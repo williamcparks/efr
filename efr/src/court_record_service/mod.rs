@@ -1,4 +1,5 @@
 mod case_party;
+mod case_party_raw;
 mod common;
 mod get_case_list_request_business;
 mod get_case_list_request_case_number;

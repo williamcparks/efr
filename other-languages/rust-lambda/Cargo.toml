@@ -1,0 +1,15 @@
+[package]
+name = "rust-lambda"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+efr = { version = "0.1.0", features = ["metadata"] }
+lambda_http = "1.0.2"
+reqwest = { version = "0.13.2", default-features = false, features = [
+    "rustls",
+] }
+rsa = "0.9.10"
+serde = { version = "1.0.228", features = ["derive"] }
+thiserror = "2.0.18"
+tokio = { version = "1.49.0", features = ["macros"] }

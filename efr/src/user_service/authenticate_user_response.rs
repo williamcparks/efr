@@ -69,6 +69,6 @@ struct Inner<'a> {
     first_name: &'a str,
     last_name: &'a str,
     password_hash: &'a str,
-    #[serde(with = "crate::api::serde_datetime")]
+    #[serde(with = "crate::api::serde_datetime::yyyy_mm_dd_t_hh_mm_ss")]
     expiration_date_time: DateTime<Utc>,
 }

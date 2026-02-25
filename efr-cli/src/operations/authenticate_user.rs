@@ -23,7 +23,6 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<AuthedUser, O
     let ct = HeaderValue::from_str(multipart.content_type())?;
 
     let bytes = multipart.into_bytes();
-    std::fs::write("./rust-debug.xml", bytes.as_slice()).unwrap();
     println!(
         "---outbound---\n{}\n---/outbound---",
         String::from_utf8_lossy(bytes.as_slice())
