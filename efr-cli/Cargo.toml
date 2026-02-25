@@ -1,0 +1,19 @@
+[package]
+name = "efr-cli"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+efr = { version = "0.1.0", path = "../efr", features = ["metadata"] }
+inquire = "0.9.3"
+reqwest = { version = "0.13.2", default-features = false, features = [
+    "rustls",
+] }
+rsa = "0.9.10"
+serde = { version = "1.0.228", features = ["derive"] }
+sha1 = "0.10.6"
+strum = { version = "0.28.0", features = ["derive"] }
+thiserror = "2.0.18"
+tokio = { version = "1.49.0", features = ["macros", "rt"] }
+toml = "1.0.3"

@@ -1,0 +1,9 @@
+/target
+/env
+/efr-xsd-explorer/schema
+/node_modules
+node_modules
+package-lock.json
+uv.lock
+__pycache__/
+Cargo.lock
