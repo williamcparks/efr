@@ -2,6 +2,11 @@
 name = "efr"
 version = "0.1.0"
 edition = "2024"
+description = "efr (EFile Rust)"
+license = "MIT"
+repository = "https://github.com/williamcparks/efr"
+readme = "README.md"
+keywords = ["efr"]
 
 [features]
 metadata = []
