@@ -30,4 +30,12 @@ impl Metadata {
             }
         }
     }
+
+    pub const fn court_policy_service_url(&self) -> &'static str {
+        match (self.state, self.environment) {
+            (State::Texas, Environment::Stage) => {
+                "https://texas-stage.tylertech.cloud/efm/v5/CourtPolicyService.svc"
+            }
+        }
+    }
 }

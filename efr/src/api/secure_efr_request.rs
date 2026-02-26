@@ -45,3 +45,28 @@ impl<T: SecureEfrRequest> EfrRequest for T {
         builder.cert_der(cert_der)
     }
 }
+
+pub(crate) fn insecure_request<T: Xml>(
+    body: &T,
+    signing_key: &SigningKey<Sha1>,
+    cert_der: &[u8],
+) -> MultiPartRequest {
+    let len = MultiPartRequestBuilder::MUTLI_PART_REQUEST_OVERHEAD
+        + Envelope::ENVELOPE_OVERHEAD
+        + SecurityHeader::SECURITY_HEADER_OVERHEAD
+        + signing_key.as_ref().size().div_ceil(3) * 4
+        + cert_der.len()
+        + body.len();
+
+    let mut builder = MultiPartRequestBuilder::new(len);
+    let sec = SecurityHeader::new(signing_key, builder.cert_content_uuid);
+
+    let xml = builder.xml();
+    xml.extend_from_slice(Envelope::START_HEADER);
+    sec.xml(xml);
+    xml.extend_from_slice(Envelope::END_HEADER_START_BODY);
+    body.xml(xml);
+    xml.extend_from_slice(Envelope::END_BODY);
+
+    builder.cert_der(cert_der)
+}

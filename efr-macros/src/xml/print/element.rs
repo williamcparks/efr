@@ -16,6 +16,10 @@ impl Element {
             }
         }
 
+        for attr in self.attrs.iter() {
+            out.extend(attr.print());
+        }
+
         out.push(Instr::Const(b">".to_vec()));
 
         for child in self.children.iter() {

@@ -1,5 +1,21 @@
 mod authenticate_user_request;
 mod authenticate_user_response;
+mod change_password_request;
+mod get_notification_preferences_request;
+mod get_user_request;
+mod notification_preferences_flags;
+mod reset_password_request;
+mod self_resend_activation_email_request;
+mod update_notification_preferences_request;
+mod update_user_request;
 
 pub use authenticate_user_request::AuthenticateUserRequest;
 pub use authenticate_user_response::AuthenticateUserResponse;
+pub use change_password_request::ChangePasswordRequest;
+pub use get_notification_preferences_request::GetNotificationPreferencesRequest;
+pub use get_user_request::GetUserRequest;
+pub use notification_preferences_flags::NotificationPreferencesFlags;
+pub use reset_password_request::ResetPasswordRequest;
+pub use self_resend_activation_email_request::SelfResendActivationEmailRequest;
+pub use update_notification_preferences_request::UpdateNotificationPreferencesRequest;
+pub use update_user_request::UpdateUserRequest;

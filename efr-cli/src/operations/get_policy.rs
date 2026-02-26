@@ -1,7 +1,4 @@
-use efr::{
-    api::EfrResponse,
-    court_record_service::{GetCaseListRequestCaseNumber, GetCaseListResponse},
-};
+use efr::court_policy_service::GetPolicyRequest;
 use reqwest::Client;
 
 use crate::{
@@ -15,28 +12,23 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         .prompt()?;
     let jurisdiction =
         inquire::Text::new("What Jurisdiction Code Are You Searching In?").prompt()?;
-    let case_number = inquire::Text::new("What Case Number?").prompt()?;
 
     let authed_user = authenticate_user::handler(client.clone(), config).await?;
 
-    let get_case_list_request = GetCaseListRequestCaseNumber {
+    let get_policy_request = GetPolicyRequest {
         email: authed_user.email.as_ref(),
         password_hash: authed_user.password_hash.as_ref(),
         efsp_url: efsp_url.as_str(),
         jurisdiction: jurisdiction.as_str(),
-        case_number: case_number.as_str(),
     };
 
-    let text = post(
+    post(
         client,
         config,
-        &get_case_list_request,
-        METADATA.court_record_service_url(),
+        &get_policy_request,
+        METADATA.court_policy_service_url(),
     )
     .await?;
-
-    let response = GetCaseListResponse::efr_response(text.as_str())?;
-    println!("{response:#?}");
 
     Ok(())
 }

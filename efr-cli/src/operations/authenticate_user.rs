@@ -1,59 +1,44 @@
 use efr::{
-    api::{EfrRequest, EfrResponse},
+    api::EfrResponse,
     user_service::{AuthenticateUserRequest, AuthenticateUserResponse},
 };
-use reqwest::{
-    Client,
-    header::{CONTENT_TYPE, HeaderValue},
-};
+use reqwest::Client;
 
 use crate::{
     config::EfrConfig,
-    operations::{METADATA, error::OperationsError},
+    operations::{METADATA, error::OperationsError, post::post},
 };
 
 pub async fn handler(client: Client, config: &EfrConfig) -> Result<AuthedUser, OperationsError> {
     let authenticate_user_request = AuthenticateUserRequest {
-        email: config.email.as_str(),
-        password: config.password.as_str(),
+        email: config.email.as_ref(),
+        password: config.password.as_ref(),
     };
 
-    let multipart =
-        authenticate_user_request.efr_request(&config.signing_key, config.cert_der.as_slice());
-    let ct = HeaderValue::from_str(multipart.content_type())?;
-
-    let bytes = multipart.into_bytes();
-    println!(
-        "---outbound---\n{}\n---/outbound---",
-        String::from_utf8_lossy(bytes.as_slice())
-    );
-
-    let res = client
-        .post(METADATA.user_service_url())
-        .header(CONTENT_TYPE, ct)
-        .header(
-            AuthenticateUserRequest::SOAP_ACTION_HEADER_NAME,
-            AuthenticateUserRequest::SOAP_ACTION,
-        )
-        .body(bytes)
-        .send()
-        .await?;
-
-    println!("---inbound---\n{res:#?}\n");
-    let text = res.text().await?;
-    println!("{text}");
+    let text = post(
+        client,
+        config,
+        &authenticate_user_request,
+        METADATA.user_service_url(),
+    )
+    .await?;
 
     let response = AuthenticateUserResponse::efr_response(text.as_str())?;
     println!("{response:#?}");
-    println!("---/inbound---");
 
     Ok(AuthedUser {
-        email: response.email.to_owned(),
-        password_hash: response.password_hash.to_owned(),
+        user_id: response.user_id.into(),
+        email: response.email.into(),
+        first_name: response.first_name.into(),
+        last_name: response.last_name.into(),
+        password_hash: response.password_hash.into(),
     })
 }
 
 pub struct AuthedUser {
-    pub email: String,
-    pub password_hash: String,
+    pub user_id: Box<str>,
+    pub email: Box<str>,
+    pub first_name: Box<str>,
+    pub last_name: Box<str>,
+    pub password_hash: Box<str>,
 }

@@ -8,8 +8,8 @@ use crate::config::{ConfigError, raw::RawEfrConfig};
 pub struct EfrConfig {
     pub cert_der: Vec<u8>,
     pub signing_key: SigningKey<Sha1>,
-    pub email: String,
-    pub password: String,
+    pub email: Box<str>,
+    pub password: Box<str>,
 }
 
 impl EfrConfig {
@@ -73,8 +73,8 @@ impl EfrConfig {
         Ok(Self {
             cert_der,
             signing_key: SigningKey::new(rsa_private_key),
-            email: raw.admin.email,
-            password: raw.admin.password,
+            email: raw.admin.email.into_boxed_str(),
+            password: raw.admin.password.into_boxed_str(),
         })
     }
 }

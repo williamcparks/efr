@@ -1,3 +1,4 @@
+mod attr;
 mod child;
 mod element;
 mod instr;
