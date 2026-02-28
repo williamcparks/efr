@@ -15,7 +15,10 @@ metadata = []
 base64 = "0.22.1"
 bitflags = "2.11.0"
 chrono = { version = "0.4.43", features = ["serde"] }
-efr-macros = { version = "0.1.1", path = "../efr-macros" }
+efr-macros = { version = "0.1.1", path = "../efr-macros", features = [
+    "partial-xml",
+    "xml",
+] }
 quick-xml = { version = "0.39.2", features = ["serialize"] }
 rsa = { version = "0.9.10", features = ["sha1"] }
 serde = { version = "1.0.228", features = ["derive"] }

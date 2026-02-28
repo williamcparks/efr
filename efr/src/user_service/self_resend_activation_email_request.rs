@@ -23,10 +23,13 @@ xml! {
     impl<'a> Xml for SelfResendActivationEmailRequest<'a> {
         @ns {
             resend = "urn:tyler:efm:services:schema:ResendActivationEmailRequest";
+            tyler = "urn:tyler:efm:services";
         }
 
-        resend:SelfResendActivationEmailRequest {
-            resend:Email { (self.email) }
+        tyler:SelfResendActivationEmail {
+            tyler:SelfResendActivationEmailRequest {
+                resend:Email { (self.email) }
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 
-use syn::{Error, Generics, Ident, LitStr, Token, Type, braced, parse::Parse};
+use syn::{
+    Attribute, Error, Generics, Ident, LitStr, Meta, Token, Type, braced, parse::Parse,
+    spanned::Spanned,
+};
 
 use crate::xml::Element;
 
@@ -51,32 +54,79 @@ impl Parse for ImplBlock {
 }
 
 pub struct NsBlock {
-    pub map: HashMap<Ident, LitStr>,
+    pub map: HashMap<Ident, NsDecl>,
 }
 
 impl Parse for NsBlock {
     fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
         syn::custom_keyword!(ns);
+        syn::custom_keyword!(inherit);
 
         input.parse::<Token![@]>()?;
         input.parse::<ns>()?;
+
         let section;
         braced!(section in input);
 
         let mut map = HashMap::new();
 
         while !section.is_empty() {
+            let subelement = match section.peek(Token![#]) {
+                false => false,
+                true => {
+                    NsDecl::parse_subelement_attr(&section)?;
+                    true
+                }
+            };
+
             let key: Ident = section.parse()?;
+            if subelement {
+                section.parse::<Token![;]>()?;
+                map.insert(key, NsDecl::SubElement);
+                continue;
+            }
+
             section.parse::<Token![=]>()?;
-            let value: LitStr = section.parse()?;
+            let uri: LitStr = section.parse()?;
             section.parse::<Token![;]>()?;
 
             if map.contains_key(&key) {
                 return Err(Error::new(key.span(), "duplicate namespace key"));
             }
-            map.insert(key, value);
+            map.insert(key, NsDecl::Uri(uri));
         }
 
         Ok(Self { map })
+    }
+}
+
+pub enum NsDecl {
+    Uri(LitStr),
+    SubElement,
+}
+
+impl NsDecl {
+    pub fn parse_subelement_attr(input: syn::parse::ParseStream) -> syn::Result<()> {
+        let attrs = Attribute::parse_outer(input)?;
+        match attrs.as_slice() {
+            [] => Err(Error::new(input.span(), "Expected #[subelement]")),
+            [attr] => {
+                if !attr.path().is_ident("subelement") {
+                    return Err(Error::new(attr.span(), "Expected #[subelement]"));
+                }
+                if let Meta::Path(_) = attr.meta {
+                    return Ok(());
+                }
+
+                Err(Error::new(
+                    attr.span(),
+                    "#[subelement] does not taking any arguments",
+                ))
+            }
+            [_, other, ..] => Err(Error::new(
+                other.span(),
+                "Expected exactly one #[subelement] Attribute",
+            )),
+        }
     }
 }

@@ -30,12 +30,12 @@ impl<'a> SecureEfrRequest for UpdateNotificationPreferencesRequest<'a> {
 xml! {
     impl<'a> Xml for UpdateNotificationPreferencesRequest<'a> {
         @ns {
-            update = "urn:tyler:efm:services:schema:UpdateNotificationPreferencesRequest" ;
             common = "urn:tyler:efm:services:schema:Common";
+            tyler = "urn:tyler:efm:services";
         }
 
-        update:UpdateNotificationPreferencesRequest {
-            common:Notification {
+        tyler:UpdateNotificationPreferences {
+            tyler:UpdateNotificationPreferencesRequest {
                 common:Notification {
                     common:Code { "ACCEPTED" }
                     common:IsActive { (&IntBool(self.flags.contains(NotificationPreferencesFlags::ACCEPTED))) }

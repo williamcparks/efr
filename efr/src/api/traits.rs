@@ -29,3 +29,18 @@ impl Xml for str {
         self.len()
     }
 }
+
+impl<T: Xml> Xml for Option<T> {
+    fn xml(&self, xml: &mut Vec<u8>) {
+        if let Some(inner) = self.as_ref() {
+            T::xml(inner, xml)
+        }
+    }
+
+    fn len(&self) -> usize {
+        match self.as_ref() {
+            Some(inner) => T::len(inner),
+            None => 0,
+        }
+    }
+}

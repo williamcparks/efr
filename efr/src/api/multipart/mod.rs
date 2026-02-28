@@ -1,5 +1,6 @@
 mod builder;
 mod content_type;
+mod envelope;
 mod response;
 mod value;
 

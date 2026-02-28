@@ -22,10 +22,13 @@ xml! {
     impl<'a> Xml for ResetPasswordRequest<'a> {
         @ns {
             reset = "urn:tyler:efm:services:schema:ResetPasswordRequest";
+            tyler = "urn:tyler:efm:services";
         }
 
-        reset:ResetPasswordRequest {
-            reset:Email { (self.email) }
+        tyler:ResetPassword {
+            tyler:ResetPasswordRequest {
+                reset:Email { (self.email) }
+            }
         }
     }
 }

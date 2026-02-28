@@ -1,4 +1,4 @@
-use crate::xml::{Element, Instr, NsBlock};
+use crate::xml::{Element, Instr, NsBlock, input::NsDecl};
 
 impl Element {
     pub fn print(&self, ns_block: Option<&NsBlock>) -> Vec<Instr> {
@@ -7,8 +7,8 @@ impl Element {
         if let Some(ns_block) = ns_block {
             for ns in self.namespaces_used() {
                 let uri = match ns_block.map.get(ns) {
-                    Some(some) => some,
-                    None => continue,
+                    Some(NsDecl::Uri(uri)) => uri,
+                    _ => continue,
                 };
 
                 let bytes = format!(" xmlns:{}=\"{}\"", ns, uri.value());

@@ -28,11 +28,16 @@ xml! {
     impl<'a> Xml for ChangePasswordRequest<'a> {
         @ns {
             change = "urn:tyler:efm:services:schema:ChangePasswordRequest";
+            tyler = "urn:tyler:efm:services";
         }
 
-        change:ChangePasswordRequest {
-            change:OldPassword { (self.old_password) }
-            change:NewPassword { (self.new_password) }
+        tyler:ChangePassword {
+            tyler:ChangePasswordRequest {
+                change:OldPassword { (self.old_password) }
+                change:NewPassword { (self.new_password) }
+                change:PasswordQuestion {}
+                change:PasswordAnswer {}
+            }
         }
     }
 }

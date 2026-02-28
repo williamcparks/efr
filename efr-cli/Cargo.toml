@@ -5,8 +5,12 @@ edition = "2024"
 publish = false
 
 [dependencies]
-efr = { version = "0.1.0", path = "../efr", features = ["metadata"] }
-inquire = "0.9.3"
+chrono = "0.4.44"
+efr = { version = "0.1.1", path = "../efr", features = ["metadata"] }
+efr-macros = { version = "0.1.1", path = "../efr-macros", features = [
+    "sub-class",
+] }
+inquire = { version = "0.9.3", features = ["date"] }
 reqwest = { version = "0.13.2", default-features = false, features = [
     "rustls",
 ] }

@@ -12,7 +12,9 @@ pub fn handler(input: Input) -> Result<TokenStream> {
     let ty_generics = input.impl_block.ty_generics;
 
     let declared_ns = input.ns_block.namespaces_declared();
-    let used_ns = input.root.namespaces_used();
+    let mut used_ns = input.root.namespaces_used();
+    used_ns.extend(input.ns_block.subelement_namespaces());
+
     if let Some(declared_not_used) = declared_ns.difference(&used_ns).next() {
         return Err(Error::new(
             declared_not_used.span(),

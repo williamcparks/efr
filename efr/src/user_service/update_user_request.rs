@@ -30,16 +30,18 @@ impl<'a> SecureEfrRequest for UpdateUserRequest<'a> {
 xml! {
     impl<'a> Xml for UpdateUserRequest<'a> {
         @ns {
-            update = "urn:tyler:efm:services:schema:UpdateUserRequest";
+            tyler = "urn:tyler:efm:services";
             common="urn:tyler:efm:services:schema:Common";
         }
 
-        update:UpdateUserRequest {
-            common:User UserID=(self.user_id) {
-                common:Email { (self.new_email) }
-                common:FirstName { (self.first_name) }
-                common:MiddleName { (self.middle_name) }
-                common:LastName { (self.last_name) }
+        tyler:UpdateUser {
+            tyler:UpdateUserRequest {
+                common:User UserID=(self.user_id) {
+                    common:Email { (self.new_email) }
+                    common:FirstName { (self.first_name) }
+                    common:MiddleName { (self.middle_name) }
+                    common:LastName { (self.last_name) }
+                }
             }
         }
     }

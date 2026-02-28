@@ -38,4 +38,20 @@ impl Metadata {
             }
         }
     }
+
+    pub const fn firm_service_url(&self) -> &'static str {
+        match (self.state, self.environment) {
+            (State::Texas, Environment::Stage) => {
+                "https://texas-stage.tylertech.cloud/efm/EFMFirmService.svc"
+            }
+        }
+    }
+
+    pub const fn filing_review_service(&self) -> &'static str {
+        match (self.state, self.environment) {
+            (State::Texas, Environment::Stage) => {
+                "https://texas-stage.tylertech.cloud/efm/v5/filingreviewservice.svc"
+            }
+        }
+    }
 }
