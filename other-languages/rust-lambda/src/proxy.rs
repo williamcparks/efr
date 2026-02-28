@@ -45,7 +45,8 @@ const METADATA: Metadata = Metadata {
 
 const URL: &str = METADATA.user_service_url();
 
-const DEFAULT_HEADER: HeaderValue = HeaderValue::from_static("multipart/related; type=\"application/xop+xml\"");
+const DEFAULT_HEADER: HeaderValue =
+    HeaderValue::from_static("multipart/related; type=\"application/xop+xml\"");
 
 pub async fn proxy(event: Request) -> Result<Response<Body>, ProxyError> {
     let input = event
@@ -83,7 +84,10 @@ pub async fn proxy(event: Request) -> Result<Response<Body>, ProxyError> {
     let status = resp.status();
     let headers = resp.headers();
     let content_type = headers.get(CONTENT_TYPE).cloned().unwrap_or(DEFAULT_HEADER);
-    let message = resp.bytes().await.map_err(|err| ProxyError::Reqwest(err.to_string()))?;
+    let message = resp
+        .bytes()
+        .await
+        .map_err(|err| ProxyError::Reqwest(err.to_string()))?;
 
     Response::builder()
         .status(status)
