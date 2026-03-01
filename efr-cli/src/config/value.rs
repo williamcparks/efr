@@ -1,13 +1,16 @@
 use std::path::Path;
 
-use rsa::{RsaPrivateKey, pkcs1v15::SigningKey, pkcs8::DecodePrivateKey};
+use efr::api::Metadata;
+use rsa::{RsaPrivateKey, pkcs1v15::SigningKey, pkcs8::DecodePrivateKey, sha2::Sha256};
 use sha1::Sha1;
 
 use crate::config::{ConfigError, raw::RawEfrConfig};
 
 pub struct EfrConfig {
+    pub metadata: Metadata,
     pub cert_der: Vec<u8>,
     pub signing_key: SigningKey<Sha1>,
+    pub codes_signing_key: SigningKey<Sha256>,
     pub email: Box<str>,
     pub password: Box<str>,
 }
@@ -71,8 +74,10 @@ impl EfrConfig {
         };
 
         Ok(Self {
+            metadata: raw.metadata,
             cert_der,
-            signing_key: SigningKey::new(rsa_private_key),
+            signing_key: SigningKey::new(rsa_private_key.clone()),
+            codes_signing_key: SigningKey::new(rsa_private_key),
             email: raw.admin.email.into_boxed_str(),
             password: raw.admin.password.into_boxed_str(),
         })

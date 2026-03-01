@@ -4,17 +4,22 @@ use crate::{
     config::EfrConfig,
     error::CliError,
     operations::{
-        Operations, Services, authenticate_user, change_password, create_payment_account_waiver,
-        get_case, get_case_list, get_filing_list, get_notification_preferences,
-        get_payment_account, get_payment_account_list, get_payment_account_type_list, get_policy,
-        get_user, remove_payment_account, reset_password, self_resend_activation_email,
-        update_notification_preferences, update_user,
+        Operations, Services, authenticate_user, change_password, codes,
+        create_payment_account_waiver, get_case, get_case_list, get_filing_list,
+        get_notification_preferences, get_payment_account, get_payment_account_list,
+        get_payment_account_type_list, get_policy, get_user, remove_payment_account,
+        reset_password, self_resend_activation_email, update_notification_preferences, update_user,
     },
 };
 
 pub async fn handler() -> Result<(), CliError> {
     let config = EfrConfig::try_new()?;
     let client = reqwest::ClientBuilder::new().build()?;
+
+    println!(
+        "EFile Rust CLI: {:?}/{:?}",
+        config.metadata.state, config.metadata.environment
+    );
 
     let service = inquire::Select::new(
         "What Service Are You Looking To Use?",
@@ -28,6 +33,7 @@ pub async fn handler() -> Result<(), CliError> {
         Services::CourtRecord => Operations::court_record(),
         Services::Policy => Operations::policy(),
         Services::FilingReview => Operations::filing_review(),
+        Services::Codes => Operations::codes(),
     };
 
     let operation = inquire::Select::new(
@@ -72,6 +78,7 @@ pub async fn handler() -> Result<(), CliError> {
         Operations::SelfResendActivationEmail => {
             self_resend_activation_email::handler(client, &config).await?
         }
+        Operations::LocationCodes => codes::location(client, &config).await?,
     }
 
     Ok(())

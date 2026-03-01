@@ -3,7 +3,7 @@ use reqwest::Client;
 
 use crate::{
     config::EfrConfig,
-    operations::{METADATA, authenticate_user, error::OperationsError, post::post},
+    operations::{authenticate_user, error::OperationsError, post::post},
 };
 
 pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
@@ -18,7 +18,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         client,
         config,
         &get_payment_account_type_list_request,
-        METADATA.firm_service_url(),
+        config.metadata.firm_service_url(),
     )
     .await?;
 

@@ -1,6 +1,6 @@
 [package]
 name = "efr"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 description = "efr (EFile Rust)"
 license = "MIT"
@@ -9,13 +9,23 @@ readme = "README.md"
 keywords = ["efr"]
 
 [features]
+codes = [
+    "dep:cms",
+    "dep:const-oid",
+    "dep:der",
+    "dep:pem",
+    "rsa/sha2",
+    "dep:sha2",
+    "dep:x509-cert",
+]
 metadata = []
 
 [dependencies]
 base64 = "0.22.1"
 bitflags = "2.11.0"
 chrono = { version = "0.4.43", features = ["serde"] }
-efr-macros = { version = "0.1.1", path = "../efr-macros", features = [
+efr-macros = { version = "0.1.2", path = "../efr-macros", features = [
+    "metadata",
     "partial-xml",
     "xml",
 ] }
@@ -25,3 +35,11 @@ serde = { version = "1.0.228", features = ["derive"] }
 sha1 = "0.10.6"
 thiserror = "2.0.18"
 uuid = { version = "1.21.0", features = ["v4"] }
+
+# codes feature
+cms = { version = "0.2.3", optional = true, features = ["builder"] }
+const-oid = { version = "0.9.6", optional = true, features = ["db"] }
+der = { version = "0.7.10", optional = true }
+pem = { version = "3.0.6", optional = true }
+sha2 = { version = "0.10.9", optional = true }
+x509-cert = { version = "0.2.5", optional = true }

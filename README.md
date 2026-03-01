@@ -10,34 +10,87 @@
 
 | State                | Stage | Production |
 | -------------------- | ----- | ---------- |
-| California           | ❌    | ❌         |
-| District of Columbia | ❌    | ❌         |
-| Georgia              | ❌    | ❌         |
-| Idaho                | ❌    | ❌         |
-| Illinois             | ❌    | ❌         |
-| Indiana              | ❌    | ❌         |
-| Louisiana            | ❌    | ❌         |
-| Maine                | ❌    | ❌         |
-| Maryland             | ❌    | ❌         |
-| Massachusetts        | ❌    | ❌         |
-| Minnesota            | ❌    | ❌         |
-| Nevada               | ❌    | ❌         |
-| New Mexico           | ❌    | ❌         |
-| North Carolina       | ❌    | ❌         |
-| North Dakota         | ❌    | ❌         |
-| Ohio                 | ❌    | ❌         |
-| Oklahoma             | ❌    | ❌         |
-| Oregon               | ❌    | ❌         |
-| Pennsylvania         | ❌    | ❌         |
-| Rhode Island         | ❌    | ❌         |
-| South Dakota         | ❌    | ❌         |
-| Tennessee            | ❌    | ❌         |
-| Texas                | ✅    | ❌         |
-| Vermont              | ❌    | ❌         |
-| Virginia             | ❌    | ❌         |
-| Washington           | ❌    | ❌         |
+| California           | ✅    | ✅         |
+| District of Columbia | ✅    | ✅         |
+| Georgia              | ✅    | ✅         |
+| Idaho                | ✅    | ✅         |
+| Illinois             | ✅    | ✅         |
+| Indiana              | ✅    | ✅         |
+| Louisiana            | ✅    | ✅         |
+| Maine                | ✅    | ✅         |
+| Maryland             | ✅    | ✅         |
+| Massachusetts        | ✅    | ✅         |
+| Minnesota            | ✅    | ✅         |
+| Nevada               | ✅    | ✅         |
+| New Mexico           | ✅    | ✅         |
+| North Carolina       | ✅    | ✅         |
+| North Dakota         | ✅    | ✅         |
+| Ohio                 | ✅    | ✅         |
+| Oklahoma             | ✅    | ✅         |
+| Oregon               | ✅    | ✅         |
+| Pennsylvania         | ✅    | ✅         |
+| Rhode Island         | ✅    | ✅         |
+| South Dakota         | ✅    | ✅         |
+| Tennessee            | ✅    | ✅         |
+| Texas                | ✅    | ✅         |
+| Vermont              | ✅    | ✅         |
+| Virginia             | ✅    | ✅         |
+| Washington           | ✅    | ✅         |
 
-## EFMUserService
+## Codes
+
+| Operation                | Request | Response |
+| ------------------------ | ------- | -------- |
+| `Location`               | ✅      | ❌       |
+| `Versions`               | ❌      | ❌       |
+| `Errro`                  | ❌      | ❌       |
+| `Country`                | ❌      | ❌       |
+| `State`                  | ❌      | ❌       |
+| `Filing Status`          | ❌      | ❌       |
+| `Data Field`             | ❌      | ❌       |
+| `Case Category`          | ❌      | ❌       |
+| `Case Type`              | ❌      | ❌       |
+| `Case Sub Type`          | ❌      | ❌       |
+| `Party Type`             | ❌      | ❌       |
+| `Filing`                 | ❌      | ❌       |
+| `Filing Component`       | ❌      | ❌       |
+| `Document Type`          | ❌      | ❌       |
+| `File Type`              | ❌      | ❌       |
+| `Optional Services`      | ❌      | ❌       |
+| `Filer Type`             | ❌      | ❌       |
+| `Procedure/Remedy`       | ❌      | ❌       |
+| `Damage Amount`          | ❌      | ❌       |
+| `Name Suffix`            | ❌      | ❌       |
+| `Language`               | ❌      | ❌       |
+| `Cross Reference`        | ❌      | ❌       |
+| `Disclaimer Requirement` | ❌      | ❌       |
+| `Motion Type`            | ❌      | ❌       |
+| `Service Type`           | ❌      | ❌       |
+| `Question`               | ❌      | ❌       |
+| `Answer`                 | ❌      | ❌       |
+| `Refund Reason`          | ❌      | ❌       |
+| `Service Provider`       | ❌      | ❌       |
+| `Notification Agency`    | ❌      | ❌       |
+| `Arrest Location`        | ❌      | ❌       |
+| `Bond`                   | ❌      | ❌       |
+| `Charge Phase`           | ❌      | ❌       |
+| `Degree`                 | ❌      | ❌       |
+| `Driver License Type`    | ❌      | ❌       |
+| `Ethnicity`              | ❌      | ❌       |
+| `Eye Color`              | ❌      | ❌       |
+| `General Offense`        | ❌      | ❌       |
+| `Hair Color`             | ❌      | ❌       |
+| `Law Enforcement Unit`   | ❌      | ❌       |
+| `Physical Feature`       | ❌      | ❌       |
+| `Race`                   | ❌      | ❌       |
+| `Statute`                | ❌      | ❌       |
+| `Statute Type`           | ❌      | ❌       |
+| `Citation Jurisdiction`  | ❌      | ❌       |
+| `Vehicle Color`          | ❌      | ❌       |
+| `Vehicle Make`           | ❌      | ❌       |
+| `Vehicle Type`           | ❌      | ❌       |
+
+## User
 
 | Operation                       | Request | Response |
 | ------------------------------- | ------- | -------- |
@@ -53,7 +106,7 @@
 
 ---
 
-## EFMFirmService
+## Firm
 
 | Operation                        | Request | Response |
 | -------------------------------- | ------- | -------- |
@@ -97,7 +150,7 @@
 
 ---
 
-## FilingReviewMDEService
+## FilingReview
 
 | Operation                        | Request | Response |
 | -------------------------------- | ------- | -------- |
@@ -115,7 +168,7 @@
 
 ---
 
-## FilingAssemblyMDEService _(inbound callbacks)_
+## FilingAssembly _(inbound callbacks)_
 
 | Operation                            | Handler | Response |
 | ------------------------------------ | ------- | -------- |
@@ -126,7 +179,7 @@
 
 ---
 
-## CourtRecordMDEService
+## Court Record
 
 | Operation                      | Request | Response |
 | ------------------------------ | ------- | -------- |
@@ -138,7 +191,7 @@
 
 ---
 
-## ServiceMDEService
+## Serving
 
 | Operation     | Request | Response |
 | ------------- | ------- | -------- |
@@ -146,7 +199,7 @@
 
 ---
 
-## CourtSchedulingMDEService
+## Court Scheduling
 
 | Operation          | Request | Response |
 | ------------------ | ------- | -------- |

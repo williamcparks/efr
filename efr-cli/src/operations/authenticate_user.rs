@@ -6,7 +6,7 @@ use reqwest::Client;
 
 use crate::{
     config::EfrConfig,
-    operations::{METADATA, error::OperationsError, post::post},
+    operations::{error::OperationsError, post::post},
 };
 
 pub async fn handler(client: Client, config: &EfrConfig) -> Result<AuthedUser, OperationsError> {
@@ -19,7 +19,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<AuthedUser, O
         client,
         config,
         &authenticate_user_request,
-        METADATA.user_service_url(),
+        config.metadata.user_service_url(),
     )
     .await?;
 

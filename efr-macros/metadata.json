@@ -1,0 +1,238 @@
+{
+    "states": [
+        {
+            "state": "California",
+            "status": "Open",
+            "stage_url": "https://california-stage.tylertech.cloud",
+            "prod_url": "https://california-efm.tylertech.cloud",
+            "review_stage_url": "https://california-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-CAStage-EFSP",
+            "toga_prod_client_key": "CJOFSCA-PROD-EFSP"
+        },
+        {
+            "state": "DistrictOfColumbia",
+            "status": "Privately-Funded",
+            "stage_url": "https://efiledc-stage.tylertech.cloud",
+            "prod_url": "https://efiledc.tylertech.cloud",
+            "review_stage_url": "https://dc-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-DCStage-EFSP",
+            "toga_prod_client_key": "CJOFSWDC-PROD-EFSP"
+        },
+        {
+            "state": "Georgia",
+            "status": "Privately-Funded",
+            "stage_url": "https://georgia-stage.tylertech.cloud",
+            "prod_url": "https://georgia.tylertech.cloud",
+            "review_stage_url": "https://georgia-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-GAStage-EFSP",
+            "toga_prod_client_key": "CJOFSGA-PROD-EFSP"
+        },
+        {
+            "state": "Idaho",
+            "status": "Closed",
+            "stage_url": "https://idaho-stage.tylertech.cloud",
+            "prod_url": "https://idaho.tylertech.cloud",
+            "review_stage_url": "https://idaho-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-IDStage-EFSP",
+            "toga_prod_client_key": "CJOFSID-PROD-EFSP"
+        },
+        {
+            "state": "Illinois",
+            "status": "Open",
+            "stage_url": "https://illinois-stage.tylertech.cloud",
+            "prod_url": "https://illinois.tylertech.cloud",
+            "review_stage_url": "http://illinois-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-ILSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSIL-PROD-EFSP"
+        },
+        {
+            "state": "Indiana",
+            "status": "Open",
+            "stage_url": "https://indiana-stage.tylertech.cloud",
+            "prod_url": "https://indiana.tylertech.cloud",
+            "review_stage_url": "https://indiana-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-INDSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSIN-PROD-EFSP"
+        },
+        {
+            "state": "Louisiana",
+            "status": "Closed",
+            "stage_url": "https://louisiana-stage.tylertech.cloud",
+            "prod_url": "https://louisiana.tylertech.cloud",
+            "review_stage_url": "https://louisiana-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFSLA-EFSP",
+            "toga_prod_client_key": "CJOFSLA-PROD-EFSP"
+        },
+        {
+            "state": "Maine",
+            "status": "Upcoming",
+            "stage_url": "https://maine-stage.tylertech.cloud",
+            "prod_url": "https://maine.tylertech.cloud",
+            "review_stage_url": "https://maine-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-MEStage-PROD",
+            "toga_prod_client_key": "CJOFSME-EFSP"
+        },
+        {
+            "state": "Maryland",
+            "status": "Open",
+            "stage_url": "https://efilemd-stage.tylertech.cloud",
+            "prod_url": "https://maryland.tylertech.cloud",
+            "review_stage_url": "https://maryland-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFSMD-STAGE-EFSP",
+            "toga_prod_client_key": "CJOFSMD-PROD-EFSP"
+        },
+        {
+            "state": "Massachusetts",
+            "status": "Upcoming",
+            "stage_url": "https://massachusetts-stage.tylertech.cloud",
+            "prod_url": "https://massachusetts.tylertech.cloud",
+            "review_stage_url": "https://massachusetts-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-MASTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSMA-PROD-EFSP"
+        },
+        {
+            "state": "Minnesota",
+            "status": "Closed",
+            "stage_url": "https://minnesota-stage.tylertech.cloud",
+            "prod_url": "https://minnesota.tylerhost.net/ofsweb",
+            "review_stage_url": "https://minnesota-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFSMN-STAGE-EFSP",
+            "toga_prod_client_key": "CJOFSMN-PROD-EFSP"
+        },
+        {
+            "state": "Nevada",
+            "status": "Privately-Funded",
+            "stage_url": "https://nevada-stage.tylertech.cloud",
+            "prod_url": "https://nevada.tylertech.cloud",
+            "review_stage_url": "https://nevada-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFSNV-EFSPSTAGE",
+            "toga_prod_client_key": "CJOFSNV-EFSP"
+        },
+        {
+            "state": "NewMexico",
+            "status": "Closed",
+            "stage_url": "https://newmexico-stage.tylertech.cloud",
+            "prod_url": "https://newmexico.tylertech.cloud",
+            "review_stage_url": "https://newmexico-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-NMSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSNM-PROD-EFSP"
+        },
+        {
+            "state": "NorthCarolina",
+            "status": "Closed",
+            "stage_url": "https://efilenc-test.tylertech.cloud",
+            "prod_url": "https://efilenc.tylertech.cloud",
+            "review_stage_url": "https://northcarolina-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFSNC-EFSPSTAGE",
+            "toga_prod_client_key": "CJOFSNC-PROD-EFSP"
+        },
+        {
+            "state": "NorthDakota",
+            "status": "Closed",
+            "stage_url": "https://northdakota-stage.tylertech.cloud",
+            "prod_url": "https://northdakota.tylertech.cloud",
+            "review_stage_url": "https://northdakota-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-NDSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSND-PROD-EFSP"
+        },
+        {
+            "state": "Ohio",
+            "status": "Upcoming",
+            "stage_url": "https://ohio-stage.tylertech.cloud",
+            "prod_url": "https://ohio.tylertech.cloud",
+            "review_stage_url": "https://ohio-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-OHSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSOH-PROD-EFSP"
+        },
+        {
+            "state": "Oklahoma",
+            "status": "Closed",
+            "stage_url": "https://oklahoma-stage.tylertech.cloud",
+            "prod_url": "https://oklahoma.tylertech.cloud",
+            "review_stage_url": "https://oklahoma-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-OKSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSOK-PROD-EFSP"
+        },
+        {
+            "state": "Oregon",
+            "status": "Closed",
+            "stage_url": "https://oregon-stage.tylertech.cloud",
+            "prod_url": "https://oregon.tylertech.cloud",
+            "review_stage_url": "https://oregon-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-ORSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSOR-PROD-EFSP-UPGRADE"
+        },
+        {
+            "state": "Pennsylvania",
+            "status": "Upcoming",
+            "stage_url": "https://pennsylvania-stage.tylertech.cloud",
+            "prod_url": "https://pennsylvania.tylertech.cloud",
+            "review_stage_url": "https://pennsylvania-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-PAStage-EFSP",
+            "toga_prod_client_key": "CJOFSPA-PROD-EFSP"
+        },
+        {
+            "state": "RhodeIsland",
+            "status": "Closed",
+            "stage_url": "https://rhodeisland-stage.tylertech.cloud",
+            "prod_url": "https://rhodeisland.tylertech.cloud",
+            "review_stage_url": "https://rhodeisland-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-RISTAGE-EFSP",
+            "toga_prod_client_key": null
+        },
+        {
+            "state": "SouthDakota",
+            "status": "Privately-Funded",
+            "stage_url": "https://southdakota-stage.tylertech.cloud",
+            "prod_url": "https://southdakota.tylertech.cloud",
+            "review_stage_url": "https://southdakota-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-SDStage-EFSP",
+            "toga_prod_client_key": "CJOFSSD-PROD-EFSP"
+        },
+        {
+            "state": "Tennessee",
+            "status": "Upcoming",
+            "stage_url": "https://tennessee-stage.tylertech.cloud",
+            "prod_url": "https://tennessee.tylertech.cloud",
+            "review_stage_url": "https://tennessee-review-stage.fileandserve.tylertech.cloud/queue",
+            "toga_stage_client_key": "CJOFS-TNSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSTN-PROD-EFSP"
+        },
+        {
+            "state": "Texas",
+            "status": "Open",
+            "stage_url": "https://texas-stage.tylertech.cloud",
+            "prod_url": "https://texas.tylertech.cloud",
+            "review_stage_url": "https://texas-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-TexFileStage-EFSP",
+            "toga_prod_client_key": "CJOFSTXTEXFILE-EFSP"
+        },
+        {
+            "state": "Vermont",
+            "status": "Closed",
+            "stage_url": "https://vermont-stage.tylertech.cloud",
+            "prod_url": "https://vermont.tylertech.cloud",
+            "review_stage_url": "https://vermont-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-VTSTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSVT-PROD-EFSP"
+        },
+        {
+            "state": "Virginia",
+            "status": "Privately-Funded",
+            "stage_url": "https://virginia-stage.tylertech.cloud",
+            "prod_url": "https://virginia.tylertech.cloud",
+            "review_stage_url": "https://virginia-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFS-VASTAGE-EFSP",
+            "toga_prod_client_key": "CJOFSVA-PROD-EFSP"
+        },
+        {
+            "state": "Washington",
+            "status": "Upcoming",
+            "stage_url": "https://efilewa-stage.tylertech.cloud",
+            "prod_url": "https://efilewa.tylertech.cloud",
+            "review_stage_url": "https://washington-review-stage.fileandserve.tylertech.cloud",
+            "toga_stage_client_key": "CJOFSWA-EFSP",
+            "toga_prod_client_key": "CJOFSWA-PROD-EFSP"
+        }
+    ]
+}

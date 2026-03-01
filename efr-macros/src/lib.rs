@@ -1,14 +1,36 @@
-#[cfg(any(feature = "partial-xml", feature = "xml", feature = "sub-class"))]
+#[cfg(any(
+    feature = "metadata",
+    feature = "partial-xml",
+    feature = "xml",
+    feature = "sub-class"
+))]
 use proc_macro::TokenStream;
-#[cfg(any(feature = "partial-xml", feature = "xml", feature = "sub-class"))]
+#[cfg(any(
+    feature = "metadata",
+    feature = "partial-xml",
+    feature = "xml",
+    feature = "sub-class"
+))]
 use syn::parse_macro_input;
 
+#[cfg(feature = "metadata")]
+mod metadata;
 #[cfg(feature = "partial-xml")]
 mod partial_xml;
 #[cfg(feature = "sub-class")]
 mod sub_class;
 #[cfg(feature = "xml")]
 mod xml;
+
+#[cfg(feature = "metadata")]
+#[proc_macro]
+pub fn metadata(input: TokenStream) -> TokenStream {
+    match metadata::handler(parse_macro_input!(input)) {
+        Ok(ok) => ok,
+        Err(err) => err.into_compile_error(),
+    }
+    .into()
+}
 
 #[cfg(feature = "partial-xml")]
 #[proc_macro]

@@ -4,7 +4,7 @@ use reqwest::Client;
 use crate::{
     config::EfrConfig,
     operations::{
-        METADATA, authenticate_user,
+        authenticate_user,
         error::OperationsError,
         inquire_helpers::{DateRange, InquireEmptyIsNone},
         post::post,
@@ -53,7 +53,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         client,
         config,
         &get_case_list_request,
-        METADATA.filing_review_service(),
+        config.metadata.filing_review_service(),
     )
     .await?;
 

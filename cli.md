@@ -37,6 +37,10 @@ you can place this pkey.pem inside /env
 The _efile rust_ toml file contains credential information for quick usage
 
 ```toml
+[location]
+state = "Texas"
+environment = "Stage"
+
 [credentials]
 # the location of the x509 certificate (relative to the efr.toml)
 cert_der = "./cert.der"

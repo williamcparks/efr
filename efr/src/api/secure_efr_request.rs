@@ -23,7 +23,7 @@ impl<T: SecureEfrRequest> EfrRequest for T {
             password_hash: self.password_hash(),
         };
 
-        let len = MultiPartRequestBuilder::MUTLI_PART_REQUEST_OVERHEAD
+        let len = MultiPartRequestBuilder::MULTI_PART_REQUEST_OVERHEAD
             + Envelope::ENVELOPE_OVERHEAD
             + SecurityHeader::SECURITY_HEADER_OVERHEAD
             + tyler.len()
@@ -51,7 +51,7 @@ pub(crate) fn insecure_request<T: Xml>(
     signing_key: &SigningKey<Sha1>,
     cert_der: &[u8],
 ) -> MultiPartRequest {
-    let len = MultiPartRequestBuilder::MUTLI_PART_REQUEST_OVERHEAD
+    let len = MultiPartRequestBuilder::MULTI_PART_REQUEST_OVERHEAD
         + Envelope::ENVELOPE_OVERHEAD
         + SecurityHeader::SECURITY_HEADER_OVERHEAD
         + signing_key.as_ref().size().div_ceil(3) * 4

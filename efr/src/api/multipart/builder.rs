@@ -43,5 +43,5 @@ impl MultiPartRequestBuilder {
         MultiPartRequest::new(self.boundary, self.bytes)
     }
 
-    pub(crate) const MUTLI_PART_REQUEST_OVERHEAD: usize = 416;
+    pub(crate) const MULTI_PART_REQUEST_OVERHEAD: usize = 416;
 }

@@ -1,4 +1,3 @@
-use efr::api::{Environment, Metadata, State};
 use efr_macros::SubClass;
 use strum::{Display, VariantArray};
 
@@ -11,10 +10,11 @@ pub enum Services {
     #[strum(to_string = "Filing Review")]
     FilingReview,
     Policy,
+    Codes,
 }
 
 #[derive(Clone, Display, SubClass)]
-#[subclass(user, firm, court_record, filing_review, policy)]
+#[subclass(user, firm, court_record, filing_review, policy, codes)]
 pub enum Operations {
     #[subclass(court_record)]
     #[strum(to_string = "Get Case List")]
@@ -83,12 +83,18 @@ pub enum Operations {
     #[subclass(user)]
     #[strum(to_string = "Self Resend Activation Email (uses email)")]
     SelfResendActivationEmail,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Location Codes")]
+    LocationCodes,
 }
 
 pub mod authenticate_user;
 pub mod change_password;
+pub mod codes;
 pub mod create_payment_account_waiver;
 pub mod error;
+pub mod get;
 pub mod get_case;
 pub mod get_case_list;
 pub mod get_filing_list;
@@ -105,8 +111,3 @@ pub mod reset_password;
 pub mod self_resend_activation_email;
 pub mod update_notification_preferences;
 pub mod update_user;
-
-pub const METADATA: Metadata = Metadata {
-    state: State::Texas,
-    environment: Environment::Stage,
-};

@@ -7,7 +7,7 @@ use crate::api::{
 
 impl MultiPartRequest {
     pub fn envelope_insecure(body: &str, signing_key: &SigningKey<Sha1>, cert_der: &[u8]) -> Self {
-        let len = MultiPartRequestBuilder::MUTLI_PART_REQUEST_OVERHEAD
+        let len = MultiPartRequestBuilder::MULTI_PART_REQUEST_OVERHEAD
             + Envelope::ENVELOPE_OVERHEAD
             + SecurityHeader::SECURITY_HEADER_OVERHEAD
             + signing_key.as_ref().size().div_ceil(3) * 4
@@ -39,7 +39,7 @@ impl MultiPartRequest {
             password_hash,
         };
 
-        let len = MultiPartRequestBuilder::MUTLI_PART_REQUEST_OVERHEAD
+        let len = MultiPartRequestBuilder::MULTI_PART_REQUEST_OVERHEAD
             + Envelope::ENVELOPE_OVERHEAD
             + SecurityHeader::SECURITY_HEADER_OVERHEAD
             + tyler.len()

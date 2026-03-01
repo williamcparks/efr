@@ -1,6 +1,6 @@
 [package]
 name = "efr-macros"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 description = "efr (EFile Rust) macros"
 license = "MIT"
@@ -9,6 +9,13 @@ readme = "README.md"
 keywords = ["efr"]
 
 [features]
+metadata = [
+    "dep:proc-macro2",
+    "dep:quote",
+    "dep:serde",
+    "dep:serde_json",
+    "dep:syn",
+]
 partial-xml = ["dep:proc-macro2", "dep:quote", "dep:syn"]
 xml = ["dep:proc-macro2", "dep:quote", "dep:syn"]
 sub-class = ["dep:proc-macro2", "dep:quote", "dep:syn"]
@@ -19,4 +26,6 @@ proc-macro = true
 [dependencies]
 proc-macro2 = { version = "1.0.106", optional = true }
 quote = { version = "1.0.44", optional = true }
+serde = { version = "1.0.228", features = ["derive"], optional = true }
+serde_json = { version = "1.0.149", optional = true }
 syn = { version = "2.0.117", optional = true }
