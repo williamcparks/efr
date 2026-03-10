@@ -1,6 +1,9 @@
 use std::path::PathBuf;
 
-use efr::{api::EfrError, codes_service::EfrCodesHeaderError};
+use efr::{
+    api::EfrError,
+    codes_service::{EfrCodesError, EfrCodesHeaderError},
+};
 use reqwest::header::InvalidHeaderValue;
 use thiserror::Error;
 
@@ -24,7 +27,10 @@ pub enum OperationsError {
     Efr(#[from] EfrError),
 
     #[error(transparent)]
-    Codes(#[from] EfrCodesHeaderError),
+    CodesHeader(#[from] EfrCodesHeaderError),
+
+    #[error(transparent)]
+    Codes(#[from] EfrCodesError),
 
     #[error(transparent)]
     Inquire(#[from] inquire::InquireError),
@@ -34,6 +40,13 @@ pub enum OperationsError {
 
     #[error("Failed To Write To `{}` Due To: {source}", .path.display())]
     Write {
+        path: PathBuf,
+        #[source]
+        source: std::io::Error,
+    },
+
+    #[error("Failed To Read `{}` Due To: {source}", .path.display())]
+    Read {
         path: PathBuf,
         #[source]
         source: std::io::Error,

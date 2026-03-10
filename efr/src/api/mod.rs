@@ -1,7 +1,7 @@
-mod common;
 mod datetime;
 mod envelope;
 mod error;
+mod json;
 mod multipart;
 mod secure_efr_request;
 mod security;
@@ -9,9 +9,9 @@ mod traits;
 mod tyler_header;
 mod uuid;
 
-pub(crate) use common::*;
 pub(crate) use envelope::Envelope;
 pub use error::EfrError;
+pub use json::json;
 pub use multipart::MultiPartRequest;
 pub(crate) use multipart::{MultiPartRequestBuilder, MultiPartResponse};
 pub(crate) use secure_efr_request::{SecureEfrRequest, insecure_request};

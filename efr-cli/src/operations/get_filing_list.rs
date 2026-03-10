@@ -1,4 +1,4 @@
-use efr::filing_review_service::GetFilingListRequest;
+use efr::{api::json, filing_review_service::GetFilingListRequest};
 use reqwest::Client;
 
 use crate::{
@@ -12,9 +12,6 @@ use crate::{
 };
 
 pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
-    let efsp_url = inquire::Text::new("EFile Service Provider URL")
-        .with_default("https://efsp.efile")
-        .prompt()?;
     let jurisdiction =
         inquire::Text::new("Filter By Jurisdiction (optional)?").prompt_empty_is_none()?;
     let filing_status =
@@ -38,7 +35,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         email: authed_user.email.as_ref(),
         password_hash: authed_user.password_hash.as_ref(),
 
-        efsp_url: efsp_url.as_str(),
+        efsp_url: config.efsp_url.as_str(),
 
         jurisdiction: jurisdiction.as_deref(),
         filing_status: filing_status.as_deref(),
@@ -49,13 +46,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         submitter: submitter.as_deref(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &get_case_list_request,
         config.metadata.filing_review_service(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

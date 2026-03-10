@@ -1,4 +1,4 @@
-use efr::firm_service::CreatePaymentAccountRequestWaiver;
+use efr::{api::json, firm_service::CreatePaymentAccountRequestWaiver};
 use reqwest::Client;
 
 use crate::{
@@ -23,13 +23,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         payment_account_type_code_id: payment_account_type_code_id.as_str(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &create_payment_account_request_waiver,
         config.metadata.firm_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

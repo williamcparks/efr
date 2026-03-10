@@ -19,6 +19,7 @@ pub struct RawEfrConfigCredentials {
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct EfrConfigAdmin {
+    pub efsp_url: String,
     pub email: String,
     pub password: String,
 }

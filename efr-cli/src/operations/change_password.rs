@@ -1,4 +1,4 @@
-use efr::user_service::ChangePasswordRequest;
+use efr::{api::json, user_service::ChangePasswordRequest};
 use reqwest::Client;
 
 use crate::{
@@ -18,13 +18,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         new_password: new_password.as_str(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &change_password_request,
         config.metadata.user_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

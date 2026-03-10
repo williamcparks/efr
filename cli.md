@@ -48,6 +48,8 @@ cert_der = "./cert.der"
 pkey_pem = "./pkey.pem"
 
 [admin]
+# the url that identifies the efsp
+efsp_url = "https://efsp.efile"
 # the user email you plan to use with the cli
 email = "some email here"
 # the password of the user

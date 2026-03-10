@@ -15,6 +15,7 @@ impl<'a> Input<'a> {
         let filing_assembly_service_arms = self.arms("efm/v5/FilingAssemblyService.svc");
         let filing_review_service_arms = self.arms("efm/v5/FilingReviewService.svc");
         let location_code_arms = self.arms("CodeService/codes/location");
+        let version_codes_arms = self.arms("CodeService/codes/version");
 
         quote! {
             use serde::{Deserialize, Serialize};
@@ -82,6 +83,12 @@ impl<'a> Input<'a> {
                 pub const fn location_codes_url(&self) -> &'static str {
                     match (self.state, self.environment) {
                         #(#location_code_arms)*
+                    }
+                }
+
+                pub const fn version_codes_url(&self) -> &'static str {
+                    match (self.state, self.environment) {
+                        #(#version_codes_arms)*
                     }
                 }
             }

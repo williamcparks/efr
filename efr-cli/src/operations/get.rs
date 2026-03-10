@@ -1,5 +1,6 @@
 use std::{path::PathBuf, str::FromStr};
 
+use bytes::Bytes;
 use efr::codes_service::CodesHeader;
 use mime::Mime;
 use reqwest::{
@@ -9,7 +10,7 @@ use reqwest::{
 
 use crate::{config::EfrConfig, operations::error::OperationsError};
 
-pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<(), OperationsError> {
+pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes, OperationsError> {
     let codes_header = CodesHeader::try_new(config.cert_der.as_slice(), &config.codes_signing_key)?;
     let codes_header_value = HeaderValue::from_str(codes_header.as_str())?;
 
@@ -31,7 +32,8 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<(), Op
     println!("---inbound---\n{res:#?}\n");
 
     let output = output_file(&res)?;
-    if let Err(err) = std::fs::write(output.as_path(), res.bytes().await?) {
+    let bytes = res.bytes().await?;
+    if let Err(err) = std::fs::write(output.as_path(), bytes.as_ref()) {
         return Err(OperationsError::Write {
             path: output,
             source: err,
@@ -41,7 +43,7 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<(), Op
     println!("output zip written to {}", output.display());
     println!("---/inbound---");
 
-    Ok(())
+    Ok(bytes)
 }
 
 fn output_file(response: &Response) -> Result<PathBuf, OperationsError> {
@@ -66,6 +68,19 @@ fn output_file(response: &Response) -> Result<PathBuf, OperationsError> {
         }
     }
 
-    out.push("out.zip");
+    out.push("codes.zip");
     Ok(out)
+}
+
+pub fn read(file: &str) -> Result<Bytes, OperationsError> {
+    let mut cwd = std::env::current_dir().map_err(OperationsError::Cwd)?;
+    cwd.push(file);
+
+    match std::fs::read(cwd.as_path()) {
+        Ok(ok) => Ok(Bytes::from(ok)),
+        Err(err) => Err(OperationsError::Read {
+            path: cwd,
+            source: err,
+        }),
+    }
 }

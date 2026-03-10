@@ -18,15 +18,17 @@ impl<'a> EfrResponse<'a> for AuthenticateUserResponse<'a> {
         let multipart = MultiPartResponse::try_new(response)?;
         let xml = multipart.xml;
 
-        if let Some(err) = EfrError::api(xml) {
-            return Err(err);
-        }
-
-        let envelope: Envelope = quick_xml::de::from_str(xml)?;
+        let envelope: Envelope<'a> = quick_xml::de::from_str(xml)?;
         let inner = envelope
             .body
             .authenticate_user_response
             .authenticate_user_response;
+        if inner.error.error_code != 0 {
+            return Err(EfrError::Efm {
+                error_code: inner.error.error_code,
+                message: inner.error.error_text.into(),
+            });
+        }
 
         Ok(Self {
             user_id: inner.user_id,
@@ -63,12 +65,24 @@ struct OuterResponse<'a> {
 #[derive(Deserialize)]
 #[serde(rename_all = "PascalCase")]
 struct Inner<'a> {
-    #[serde(rename = "UserID")]
+    error: ErrorMessage<'a>,
+    #[serde(rename = "UserID", default)]
     user_id: &'a str,
+    #[serde(default)]
     email: &'a str,
+    #[serde(default)]
     first_name: &'a str,
+    #[serde(default)]
     last_name: &'a str,
+    #[serde(default)]
     password_hash: &'a str,
-    #[serde(with = "crate::api::serde_datetime::yyyy_mm_dd_t_hh_mm_ss")]
+    #[serde(with = "crate::api::serde_datetime::yyyy_mm_dd_t_hh_mm_ss", default)]
     expiration_date_time: DateTime<Utc>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "PascalCase")]
+struct ErrorMessage<'a> {
+    error_code: i64,
+    error_text: &'a str,
 }

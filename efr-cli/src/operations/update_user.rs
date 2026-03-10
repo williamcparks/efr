@@ -1,4 +1,4 @@
-use efr::user_service::UpdateUserRequest;
+use efr::{api::json, user_service::UpdateUserRequest};
 use reqwest::Client;
 
 use crate::{
@@ -37,13 +37,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         last_name: last_name.as_str(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &update_user_request,
         config.metadata.user_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

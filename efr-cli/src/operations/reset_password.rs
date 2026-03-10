@@ -1,4 +1,4 @@
-use efr::user_service::ResetPasswordRequest;
+use efr::{api::json, user_service::ResetPasswordRequest};
 use reqwest::Client;
 
 use crate::{
@@ -11,13 +11,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         email: config.email.as_ref(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &reset_password_request,
         config.metadata.user_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

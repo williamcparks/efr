@@ -1,4 +1,4 @@
-use efr::firm_service::GetPaymentAccountTypeListRequest;
+use efr::{api::json, firm_service::GetPaymentAccountTypeListRequest};
 use reqwest::Client;
 
 use crate::{
@@ -14,13 +14,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         password_hash: authed_user.password_hash.as_ref(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &get_payment_account_type_list_request,
         config.metadata.firm_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

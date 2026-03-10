@@ -1,4 +1,4 @@
-use efr::user_service::GetNotificationPreferencesRequest;
+use efr::{api::json, user_service::GetNotificationPreferencesRequest};
 use reqwest::Client;
 
 use crate::{
@@ -14,13 +14,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         password_hash: authed_user.password_hash.as_ref(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &get_notification_preferences_request,
         config.metadata.user_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:#?}");
 
     Ok(())
 }

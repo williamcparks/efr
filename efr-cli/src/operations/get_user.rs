@@ -1,4 +1,4 @@
-use efr::user_service::GetUserRequest;
+use efr::{api::json, user_service::GetUserRequest};
 use reqwest::Client;
 
 use crate::{
@@ -15,13 +15,16 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
         user_id: authed_user.user_id.as_ref(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &get_user_request,
         config.metadata.user_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:?}");
 
     Ok(())
 }

@@ -2,7 +2,7 @@ use efr_macros::xml;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    api::{IntBool, SecureEfrRequest},
+    api::{SecureEfrRequest, Xml},
     user_service::NotificationPreferencesFlags,
 };
 
@@ -70,5 +70,21 @@ xml! {
                 }
             }
         }
+    }
+}
+
+struct IntBool(pub bool);
+
+impl Xml for IntBool {
+    fn len(&self) -> usize {
+        1
+    }
+
+    fn xml(&self, xml: &mut Vec<u8>) {
+        let byte = match self.0 {
+            false => b'0',
+            true => b'1',
+        };
+        xml.push(byte)
     }
 }

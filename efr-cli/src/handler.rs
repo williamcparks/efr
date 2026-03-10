@@ -79,6 +79,7 @@ pub async fn handler() -> Result<(), CliError> {
             self_resend_activation_email::handler(client, &config).await?
         }
         Operations::LocationCodes => codes::location(client, &config).await?,
+        Operations::VersionCodes => codes::version(client, &config).await?,
     }
 
     Ok(())

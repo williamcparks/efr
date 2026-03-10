@@ -11,6 +11,7 @@ pub struct EfrConfig {
     pub cert_der: Vec<u8>,
     pub signing_key: SigningKey<Sha1>,
     pub codes_signing_key: SigningKey<Sha256>,
+    pub efsp_url: String,
     pub email: Box<str>,
     pub password: Box<str>,
 }
@@ -78,6 +79,7 @@ impl EfrConfig {
             cert_der,
             signing_key: SigningKey::new(rsa_private_key.clone()),
             codes_signing_key: SigningKey::new(rsa_private_key),
+            efsp_url: raw.admin.efsp_url,
             email: raw.admin.email.into_boxed_str(),
             password: raw.admin.password.into_boxed_str(),
         })

@@ -1,4 +1,4 @@
-use efr::court_policy_service::GetPolicyRequest;
+use efr::{api::json, court_policy_service::GetPolicyRequest};
 use reqwest::Client;
 
 use crate::{
@@ -7,9 +7,6 @@ use crate::{
 };
 
 pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
-    let efsp_url = inquire::Text::new("EFile Service Provider URL")
-        .with_default("https://efsp.efile")
-        .prompt()?;
     let jurisdiction =
         inquire::Text::new("What Jurisdiction Code Are You Searching In?").prompt()?;
 
@@ -18,17 +15,20 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
     let get_policy_request = GetPolicyRequest {
         email: authed_user.email.as_ref(),
         password_hash: authed_user.password_hash.as_ref(),
-        efsp_url: efsp_url.as_str(),
+        efsp_url: config.efsp_url.as_str(),
         jurisdiction: jurisdiction.as_str(),
     };
 
-    post(
+    let xml = post(
         client,
         config,
         &get_policy_request,
         config.metadata.court_policy_service_url(),
     )
     .await?;
+
+    let json_res = json(xml.as_str())?;
+    println!("{json_res:?}");
 
     Ok(())
 }

@@ -6,6 +6,12 @@
 
 # EFSP API Implementation Progress
 
+Key
+
+- ✅ = Impl.
+- ❌ = Not Impl.
+- JSON = XML response is converted to JSON
+
 ## States:
 
 | State                | Stage | Production |
@@ -43,7 +49,7 @@
 | ------------------------ | ------- | -------- |
 | `Location`               | ✅      | ❌       |
 | `Versions`               | ❌      | ❌       |
-| `Errro`                  | ❌      | ❌       |
+| `Error`                  | ❌      | ❌       |
 | `Country`                | ❌      | ❌       |
 | `State`                  | ❌      | ❌       |
 | `Filing Status`          | ❌      | ❌       |
@@ -92,17 +98,16 @@
 
 ## User
 
-| Operation                       | Request | Response |
-| ------------------------------- | ------- | -------- |
-| `AuthenticateUser`              | ✅      | ✅       |
-| `ChangePassword`                | ✅      | ❌       |
-| `GetUser`                       | ✅      | ❌       |
-| `GetUserSelf`                   | ❌      | ❌       |
-| `UpdateUser`                    | ✅      | ❌       |
-| `ResetPassword`                 | ✅      | ❌       |
-| `GetNotificationPreferences`    | ✅      | ❌       |
-| `UpdateNotificationPreferences` | ✅      | ❌       |
-| `ResendActivationEmail` (self)  | ✅      | ❌       |
+| Operation                       | Request | Response  |
+| ------------------------------- | ------- | --------- |
+| `AuthenticateUser`              | ✅      | ✅ & JSON |
+| `ChangePassword`                | ✅      | JSON      |
+| `GetUser`                       | ✅      | JSON      |
+| `UpdateUser`                    | ✅      | JSON      |
+| `ResetPassword`                 | ✅      | JSON      |
+| `GetNotificationPreferences`    | ✅      | JSON      |
+| `UpdateNotificationPreferences` | ✅      | JSON      |
+| `ResendActivationEmail` (self)  | ✅      | JSON      |
 
 ---
 
@@ -110,43 +115,43 @@
 
 | Operation                        | Request | Response |
 | -------------------------------- | ------- | -------- |
-| `GetFirm`                        | ❌      | ❌       |
-| `UpdateFirm`                     | ❌      | ❌       |
-| `RegisterUser`                   | ❌      | ❌       |
-| `GetUser` (firm)                 | ❌      | ❌       |
-| `GetUserList`                    | ❌      | ❌       |
-| `RemoveUser`                     | ❌      | ❌       |
-| `ResendActivationEmail`          | ❌      | ❌       |
-| `ResetUserPassword`              | ❌      | ❌       |
-| `AddUserRole`                    | ❌      | ❌       |
-| `RemoveUserRole`                 | ❌      | ❌       |
-| `CreatePaymentAccount`           | ❌      | ❌       |
-| `GetPaymentAccount`              | ✅      | ❌       |
-| `GetPaymentAccountList`          | ✅      | ❌       |
-| `GetPaymentAccountTypeList`      | ✅      | ❌       |
-| `UpdatePaymentAccount`           | ❌      | ❌       |
-| `RemovePaymentAccount`           | ✅      | ❌       |
-| `CreatePaymentAccountWaiver`     | ✅      | ❌       |
-| `CreateGlobalPaymentAccount`     | ❌      | ❌       |
-| `GetGlobalPaymentAccount`        | ❌      | ❌       |
-| `GetGlobalPaymentAccountList`    | ❌      | ❌       |
-| `UpdateGlobalPaymentAccount`     | ❌      | ❌       |
-| `RemoveGlobalPaymentAccount`     | ❌      | ❌       |
-| `GetVitalChekPaymentAccountId`   | ❌      | ❌       |
-| `CreateAttorney`                 | ❌      | ❌       |
-| `GetAttorney`                    | ❌      | ❌       |
-| `GetAttorneyList`                | ❌      | ❌       |
-| `UpdateAttorney`                 | ❌      | ❌       |
-| `RemoveAttorney`                 | ❌      | ❌       |
-| `CreateServiceContact`           | ❌      | ❌       |
-| `GetServiceContact`              | ❌      | ❌       |
-| `GetServiceContactList`          | ❌      | ❌       |
-| `UpdateServiceContact`           | ❌      | ❌       |
-| `RemoveServiceContact`           | ❌      | ❌       |
-| `AttachServiceContact`           | ❌      | ❌       |
-| `DetachServiceContact`           | ❌      | ❌       |
-| `GetPublicList`                  | ❌      | ❌       |
-| `GetNotificationPreferencesList` | ❌      | ❌       |
+| `GetFirm`                        | ❌      | JSON     |
+| `UpdateFirm`                     | ❌      | JSON     |
+| `RegisterUser`                   | ❌      | JSON     |
+| `GetUser` (firm)                 | ❌      | JSON     |
+| `GetUserList`                    | ❌      | JSON     |
+| `RemoveUser`                     | ❌      | JSON     |
+| `ResendActivationEmail`          | ❌      | JSON     |
+| `ResetUserPassword`              | ❌      | JSON     |
+| `AddUserRole`                    | ❌      | JSON     |
+| `RemoveUserRole`                 | ❌      | JSON     |
+| `CreatePaymentAccount`           | ❌      | JSON     |
+| `GetPaymentAccount`              | ✅      | JSON     |
+| `GetPaymentAccountList`          | ✅      | JSON     |
+| `GetPaymentAccountTypeList`      | ✅      | JSON     |
+| `UpdatePaymentAccount`           | ❌      | JSON     |
+| `RemovePaymentAccount`           | ✅      | JSON     |
+| `CreatePaymentAccountWaiver`     | ✅      | JSON     |
+| `CreateGlobalPaymentAccount`     | ❌      | JSON     |
+| `GetGlobalPaymentAccount`        | ❌      | JSON     |
+| `GetGlobalPaymentAccountList`    | ❌      | JSON     |
+| `UpdateGlobalPaymentAccount`     | ❌      | JSON     |
+| `RemoveGlobalPaymentAccount`     | ❌      | JSON     |
+| `GetVitalChekPaymentAccountId`   | ❌      | JSON     |
+| `CreateAttorney`                 | ❌      | JSON     |
+| `GetAttorney`                    | ❌      | JSON     |
+| `GetAttorneyList`                | ❌      | JSON     |
+| `UpdateAttorney`                 | ❌      | JSON     |
+| `RemoveAttorney`                 | ❌      | JSON     |
+| `CreateServiceContact`           | ❌      | JSON     |
+| `GetServiceContact`              | ❌      | JSON     |
+| `GetServiceContactList`          | ❌      | JSON     |
+| `UpdateServiceContact`           | ❌      | JSON     |
+| `RemoveServiceContact`           | ❌      | JSON     |
+| `AttachServiceContact`           | ❌      | JSON     |
+| `DetachServiceContact`           | ❌      | JSON     |
+| `GetPublicList`                  | ❌      | JSON     |
+| `GetNotificationPreferencesList` | ❌      | JSON     |
 
 ---
 
@@ -154,17 +159,17 @@
 
 | Operation                        | Request | Response |
 | -------------------------------- | ------- | -------- |
-| `GetFilingList`                  | ✅      | ❌       |
-| `GetFilingDetails`               | ❌      | ❌       |
-| `GetFilingStatus`                | ❌      | ❌       |
-| `GetFilingService`               | ❌      | ❌       |
-| `GetFeesCalculation`             | ❌      | ❌       |
-| `CancelFiling`                   | ❌      | ❌       |
-| `ReviewFiling`                   | ❌      | ❌       |
-| `GetServiceTypes`                | ❌      | ❌       |
-| `GetPolicy`                      | ✅      | ❌       |
-| `GetBatchList` _(Tyler ext.)_    | ❌      | ❌       |
-| `GetBatchDetails` _(Tyler ext.)_ | ❌      | ❌       |
+| `GetFilingList`                  | ✅      | JSON     |
+| `GetFilingDetails`               | ❌      | JSON     |
+| `GetFilingStatus`                | ❌      | JSON     |
+| `GetFilingService`               | ❌      | JSON     |
+| `GetFeesCalculation`             | ❌      | JSON     |
+| `CancelFiling`                   | ❌      | JSON     |
+| `ReviewFiling`                   | ❌      | JSON     |
+| `GetServiceTypes`                | ❌      | JSON     |
+| `GetPolicy`                      | ✅      | JSON     |
+| `GetBatchList` _(Tyler ext.)_    | ❌      | JSON     |
+| `GetBatchDetails` _(Tyler ext.)_ | ❌      | JSON     |
 
 ---
 
@@ -172,10 +177,10 @@
 
 | Operation                            | Handler | Response |
 | ------------------------------------ | ------- | -------- |
-| `NotifyFilingReviewComplete`         | ❌      | ❌       |
-| `NotifyEvent`                        | ❌      | ❌       |
-| `NotifyServiceComplete`              | ❌      | ❌       |
-| `NotifyBatchComplete` _(Tyler ext.)_ | ❌      | ❌       |
+| `NotifyFilingReviewComplete`         | ❌      | JSON     |
+| `NotifyEvent`                        | ❌      | JSON     |
+| `NotifyServiceComplete`              | ❌      | JSON     |
+| `NotifyBatchComplete` _(Tyler ext.)_ | ❌      | JSON     |
 
 ---
 
@@ -183,11 +188,11 @@
 
 | Operation                      | Request | Response |
 | ------------------------------ | ------- | -------- |
-| `GetCase`                      | ✅      | ⏳       |
-| `GetCaseList`                  | ✅      | ⏳       |
-| `GetServiceAttachCaseList`     | ❌      | ❌       |
-| `GetServiceInformation`        | ❌      | ❌       |
-| `GetServiceInformationHistory` | ❌      | ❌       |
+| `GetCase`                      | ✅      | JSON     |
+| `GetCaseList`                  | ✅      | JSON     |
+| `GetServiceAttachCaseList`     | ❌      | JSON     |
+| `GetServiceInformation`        | ❌      | JSON     |
+| `GetServiceInformationHistory` | ❌      | JSON     |
 
 ---
 
@@ -195,7 +200,7 @@
 
 | Operation     | Request | Response |
 | ------------- | ------- | -------- |
-| `ServeFiling` | ❌      | ❌       |
+| `ServeFiling` | ❌      | JSON     |
 
 ---
 
@@ -203,8 +208,8 @@
 
 | Operation          | Request | Response |
 | ------------------ | ------- | -------- |
-| `GetReturnDate`    | ❌      | ❌       |
-| `ReserveCourtDate` | ❌      | ❌       |
+| `GetReturnDate`    | ❌      | JSON     |
+| `ReserveCourtDate` | ❌      | JSON     |
 
 ## CLI
 
