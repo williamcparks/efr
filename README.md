@@ -6,7 +6,7 @@
 
 # EFile CLI Demo
 
-<video src="docs/codes_showcase.mp4" muted controls width="100%"></video>
+https://github.com/user-attachments/assets/9ae3daf8-4f28-4d7d-9217-17f33aea71c1
 
 # EFSP API Implementation Progress
 
