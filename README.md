@@ -4,6 +4,10 @@
 [![docs.rs](https://docs.rs/efr/badge.svg)](https://docs.rs/efr)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+# EFile CLI Demo
+
+<video src="docs/codes_showcase.mp4" controls width="100%"></video>
+
 # EFSP API Implementation Progress
 
 Key
