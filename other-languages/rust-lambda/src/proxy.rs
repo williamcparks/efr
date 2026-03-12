@@ -6,9 +6,9 @@ use crate::{
 };
 
 pub async fn proxy(event: Request) -> Result<Response<Body>, ProxyError> {
-    let (input, metadata) = Input::try_new(event)?;
+    let (input, metadata, authtoken) = Input::try_new(event)?;
 
-    let json_obj = send(input, metadata).await?;
+    let json_obj = send(input, metadata, authtoken).await?;
     let json_msg = serde_json::to_string(&json_obj)?;
 
     Response::builder()

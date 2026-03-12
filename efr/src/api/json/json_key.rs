@@ -17,6 +17,8 @@ fn qname<'a, 'b>(local_name: &'a [u8], uri: &'b ResolveResult) -> (&'a str, &'b 
             "caselistresponse"
         }
         b"http://release.niem.gov/niem/domains/cbrn/4.1/" => "cbrn",
+        b"http://schemas.xmlsoap.org/soap/envelope/" => "soap",
+        b"" => "",
         _ => {
             let value = str::from_utf8(uri).unwrap_or("unknown");
 
@@ -36,8 +38,10 @@ pub fn json_key(local_name: &[u8], uri: &ResolveResult) -> String {
 
     let mut buf = String::with_capacity(local_name.len() + uri.len() + 1);
 
-    buf.push_str(uri);
-    buf.push(':');
+    if !uri.is_empty() {
+        buf.push_str(uri);
+        buf.push(':');
+    }
     buf.push_str(local_name);
 
     buf
@@ -49,8 +53,10 @@ pub fn json_key_attr(local_name: &[u8], uri: &ResolveResult) -> String {
     let mut buf = String::with_capacity(local_name.len() + uri.len() + 2);
 
     buf.push('@');
-    buf.push_str(uri);
-    buf.push(':');
+    if !uri.is_empty() {
+        buf.push_str(uri);
+        buf.push(':');
+    }
     buf.push_str(local_name);
 
     buf

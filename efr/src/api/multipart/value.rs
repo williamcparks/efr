@@ -1,5 +1,6 @@
 use uuid::Uuid;
 
+#[derive(Clone, Debug)]
 pub struct MultiPartRequest {
     content_type: [u8; 161],
     bytes: Vec<u8>,

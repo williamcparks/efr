@@ -1,4 +1,4 @@
-use lambda_http::ext::PayloadError;
+use lambda_http::{ext::PayloadError, http::Method};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -9,9 +9,13 @@ pub enum SendError {
 
     Json(#[from] serde_json::Error),
 
+    Qs(#[from] serde_qs::Error),
+
     Payload(#[from] PayloadError),
 
     ReqwestClient(reqwest::Error),
+
+    Reqwest(#[from] reqwest::Error),
 
     #[error("Header: `state`: {0}")]
     StateHeader(lambda_http::http::header::ToStrError),
@@ -24,4 +28,19 @@ pub enum SendError {
 
     #[error("Header: `environment`: No State Header Provided")]
     NoEnviroHeader,
+
+    State(#[from] efr::api::StateError),
+
+    Enviro(#[from] efr::api::EnvironmentError),
+
+    #[error("Invalid Auth Token, Must Be {{email}}:{{password}}")]
+    AuthToken,
+
+    #[error("Use Method: `{0}`")]
+    UseMethod(Method),
+
+    #[error("RSA - {0}")]
+    Rsa(Box<str>),
+
+    Efr(#[from] efr::api::EfrError),
 }
