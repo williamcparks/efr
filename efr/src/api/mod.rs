@@ -25,6 +25,6 @@ pub(crate) use uuid::HEX;
 mod metadata;
 
 #[cfg(feature = "metadata")]
-pub use metadata::{Environment, Metadata, State};
+pub use metadata::{Environment, EnvironmentError, Metadata, State, StateError};
 
 pub(crate) mod serde_datetime;
