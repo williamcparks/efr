@@ -10,3 +10,4 @@ Cargo.lock
 # zip files from codes
 codeversions.zip
 locations.zip
+errorcodes.zip
