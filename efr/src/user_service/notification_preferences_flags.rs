@@ -1,5 +1,5 @@
 use bitflags::bitflags;
-use serde::{Deserialize, Serialize, de::Visitor};
+use serde::{Deserialize, Serialize};
 
 bitflags! {
     #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -24,28 +24,12 @@ impl Serialize for NotificationPreferencesFlags {
     }
 }
 
-struct Vis;
-
-impl<'de> Visitor<'de> for Vis {
-    type Value = NotificationPreferencesFlags;
-
-    fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
-        formatter.write_str("a u8 representing bitflags for `NotificationPreferencesFlags`")
-    }
-
-    fn visit_u8<E>(self, v: u8) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        Ok(NotificationPreferencesFlags::from_bits_truncate(v))
-    }
-}
-
 impl<'de> Deserialize<'de> for NotificationPreferencesFlags {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
-        deserializer.deserialize_u8(Vis)
+        let bits = u8::deserialize(deserializer)?;
+        Ok(Self::from_bits_truncate(bits))
     }
 }
