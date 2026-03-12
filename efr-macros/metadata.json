@@ -2,6 +2,7 @@
     "states": [
         {
             "state": "California",
+            "abbr": "ca",
             "status": "Open",
             "stage_url": "https://california-stage.tylertech.cloud",
             "prod_url": "https://california-efm.tylertech.cloud",
@@ -11,6 +12,7 @@
         },
         {
             "state": "DistrictOfColumbia",
+            "abbr": "dc",
             "status": "Privately-Funded",
             "stage_url": "https://efiledc-stage.tylertech.cloud",
             "prod_url": "https://efiledc.tylertech.cloud",
@@ -20,6 +22,7 @@
         },
         {
             "state": "Georgia",
+            "abbr": "ga",
             "status": "Privately-Funded",
             "stage_url": "https://georgia-stage.tylertech.cloud",
             "prod_url": "https://georgia.tylertech.cloud",
@@ -29,6 +32,7 @@
         },
         {
             "state": "Idaho",
+            "abbr": "id",
             "status": "Closed",
             "stage_url": "https://idaho-stage.tylertech.cloud",
             "prod_url": "https://idaho.tylertech.cloud",
@@ -38,6 +42,7 @@
         },
         {
             "state": "Illinois",
+            "abbr": "il",
             "status": "Open",
             "stage_url": "https://illinois-stage.tylertech.cloud",
             "prod_url": "https://illinois.tylertech.cloud",
@@ -47,6 +52,7 @@
         },
         {
             "state": "Indiana",
+            "abbr": "in",
             "status": "Open",
             "stage_url": "https://indiana-stage.tylertech.cloud",
             "prod_url": "https://indiana.tylertech.cloud",
@@ -56,6 +62,7 @@
         },
         {
             "state": "Louisiana",
+            "abbr": "la",
             "status": "Closed",
             "stage_url": "https://louisiana-stage.tylertech.cloud",
             "prod_url": "https://louisiana.tylertech.cloud",
@@ -65,6 +72,7 @@
         },
         {
             "state": "Maine",
+            "abbr": "ma",
             "status": "Upcoming",
             "stage_url": "https://maine-stage.tylertech.cloud",
             "prod_url": "https://maine.tylertech.cloud",
@@ -74,6 +82,7 @@
         },
         {
             "state": "Maryland",
+            "abbr": "md",
             "status": "Open",
             "stage_url": "https://efilemd-stage.tylertech.cloud",
             "prod_url": "https://maryland.tylertech.cloud",
@@ -83,6 +92,7 @@
         },
         {
             "state": "Massachusetts",
+            "abbr": "ma",
             "status": "Upcoming",
             "stage_url": "https://massachusetts-stage.tylertech.cloud",
             "prod_url": "https://massachusetts.tylertech.cloud",
@@ -92,6 +102,7 @@
         },
         {
             "state": "Minnesota",
+            "abbr": "mn",
             "status": "Closed",
             "stage_url": "https://minnesota-stage.tylertech.cloud",
             "prod_url": "https://minnesota.tylerhost.net/ofsweb",
@@ -101,6 +112,7 @@
         },
         {
             "state": "Nevada",
+            "abbr": "nv",
             "status": "Privately-Funded",
             "stage_url": "https://nevada-stage.tylertech.cloud",
             "prod_url": "https://nevada.tylertech.cloud",
@@ -110,6 +122,7 @@
         },
         {
             "state": "NewMexico",
+            "abbr": "nm",
             "status": "Closed",
             "stage_url": "https://newmexico-stage.tylertech.cloud",
             "prod_url": "https://newmexico.tylertech.cloud",
@@ -119,6 +132,7 @@
         },
         {
             "state": "NorthCarolina",
+            "abbr": "nc",
             "status": "Closed",
             "stage_url": "https://efilenc-test.tylertech.cloud",
             "prod_url": "https://efilenc.tylertech.cloud",
@@ -128,6 +142,7 @@
         },
         {
             "state": "NorthDakota",
+            "abbr": "nd",
             "status": "Closed",
             "stage_url": "https://northdakota-stage.tylertech.cloud",
             "prod_url": "https://northdakota.tylertech.cloud",
@@ -137,6 +152,7 @@
         },
         {
             "state": "Ohio",
+            "abbr": "oh",
             "status": "Upcoming",
             "stage_url": "https://ohio-stage.tylertech.cloud",
             "prod_url": "https://ohio.tylertech.cloud",
@@ -146,6 +162,7 @@
         },
         {
             "state": "Oklahoma",
+            "abbr": "ok",
             "status": "Closed",
             "stage_url": "https://oklahoma-stage.tylertech.cloud",
             "prod_url": "https://oklahoma.tylertech.cloud",
@@ -155,6 +172,7 @@
         },
         {
             "state": "Oregon",
+            "abbr": "or",
             "status": "Closed",
             "stage_url": "https://oregon-stage.tylertech.cloud",
             "prod_url": "https://oregon.tylertech.cloud",
@@ -164,6 +182,7 @@
         },
         {
             "state": "Pennsylvania",
+            "abbr": "pa",
             "status": "Upcoming",
             "stage_url": "https://pennsylvania-stage.tylertech.cloud",
             "prod_url": "https://pennsylvania.tylertech.cloud",
@@ -173,6 +192,7 @@
         },
         {
             "state": "RhodeIsland",
+            "abbr": "ri",
             "status": "Closed",
             "stage_url": "https://rhodeisland-stage.tylertech.cloud",
             "prod_url": "https://rhodeisland.tylertech.cloud",
@@ -182,6 +202,7 @@
         },
         {
             "state": "SouthDakota",
+            "abbr": "sd",
             "status": "Privately-Funded",
             "stage_url": "https://southdakota-stage.tylertech.cloud",
             "prod_url": "https://southdakota.tylertech.cloud",
@@ -191,6 +212,7 @@
         },
         {
             "state": "Tennessee",
+            "abbr": "tn",
             "status": "Upcoming",
             "stage_url": "https://tennessee-stage.tylertech.cloud",
             "prod_url": "https://tennessee.tylertech.cloud",
@@ -200,6 +222,7 @@
         },
         {
             "state": "Texas",
+            "abbr": "tx",
             "status": "Open",
             "stage_url": "https://texas-stage.tylertech.cloud",
             "prod_url": "https://texas.tylertech.cloud",
@@ -209,6 +232,7 @@
         },
         {
             "state": "Vermont",
+            "abbr": "vt",
             "status": "Closed",
             "stage_url": "https://vermont-stage.tylertech.cloud",
             "prod_url": "https://vermont.tylertech.cloud",
@@ -218,6 +242,7 @@
         },
         {
             "state": "Virginia",
+            "abbr": "va",
             "status": "Privately-Funded",
             "stage_url": "https://virginia-stage.tylertech.cloud",
             "prod_url": "https://virginia.tylertech.cloud",
@@ -227,6 +252,7 @@
         },
         {
             "state": "Washington",
+            "abbr": "wa",
             "status": "Upcoming",
             "stage_url": "https://efilewa-stage.tylertech.cloud",
             "prod_url": "https://efilewa.tylertech.cloud",

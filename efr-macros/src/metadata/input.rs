@@ -13,6 +13,7 @@ pub struct Input<'a> {
 #[derive(Deserialize)]
 pub struct State<'a> {
     pub state: &'a str,
+    pub abbr: &'a str,
     // pub status: &'a str,
     pub stage_url: &'a str,
     pub prod_url: &'a str,

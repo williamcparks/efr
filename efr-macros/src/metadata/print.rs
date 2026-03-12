@@ -22,6 +22,8 @@ impl<'a> Input<'a> {
         let filing_status_codes_arms = self.arms("CodeService/codes/filingstatus");
         let data_field_codes_arms = self.arms("CodeService/codes/datafield");
 
+        let try_new_impls = self.print_try_new();
+
         quote! {
             use serde::{Deserialize, Serialize};
 
@@ -127,6 +129,8 @@ impl<'a> Input<'a> {
                     }
                 }
             }
+
+            #try_new_impls
         }
     }
 
@@ -147,7 +151,7 @@ impl<'a> State<'a> {
         }
     }
 
-    fn state_ident(&self) -> Ident {
+    pub fn state_ident(&self) -> Ident {
         Ident::new(self.state, Span::call_site())
     }
 }
