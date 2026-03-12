@@ -1,4 +1,7 @@
-use efr::codes_service::{CodeError, CodeHeader, CodeLocation, CodeResponse, CodeVersion};
+use efr::codes_service::{
+    CodeCountry, CodeDataField, CodeError, CodeFilingStatus, CodeHeader, CodeLocation,
+    CodeResponse, CodeState, CodeVersion,
+};
 use reqwest::Client;
 use strum::Display;
 
@@ -29,57 +32,57 @@ impl CodesSource {
     }
 }
 
-pub async fn location(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
-    let codes_source = CodesSource::prompt()?;
-    let bytes = match codes_source {
-        CodesSource::Fetch => get(client, config, config.metadata.location_codes_url()).await?,
-        CodesSource::LocalFs => read("locations.zip")?,
+macro_rules! code_fetch {
+    ($ident: ident, $file_name: literal, $url: ident, $ty: ty) => {
+        pub async fn $ident(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
+            let codes_source = CodesSource::prompt()?;
+            let bytes = match codes_source {
+                CodesSource::Fetch => get(client, config, config.metadata.$url()).await?,
+                CodesSource::LocalFs => read($file_name)?,
+            };
+
+            let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+
+            for line in xml.lines().take(100) {
+                println!("{line}");
+            }
+
+            let code_response = CodeResponse::<'_, $ty>::try_new(xml.as_str())?;
+
+            println!("{:#?}", code_response.codes_metadata);
+            for row_result in code_response.rows {
+                println!("{:#?}", row_result?);
+            }
+
+            Ok(())
+        }
     };
-
-    let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
-    let code_response = CodeResponse::<'_, CodeLocation>::try_new(xml.as_str())?;
-
-    println!("{:#?}", code_response.codes_metadata);
-    for row_result in code_response.rows {
-        println!("{:#?}", row_result?);
-    }
-
-    Ok(())
 }
 
-pub async fn version(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
-    let codes_source = CodesSource::prompt()?;
-    let bytes = match codes_source {
-        CodesSource::Fetch => get(client, config, config.metadata.version_codes_url()).await?,
-        CodesSource::LocalFs => read("codeversions.zip")?,
-    };
-
-    let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
-    let code_response = CodeResponse::<'_, CodeVersion>::try_new(xml.as_str())?;
-
-    println!("{:#?}", code_response.codes_metadata);
-    for row_result in code_response.rows {
-        println!("{:#?}", row_result?);
-    }
-
-    Ok(())
+code_fetch! {
+    location, "locations.zip", location_codes_url, CodeLocation
 }
 
-pub async fn error(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
-    let codes_source = CodesSource::prompt()?;
-    let bytes = match codes_source {
-        CodesSource::Fetch => get(client, config, config.metadata.error_codes_url()).await?,
-        CodesSource::LocalFs => read("errorcodes.zip")?,
-    };
+code_fetch! {
+    version, "codeversions.zip", version_codes_url, CodeVersion
+}
 
-    let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+code_fetch! {
+    error, "errorcodes.zip", error_codes_url, CodeError
+}
 
-    let code_response = CodeResponse::<'_, CodeError>::try_new(xml.as_str())?;
+code_fetch! {
+    country, "countrycodes.zip", country_codes_url, CodeCountry
+}
 
-    println!("{:#?}", code_response.codes_metadata);
-    for row_result in code_response.rows {
-        println!("{:#?}", row_result?);
-    }
+code_fetch! {
+    state, "statecodes.zip", state_codes_url, CodeState
+}
 
-    Ok(())
+code_fetch! {
+    filing_status, "filingstatuscodes.zip", filing_status_codes_url, CodeFilingStatus
+}
+
+code_fetch! {
+    data_field, "datafieldcodes.zip", data_field_codes_url, CodeDataField
 }

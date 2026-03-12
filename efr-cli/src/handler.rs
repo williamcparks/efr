@@ -81,6 +81,10 @@ pub async fn handler() -> Result<(), CliError> {
         Operations::LocationCodes => codes::location(client, &config).await?,
         Operations::VersionCodes => codes::version(client, &config).await?,
         Operations::ErrorCodes => codes::error(client, &config).await?,
+        Operations::CountryCodes => codes::country(client, &config).await?,
+        Operations::StateCodes => codes::state(client, &config).await?,
+        Operations::FilingStatusCodes => codes::filing_status(client, &config).await?,
+        Operations::DataFieldCodes => codes::data_field(client, &config).await?,
     }
 
     Ok(())

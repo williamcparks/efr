@@ -95,6 +95,22 @@ pub enum Operations {
     #[subclass(codes)]
     #[strum(to_string = "Fetch Error Codes")]
     ErrorCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Country Codes")]
+    CountryCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch State Codes")]
+    StateCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Filing Status Codes")]
+    FilingStatusCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Data Field Codes")]
+    DataFieldCodes,
 }
 
 pub mod authenticate_user;

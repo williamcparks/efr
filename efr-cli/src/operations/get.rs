@@ -1,4 +1,4 @@
-use std::{path::PathBuf, str::FromStr};
+use std::{io::ErrorKind, path::PathBuf, str::FromStr};
 
 use bytes::Bytes;
 use efr::codes_service::CodeHeader;
@@ -48,6 +48,16 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes,
 
 fn output_file(response: &Response) -> Result<PathBuf, OperationsError> {
     let mut out = std::env::current_dir().map_err(OperationsError::Cwd)?;
+    out.push("code-downloads");
+
+    if let Err(err) = std::fs::create_dir(out.as_path())
+        && err.kind() != ErrorKind::AlreadyExists
+    {
+        return Err(OperationsError::Write {
+            path: out,
+            source: err,
+        });
+    }
 
     if let Some(header) = response.headers().get(CONTENT_DISPOSITION)
         && let Ok(content_dispo) = header.to_str()
@@ -74,6 +84,7 @@ fn output_file(response: &Response) -> Result<PathBuf, OperationsError> {
 
 pub fn read(file: &str) -> Result<Bytes, OperationsError> {
     let mut cwd = std::env::current_dir().map_err(OperationsError::Cwd)?;
+    cwd.push("code-downloads");
     cwd.push(file);
 
     match std::fs::read(cwd.as_path()) {

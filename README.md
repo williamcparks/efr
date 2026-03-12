@@ -60,10 +60,10 @@ Key
 | `Location`               | ✅      | ✅       |
 | `Versions`               | ✅      | ✅       |
 | `Error`                  | ✅      | ✅       |
-| `Country`                | ❌      | ❌       |
-| `State`                  | ❌      | ❌       |
-| `Filing Status`          | ❌      | ❌       |
-| `Data Field`             | ❌      | ❌       |
+| `Country`                | ✅      | ✅       |
+| `State`                  | ✅      | ✅       |
+| `Filing Status`          | ✅      | ✅       |
+| `Data Field`             | ✅      | ✅       |
 | `Case Category`          | ❌      | ❌       |
 | `Case Type`              | ❌      | ❌       |
 | `Case Sub Type`          | ❌      | ❌       |

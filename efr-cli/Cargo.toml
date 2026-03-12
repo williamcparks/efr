@@ -1,14 +1,14 @@
 [package]
 name = "efr-cli"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2024"
 publish = false
 
 [dependencies]
 bytes = "1.11.1"
 chrono = "0.4.44"
-efr = { version = "0.1.3", path = "../efr", features = ["codes", "metadata"] }
-efr-macros = { version = "0.1.3", path = "../efr-macros", features = [
+efr = { version = "0.1.4", path = "../efr", features = ["codes", "metadata"] }
+efr-macros = { version = "0.1.4", path = "../efr-macros", features = [
     "sub-class",
 ] }
 inquire = { version = "0.9.3", features = ["date"] }

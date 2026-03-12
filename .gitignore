@@ -8,6 +8,4 @@ __pycache__/
 Cargo.lock
 
 # zip files from codes
-codeversions.zip
-locations.zip
-errorcodes.zip
+/code-downloads
