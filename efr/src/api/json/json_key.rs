@@ -17,7 +17,15 @@ fn qname<'a, 'b>(local_name: &'a [u8], uri: &'b ResolveResult) -> (&'a str, &'b 
             "caselistresponse"
         }
         b"http://release.niem.gov/niem/domains/cbrn/4.1/" => "cbrn",
-        _ => str::from_utf8(uri).unwrap_or("unknown"),
+        _ => {
+            let value = str::from_utf8(uri).unwrap_or("unknown");
+
+            #[cfg(debug_assertions)]
+            panic!("unknown uri: {}", value);
+
+            #[allow(unused)]
+            value
+        }
     };
 
     (local_name, prefix)

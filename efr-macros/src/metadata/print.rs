@@ -16,6 +16,11 @@ impl<'a> Input<'a> {
         let filing_review_service_arms = self.arms("efm/v5/FilingReviewService.svc");
         let location_code_arms = self.arms("CodeService/codes/location");
         let version_codes_arms = self.arms("CodeService/codes/version");
+        let error_codes_arms = self.arms("CodeService/codes/error");
+        let country_codes_arms = self.arms("CodeService/codes/country");
+        let state_codes_arms = self.arms("CodeService/codes/state");
+        let filing_status_codes_arms = self.arms("CodeService/codes/filingstatus");
+        let data_field_codes_arms = self.arms("CodeService/codes/datafield");
 
         quote! {
             use serde::{Deserialize, Serialize};
@@ -89,6 +94,36 @@ impl<'a> Input<'a> {
                 pub const fn version_codes_url(&self) -> &'static str {
                     match (self.state, self.environment) {
                         #(#version_codes_arms)*
+                    }
+                }
+
+                pub const fn error_codes_url(&self) -> &'static str {
+                    match (self.state, self.environment) {
+                        #(#error_codes_arms)*
+                    }
+                }
+
+                pub const fn country_codes_url(&self) -> &'static str {
+                    match (self.state, self.environment) {
+                        #(#country_codes_arms)*
+                    }
+                }
+
+                pub const fn state_codes_url(&self) -> &'static str {
+                    match (self.state, self.environment) {
+                        #(#state_codes_arms)*
+                    }
+                }
+
+                pub const fn filing_status_codes_url(&self) -> &'static str {
+                    match (self.state, self.environment) {
+                        #(#filing_status_codes_arms)*
+                    }
+                }
+
+                pub const fn data_field_codes_url(&self) -> &'static str {
+                    match (self.state, self.environment) {
+                        #(#data_field_codes_arms)*
                     }
                 }
             }

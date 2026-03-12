@@ -1,4 +1,4 @@
-use efr::codes_service::{CodeVersion, CodesHeader, CodesResponse};
+use efr::codes_service::{CodeError, CodeHeader, CodeLocation, CodeResponse, CodeVersion};
 use reqwest::Client;
 use strum::Display;
 
@@ -31,12 +31,20 @@ impl CodesSource {
 
 pub async fn location(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
     let codes_source = CodesSource::prompt()?;
-    let _bytes = match codes_source {
+    let bytes = match codes_source {
         CodesSource::Fetch => get(client, config, config.metadata.location_codes_url()).await?,
         CodesSource::LocalFs => read("locations.zip")?,
     };
 
-    todo!();
+    let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+    let code_response = CodeResponse::<'_, CodeLocation>::try_new(xml.as_str())?;
+
+    println!("{:#?}", code_response.codes_metadata);
+    for row_result in code_response.rows {
+        println!("{:#?}", row_result?);
+    }
+
+    Ok(())
 }
 
 pub async fn version(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
@@ -46,11 +54,30 @@ pub async fn version(client: Client, config: &EfrConfig) -> Result<(), Operation
         CodesSource::LocalFs => read("codeversions.zip")?,
     };
 
-    let xml = CodesHeader::unzip_xml(bytes.as_ref())?;
-    let codes_response = CodesResponse::<'_, CodeVersion>::try_new(xml.as_str())?;
+    let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+    let code_response = CodeResponse::<'_, CodeVersion>::try_new(xml.as_str())?;
 
-    println!("{:#?}", codes_response.codes_metadata);
-    for row_result in codes_response.rows {
+    println!("{:#?}", code_response.codes_metadata);
+    for row_result in code_response.rows {
+        println!("{:#?}", row_result?);
+    }
+
+    Ok(())
+}
+
+pub async fn error(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
+    let codes_source = CodesSource::prompt()?;
+    let bytes = match codes_source {
+        CodesSource::Fetch => get(client, config, config.metadata.error_codes_url()).await?,
+        CodesSource::LocalFs => read("errorcodes.zip")?,
+    };
+
+    let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+
+    let code_response = CodeResponse::<'_, CodeError>::try_new(xml.as_str())?;
+
+    println!("{:#?}", code_response.codes_metadata);
+    for row_result in code_response.rows {
         println!("{:#?}", row_result?);
     }
 

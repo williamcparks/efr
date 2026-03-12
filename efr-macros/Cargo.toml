@@ -9,16 +9,13 @@ readme = "README.md"
 keywords = ["efr"]
 
 [features]
-metadata = [
-    "dep:proc-macro2",
-    "dep:quote",
-    "dep:serde",
-    "dep:serde_json",
-    "dep:syn",
-]
-partial-xml = ["dep:proc-macro2", "dep:quote", "dep:syn"]
-xml = ["dep:proc-macro2", "dep:quote", "dep:syn"]
-sub-class = ["dep:proc-macro2", "dep:quote", "dep:syn"]
+exports = ["dep:proc-macro2", "dep:quote", "dep:syn"]
+
+codelist = ["exports"]
+metadata = ["exports", "dep:serde", "dep:serde_json"]
+partial-xml = ["exports"]
+xml = ["exports"]
+sub-class = ["exports"]
 
 [lib]
 proc-macro = true

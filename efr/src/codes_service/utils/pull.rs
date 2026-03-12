@@ -13,6 +13,11 @@ pub struct Tag {
     uri: Option<&'static str>,
 }
 
+pub enum StartOrEmpty<'a> {
+    Start(BytesStart<'a>),
+    Empty(BytesStart<'a>),
+}
+
 pub struct Pull<'a, 'b>(pub &'b mut NsReader<&'a [u8]>);
 
 impl<'a, 'b> Pull<'a, 'b> {
@@ -39,6 +44,54 @@ impl<'a, 'b> Pull<'a, 'b> {
             Event::Eof => Err(EfrCodesError::Xml(quick_xml::DeError::UnexpectedEof)),
             other => Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
                 "Expected <Row> or </SimpleCodeList>. Got {other:?}"
+            )))),
+        }
+    }
+
+    pub fn start_or_empty(&mut self, tag: Tag) -> Result<StartOrEmpty<'a>, EfrCodesError> {
+        match self.0.read_event()? {
+            Event::Start(start) => {
+                let (resolve_result, local_name) = self.0.resolver().resolve_element(start.name());
+
+                if local_name.as_ref() != tag.local_name.as_bytes() {
+                    return Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
+                        "Expected {tag}. Got {start:?}"
+                    ))));
+                }
+
+                match (resolve_result, tag.uri) {
+                    (ResolveResult::Unbound, None) => Ok(StartOrEmpty::Start(start)),
+                    (ResolveResult::Bound(ns), Some(uri)) if uri.as_bytes() == ns.0 => {
+                        Ok(StartOrEmpty::Start(start))
+                    }
+                    _ => Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
+                        "Expected {tag}. Got {start:?}"
+                    )))),
+                }
+            }
+            Event::Empty(start) => {
+                let (resolve_result, local_name) = self.0.resolver().resolve_element(start.name());
+
+                if local_name.as_ref() != tag.local_name.as_bytes() {
+                    return Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
+                        "Expected {tag}. Got {start:?}"
+                    ))));
+                }
+
+                match (resolve_result, tag.uri) {
+                    (ResolveResult::Unbound, None) => Ok(StartOrEmpty::Empty(start)),
+                    (ResolveResult::Bound(ns), Some(uri)) if uri.as_bytes() == ns.0 => {
+                        Ok(StartOrEmpty::Empty(start))
+                    }
+                    _ => Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
+                        "Expected {tag}. Got {start:?}"
+                    )))),
+                }
+            }
+
+            Event::Eof => Err(EfrCodesError::Xml(quick_xml::DeError::UnexpectedEof)),
+            other => Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
+                "Expected {tag}. Got {other:?}"
             )))),
         }
     }

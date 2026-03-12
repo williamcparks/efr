@@ -1,9 +1,11 @@
 use std::io::{Cursor, Read};
 use zip::{ZipArchive, result::ZipError};
 
-use crate::codes_service::{CodesHeader, EfrCodesError};
+use crate::codes_service::EfrCodesError;
 
-impl CodesHeader {
+use super::CodeHeader;
+
+impl CodeHeader {
     pub fn unzip_xml(bytes: &[u8]) -> Result<String, EfrCodesError> {
         let reader = Cursor::new(bytes);
         let mut archive = ZipArchive::new(reader)?;

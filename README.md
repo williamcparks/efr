@@ -7,9 +7,11 @@
 # EFile CLI Demo
 
 ## Get Case List Conversion To JSON
+
 <img width="1470" height="956" alt="Screenshot 2026-03-10 at 7 04 31 PM" src="https://github.com/user-attachments/assets/6474b4fc-2f70-4af8-ae5d-e4d787a1a23e" />
 
 ## Get Version Codes Conversion To Fast Rust Structs
+
 https://github.com/user-attachments/assets/9ae3daf8-4f28-4d7d-9217-17f33aea71c1
 
 # EFSP API Implementation Progress
@@ -55,9 +57,9 @@ Key
 
 | Operation                | Request | Response |
 | ------------------------ | ------- | -------- |
-| `Location`               | ✅      | ❌       |
-| `Versions`               | ❌      | ❌       |
-| `Error`                  | ❌      | ❌       |
+| `Location`               | ✅      | ✅       |
+| `Versions`               | ✅      | ✅       |
+| `Error`                  | ✅      | ✅       |
 | `Country`                | ❌      | ❌       |
 | `State`                  | ❌      | ❌       |
 | `Filing Status`          | ❌      | ❌       |

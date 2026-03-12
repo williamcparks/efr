@@ -91,6 +91,10 @@ pub enum Operations {
     #[subclass(codes)]
     #[strum(to_string = "Fetch Version Codes")]
     VersionCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Error Codes")]
+    ErrorCodes,
 }
 
 pub mod authenticate_user;

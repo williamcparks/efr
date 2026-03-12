@@ -19,11 +19,11 @@ use x509_cert::{Certificate, der::Decode, spki::AlgorithmIdentifierOwned};
 
 use crate::codes_service::EfrCodesHeaderError;
 
-pub struct CodesHeader {
+pub struct CodeHeader {
     pub header: String,
 }
 
-impl CodesHeader {
+impl CodeHeader {
     pub const TYL_EFM_API_HEADER: &str = "tyl-efm-api";
 
     pub fn try_new(

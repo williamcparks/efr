@@ -2,14 +2,6 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum EfrCodesHeaderError {
-    /// a pem parsing / serialization error
-    #[error("EFile Rust Pem (Crypto): {0}")]
-    Pem(
-        #[from]
-        #[source]
-        pem::PemError,
-    ),
-
     /// a der parsing / serialization error
     #[error("EFile Rust Der (Crypto): {0}")]
     Der(

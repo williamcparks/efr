@@ -1,7 +1,7 @@
 use std::{path::PathBuf, str::FromStr};
 
 use bytes::Bytes;
-use efr::codes_service::CodesHeader;
+use efr::codes_service::CodeHeader;
 use mime::Mime;
 use reqwest::{
     Client, Response,
@@ -11,21 +11,21 @@ use reqwest::{
 use crate::{config::EfrConfig, operations::error::OperationsError};
 
 pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes, OperationsError> {
-    let codes_header = CodesHeader::try_new(config.cert_der.as_slice(), &config.codes_signing_key)?;
+    let codes_header = CodeHeader::try_new(config.cert_der.as_slice(), &config.codes_signing_key)?;
     let codes_header_value = HeaderValue::from_str(codes_header.as_str())?;
 
     println!("---outbound---");
     println!("GET {url}");
     println!(
         "{}: {}",
-        CodesHeader::TYL_EFM_API_HEADER,
+        CodeHeader::TYL_EFM_API_HEADER,
         codes_header.as_str()
     );
     println!("---/outbound---");
 
     let res = client
         .get(url)
-        .header(CodesHeader::TYL_EFM_API_HEADER, codes_header_value)
+        .header(CodeHeader::TYL_EFM_API_HEADER, codes_header_value)
         .send()
         .await?;
 

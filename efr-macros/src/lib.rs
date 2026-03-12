@@ -1,18 +1,10 @@
-#[cfg(any(
-    feature = "metadata",
-    feature = "partial-xml",
-    feature = "xml",
-    feature = "sub-class"
-))]
+#[cfg(feature = "exports")]
 use proc_macro::TokenStream;
-#[cfg(any(
-    feature = "metadata",
-    feature = "partial-xml",
-    feature = "xml",
-    feature = "sub-class"
-))]
+#[cfg(feature = "exports")]
 use syn::parse_macro_input;
 
+#[cfg(feature = "codelist")]
+mod codelist;
 #[cfg(feature = "metadata")]
 mod metadata;
 #[cfg(feature = "partial-xml")]
@@ -52,6 +44,16 @@ pub fn xml(input: TokenStream) -> TokenStream {
 #[proc_macro_derive(SubClass, attributes(subclass))]
 pub fn sub_class(input: TokenStream) -> TokenStream {
     match sub_class::handler(parse_macro_input!(input)) {
+        Ok(ok) => ok,
+        Err(err) => err.into_compile_error(),
+    }
+    .into()
+}
+
+#[cfg(feature = "codelist")]
+#[proc_macro_derive(CodeList, attributes(codelist))]
+pub fn codelist(input: TokenStream) -> TokenStream {
+    match codelist::handler(parse_macro_input!(input)) {
         Ok(ok) => ok,
         Err(err) => err.into_compile_error(),
     }

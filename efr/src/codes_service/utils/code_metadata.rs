@@ -7,7 +7,7 @@ use crate::codes_service::EfrCodesError;
 use super::pull::{Pull, Tag};
 
 #[derive(Clone, Debug)]
-pub struct CodesMetadata<'a> {
+pub struct CodeMetadata<'a> {
     pub short_name: Cow<'a, str>,
     pub long_name: Cow<'a, str>,
     pub version: Cow<'a, str>,
@@ -15,7 +15,7 @@ pub struct CodesMetadata<'a> {
     pub canonical_version_uri: Cow<'a, str>,
 }
 
-impl<'a> CodesMetadata<'a> {
+impl<'a> CodeMetadata<'a> {
     pub fn try_new(reader: &mut NsReader<&'a [u8]>) -> Result<Self, EfrCodesError> {
         let mut pull = Pull(reader);
 

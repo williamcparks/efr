@@ -80,6 +80,7 @@ pub async fn handler() -> Result<(), CliError> {
         }
         Operations::LocationCodes => codes::location(client, &config).await?,
         Operations::VersionCodes => codes::version(client, &config).await?,
+        Operations::ErrorCodes => codes::error(client, &config).await?,
     }
 
     Ok(())
