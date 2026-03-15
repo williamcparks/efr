@@ -17,7 +17,10 @@ fn qname<'a, 'b>(local_name: &'a [u8], uri: &'b ResolveResult) -> (&'a str, &'b 
             "caselistresponse"
         }
         b"http://release.niem.gov/niem/domains/cbrn/4.1/" => "cbrn",
+        b"urn:tyler:efm:services" => "tyler",
+        b"urn:tyler:efm:services:schema:AuthenticateResponse" => "authenticateresponse",
         b"http://schemas.xmlsoap.org/soap/envelope/" => "soap",
+        b"urn:tyler:efm:services:schema:BaseResponse" => "baseresponse",
         b"" => "",
         _ => {
             let value = str::from_utf8(uri).unwrap_or("unknown");

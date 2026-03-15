@@ -38,7 +38,7 @@ pub enum ProxyError {
 
     Enviro(efr::api::EnvironmentError),
 
-    #[error("Invalid Auth Token, Must Be {{email}}:{{password}}")]
+    #[error("Invalid Auth Token, Must Be {{email}}:{{password hash}}")]
     AuthToken,
 
     #[error("Use Method: `{0}`")]

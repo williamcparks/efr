@@ -14,7 +14,7 @@ pub enum Input {
 impl Input {
     pub fn try_new(request: Request) -> Result<(Self, Metadata, Option<AuthToken>), SendError> {
         let metadata = try_metadata(&request)?;
-        let authtoken = AuthToken::new_opt(&request);
+        let authtoken = AuthToken::try_new_opt(&request)?;
 
         let url = request.uri().path();
 

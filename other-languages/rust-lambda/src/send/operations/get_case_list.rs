@@ -22,7 +22,7 @@ impl GetCaseList {
         metadata: Metadata,
         authtoken: Option<AuthToken>,
     ) -> Result<Value, SendError> {
-        let authtoken = AuthToken::enforce(authtoken)?;
+        let authtoken = authtoken.ok_or(SendError::AuthToken)?;
         let (email, password_hash) = authtoken.pair();
 
         let (private_key, cert_der) = sign()?;

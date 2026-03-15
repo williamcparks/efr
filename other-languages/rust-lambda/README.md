@@ -7,6 +7,35 @@ setup
 - env/pkey.pem exists
 - env/cert.der exists
 
+## Metadata in requests
+
+You need to add the state, environment, and optionally an "authtoken" for authenticated routes to access the lambda
+
+HTTP Headers:
+
+- state = lower case abbreviation of the state you are using, for example "tx" for Texas or "ca" for California
+- environment = lower case of either "stage" or "production"
+- authtoken = email:password-hash where "password-hash" comes from the /authenticate api for example:
+
+```
+POST /authenticate
+state: tx
+environment: stage
+content-type: application/json
+
+{
+  "email": "user@example.com"
+  "password": "password"
+}
+```
+
+```
+GET /get_case_list?case_number=example&jurisdiction=juris:county
+state: tx
+environment: stage
+authtoken: user@example.com:whatever-password-hash-from-auth-call
+```
+
 # Introduction
 
 rust-lambda is a Rust project that implements an AWS Lambda function in Rust.

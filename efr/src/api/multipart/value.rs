@@ -18,6 +18,10 @@ impl MultiPartRequest {
         unsafe { str::from_utf8_unchecked(self.content_type.as_slice()) }
     }
 
+    pub fn bytes(&self) -> &[u8] {
+        self.bytes.as_slice()
+    }
+
     pub fn into_bytes(self) -> Vec<u8> {
         self.bytes
     }
