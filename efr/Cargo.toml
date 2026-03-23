@@ -1,12 +1,15 @@
 [package]
 name = "efr"
-version = "0.1.81"
+version = "0.1.82"
 edition = "2024"
 description = "efr (EFile Rust)"
 license = "MIT"
 repository = "https://github.com/williamcparks/efr"
 readme = "README.md"
 keywords = ["efr"]
+
+[package.metadata.docs.rs]
+all-features = true
 
 [features]
 codes = [
@@ -25,7 +28,7 @@ metadata = ["efr-macros/metadata"]
 base64 = "0.22.1"
 bitflags = "2.11.0"
 chrono = { version = "0.4.43", features = ["serde"] }
-efr-macros = { version = "0.1.81", path = "../efr-macros", features = [
+efr-macros = { version = "0.1.82", path = "../efr-macros", features = [
     "partial-xml",
     "xml",
 ] }

@@ -23,15 +23,7 @@ fn qname<'a, 'b>(local_name: &'a [u8], uri: &'b ResolveResult) -> (&'a str, &'b 
         b"http://schemas.xmlsoap.org/soap/envelope/" => "soap",
         b"urn:tyler:efm:services:schema:BaseResponse" => "baseresponse",
         b"" => "",
-        _ => {
-            let value = str::from_utf8(uri).unwrap_or("unknown");
-
-            #[cfg(debug_assertions)]
-            panic!("unknown uri: {}", value);
-
-            #[allow(unused)]
-            value
-        }
+        _ => str::from_utf8(uri).unwrap_or(""),
     };
 
     (local_name, prefix)
