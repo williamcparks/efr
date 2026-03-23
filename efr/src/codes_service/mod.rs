@@ -12,8 +12,10 @@ pub use code_country::CodeCountry;
 pub use code_data_field::{CodeDataField, CodeDataFieldFlags};
 pub use code_error::CodeError;
 pub use code_filing_status::CodeFilingStatus;
-pub use code_location::{CodeLocation, CodeLocationAllowableCardTypes, CodeLocationFlags};
+pub use code_location::{
+    CodeLocation, CodeLocationAllowableCardTypes, CodeLocationFlags, CodeLocationPartialWaiver,
+};
 pub use code_state::CodeState;
-pub use code_version::CodeVersion;
+pub use code_version::{CodeVersion, CodeVersionFile};
 pub use error::{EfrCodesError, EfrCodesHeaderError};
 pub use utils::{CodeHeader, CodeMetadata, CodeResponse, CodeRows};

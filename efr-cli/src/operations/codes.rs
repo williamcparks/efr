@@ -43,10 +43,6 @@ macro_rules! code_fetch {
 
             let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
 
-            for line in xml.lines().take(100) {
-                println!("{line}");
-            }
-
             let code_response = CodeResponse::<'_, $ty>::try_new(xml.as_str())?;
 
             println!("{:#?}", code_response.codes_metadata);
