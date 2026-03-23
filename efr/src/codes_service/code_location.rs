@@ -48,7 +48,7 @@ pub struct CodeLocation<'a> {
 }
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
     pub struct CodeLocationFlags: u64 {
         const INITIAL                                    = 1 << 0;
         const SUBSEQUENT                                 = 1 << 1;
@@ -99,7 +99,7 @@ bitflags! {
 }
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
     pub struct CodeLocationAllowableCardTypes: u8 {
         const AMEX = 1 << 0;
         const CHECKING = 1 << 1;
@@ -110,7 +110,7 @@ bitflags! {
 }
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
     pub struct CodeLocationRedactionTargetConfig: u8 {
         const ACCOUNT_NUMBER = 1 << 0;
         const CREDIT_CARD = 1 << 1;
@@ -606,63 +606,6 @@ impl CodeLocationPartialWaiver {
         }
 
         Ok(Self(res))
-    }
-}
-
-impl Serialize for CodeLocationFlags {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        serializer.serialize_u64(self.bits())
-    }
-}
-
-impl<'de> Deserialize<'de> for CodeLocationFlags {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        let bits = u64::deserialize(deserializer)?;
-        Ok(Self::from_bits_truncate(bits))
-    }
-}
-
-impl Serialize for CodeLocationAllowableCardTypes {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        serializer.serialize_u8(self.bits())
-    }
-}
-
-impl<'de> Deserialize<'de> for CodeLocationAllowableCardTypes {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        let bits = u8::deserialize(deserializer)?;
-        Ok(Self::from_bits_truncate(bits))
-    }
-}
-
-impl Serialize for CodeLocationRedactionTargetConfig {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        serializer.serialize_u8(self.bits())
-    }
-}
-
-impl<'de> Deserialize<'de> for CodeLocationRedactionTargetConfig {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        let bits = u8::deserialize(deserializer)?;
-        Ok(Self::from_bits_truncate(bits))
     }
 }
 

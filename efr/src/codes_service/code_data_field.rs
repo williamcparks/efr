@@ -23,7 +23,7 @@ pub struct CodeDataField<'a> {
 }
 
 bitflags! {
-    #[derive(Clone, Debug)]
+    #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct CodeDataFieldFlags: u8 {
         const IS_VISIBLE = 1 << 0;
         const IS_REQUIRED = 1 << 1;
@@ -88,23 +88,4 @@ struct RawCodeDataField<'a> {
     defaultvalueexpression: Cow<'a, str>,
     #[codelist(optional)]
     isreadonly: Cow<'a, str>,
-}
-
-impl Serialize for CodeDataFieldFlags {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        serializer.serialize_u8(self.bits())
-    }
-}
-
-impl<'de> Deserialize<'de> for CodeDataFieldFlags {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        let bits = u8::deserialize(deserializer)?;
-        Ok(Self::from_bits_truncate(bits))
-    }
 }
