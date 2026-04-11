@@ -35,7 +35,8 @@ pub async fn post<T: EfrRequest>(
         .header(T::SOAP_ACTION_HEADER_NAME, T::SOAP_ACTION)
         .body(bytes)
         .send()
-        .await?;
+        .await?
+        .error_for_status()?;
 
     println!("---inbound---\n{res:#?}\n");
     let text = res.text().await?;

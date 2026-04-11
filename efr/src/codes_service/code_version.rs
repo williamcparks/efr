@@ -34,6 +34,8 @@ impl CodeVersion {
 )]
 pub enum CodeList {
     // ── System-wide ──────────────────────────────────────────────────────────
+    #[strum(serialize = "codeversions.zip")]
+    Versions,
     #[strum(serialize = "countrycodes.zip")]
     Country,
     #[strum(serialize = "datafieldconfigcodes.zip")]
@@ -150,6 +152,7 @@ impl CodeList {
     pub fn name(&self) -> &'static str {
         match self {
             // ── System-wide ──────────────────────────────────────────────────
+            Self::Versions => "codeversions",
             Self::Country => "countrycodes",
             Self::DataFieldConfig => "datafieldconfigcodes",
             Self::Error => "errorcodes",
@@ -217,6 +220,7 @@ impl CodeList {
         let jurisdiction = jurisdiction.unwrap_or_default();
         match self {
             // ── System-wide ──────────────────────────────────────────────────────────
+            Self::Versions => Cow::Borrowed(metadata.version_url()),
             Self::Country => Cow::Borrowed(metadata.country_url()),
             Self::DataFieldConfig => Cow::Borrowed(metadata.data_field_config_url()),
             Self::Error => Cow::Borrowed(metadata.error_url()),
@@ -282,7 +286,8 @@ impl CodeList {
     pub const fn requires_jurisdiction(&self) -> bool {
         match self {
             // ── System-wide ──────────────────────────────────────────────────────────
-            Self::Country
+            Self::Versions
+            | Self::Country
             | Self::DataFieldConfig
             | Self::Error
             | Self::FilingStatus

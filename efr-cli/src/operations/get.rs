@@ -31,7 +31,8 @@ pub async fn get(
         .get(url)
         .header(CodeHeader::TYL_EFM_API_HEADER, codes_header_value)
         .send()
-        .await?;
+        .await?
+        .error_for_status()?;
 
     println!("---inbound---\n{res:#?}\n");
 

@@ -17,7 +17,7 @@ impl<'a> Input<'a> {
 
         // System-wide (static)
         let location_arms = self.arms("CodeService/codes/location/");
-        let version_arms = self.arms("CodeService/codes/versions/");
+        let version_arms = self.arms("CodeService/codes/version/");
         let error_arms = self.arms("CodeService/codes/error/");
         let country_arms = self.arms("CodeService/codes/country/");
         let state_arms = self.arms("CodeService/codes/state/");
