@@ -33,6 +33,7 @@ pub async fn codes(client: Client, config: &EfrConfig) -> Result<(), OperationsE
 
     for row_result in code_response {
         let row = row_result?;
+
         println!("{row:#?}");
     }
 

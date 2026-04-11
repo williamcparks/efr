@@ -34,112 +34,164 @@ impl CodeVersion {
 )]
 pub enum CodeList {
     // ── System-wide ──────────────────────────────────────────────────────────
+    #[serde(alias = "codeversions.zip")]
     #[strum(serialize = "codeversions.zip")]
     Versions,
+    #[serde(alias = "countrycodes.zip")]
     #[strum(serialize = "countrycodes.zip")]
     Country,
+    #[serde(alias = "datafieldconfigcodes.zip")]
     #[strum(serialize = "datafieldconfigcodes.zip")]
     DataFieldConfig,
+    #[serde(alias = "errorcodes.zip")]
     #[strum(serialize = "errorcodes.zip")]
     Error,
+    #[serde(alias = "filingstatuscodes.zip")]
     #[strum(serialize = "filingstatuscodes.zip")]
     FilingStatus,
+    #[serde(alias = "languagecodes.zip")]
     #[strum(serialize = "languagecodes.zip")]
     Language,
+    #[serde(alias = "locations.zip")]
     #[strum(serialize = "locations.zip")]
     Locations,
+    #[serde(alias = "statecodes.zip")]
     #[strum(serialize = "statecodes.zip")]
     State,
 
     // ── Court-specific ───────────────────────────────────────────────────────
+    #[serde(alias = "answercodes.zip")]
     #[strum(serialize = "answercodes.zip")]
     Answer,
+    #[serde(alias = "appellatelowercourts.zip")]
     #[strum(serialize = "appellatelowercourts.zip")]
     AppellateLowerCourts,
+    #[serde(alias = "casecategorycodes.zip")]
     #[strum(serialize = "casecategorycodes.zip")]
     CaseCategory,
+    #[serde(alias = "casesubtypecodes.zip")]
     #[strum(serialize = "casesubtypecodes.zip")]
     CaseSubType,
+    #[serde(alias = "casetypecodes.zip")]
     #[strum(serialize = "casetypecodes.zip")]
     CaseType,
+    #[serde(alias = "crossreferencecodes.zip")]
     #[strum(serialize = "crossreferencecodes.zip")]
     CrossReference,
+    #[serde(alias = "damageamountcodes.zip")]
     #[strum(serialize = "damageamountcodes.zip")]
     DamageAmount,
+    #[serde(alias = "disclaimerrequirementcodes.zip")]
     #[strum(serialize = "disclaimerrequirementcodes.zip")]
     DisclaimerRequirement,
+    #[serde(alias = "documenttypecodes.zip")]
     #[strum(serialize = "documenttypecodes.zip")]
     DocumentType,
+    #[serde(alias = "filertypecodes.zip")]
     #[strum(serialize = "filertypecodes.zip")]
     FilerType,
+    #[serde(alias = "filetypecodes.zip")]
     #[strum(serialize = "filetypecodes.zip")]
     FileType,
+    #[serde(alias = "filingcodes.zip")]
     #[strum(serialize = "filingcodes.zip")]
     Filing,
+    #[serde(alias = "filingcomponentcodes.zip")]
     #[strum(serialize = "filingcomponentcodes.zip")]
     FilingComponent,
+    #[serde(alias = "hearinglocationcodes.zip")]
     #[strum(serialize = "hearinglocationcodes.zip")]
     HearingLocation,
+    #[serde(alias = "judicialofficercodes.zip")]
     #[strum(serialize = "judicialofficercodes.zip")]
     JudicialOfficer,
+    #[serde(alias = "motiontypecodes.zip")]
     #[strum(serialize = "motiontypecodes.zip")]
     MotionType,
+    #[serde(alias = "namesuffixcodes.zip")]
     #[strum(serialize = "namesuffixcodes.zip")]
     NameSuffix,
+    #[serde(alias = "notificationagencycodes.zip")]
     #[strum(serialize = "notificationagencycodes.zip")]
     NotificationAgency,
+    #[serde(alias = "optionalservicescodes.zip")]
     #[strum(serialize = "optionalservicescodes.zip")]
     OptionalServices,
+    #[serde(alias = "partytypecodes.zip")]
     #[strum(serialize = "partytypecodes.zip")]
     PartyType,
+    #[serde(alias = "procedureremedycodes.zip")]
     #[strum(serialize = "procedureremedycodes.zip")]
     ProcedureRemedy,
+    #[serde(alias = "questioncodes.zip")]
     #[strum(serialize = "questioncodes.zip")]
     Question,
+    #[serde(alias = "refundreasoncodes.zip")]
     #[strum(serialize = "refundreasoncodes.zip")]
     RefundReason,
+    #[serde(alias = "repcapcodes.zip")]
     #[strum(serialize = "repcapcodes.zip")]
     RepCap,
+    #[serde(alias = "serviceprovidercodes.zip")]
     #[strum(serialize = "serviceprovidercodes.zip")]
     ServiceProvider,
+    #[serde(alias = "servicetypecodes.zip")]
     #[strum(serialize = "servicetypecodes.zip")]
     ServiceType,
 
     // ── Criminal initiation ──────────────────────────────────────────────────
+    #[serde(alias = "arrestlocationcodes.zip")]
     #[strum(serialize = "arrestlocationcodes.zip")]
     ArrestLocation,
+    #[serde(alias = "bondcodes.zip")]
     #[strum(serialize = "bondcodes.zip")]
     Bond,
+    #[serde(alias = "chargephasecodes.zip")]
     #[strum(serialize = "chargephasecodes.zip")]
     ChargePhase,
+    #[serde(alias = "citationjurisdictioncodes.zip")]
     #[strum(serialize = "citationjurisdictioncodes.zip")]
     CitationJurisdiction,
+    #[serde(alias = "degreecodes.zip")]
     #[strum(serialize = "degreecodes.zip")]
     Degree,
+    #[serde(alias = "driverlicensetypecodes.zip")]
     #[strum(serialize = "driverlicensetypecodes.zip")]
     DriverLicenseType,
+    #[serde(alias = "ethnicitycodes.zip")]
     #[strum(serialize = "ethnicitycodes.zip")]
     Ethnicity,
+    #[serde(alias = "eyecolorcodes.zip")]
     #[strum(serialize = "eyecolorcodes.zip")]
     EyeColor,
+    #[serde(alias = "generaloffensecodes.zip")]
     #[strum(serialize = "generaloffensecodes.zip")]
     GeneralOffense,
+    #[serde(alias = "haircolorcodes.zip")]
     #[strum(serialize = "haircolorcodes.zip")]
     HairColor,
+    #[serde(alias = "lawenforcementunitcodes.zip")]
     #[strum(serialize = "lawenforcementunitcodes.zip")]
     LawEnforcementUnit,
+    #[serde(alias = "physicalfeaturecodes.zip")]
     #[strum(serialize = "physicalfeaturecodes.zip")]
     PhysicalFeature,
+    #[serde(alias = "racecodes.zip")]
     #[strum(serialize = "racecodes.zip")]
     Race,
+    #[serde(alias = "statutecodes.zip")]
     #[strum(serialize = "statutecodes.zip")]
     Statute,
+    #[serde(alias = "statutetypecodes.zip")]
     #[strum(serialize = "statutetypecodes.zip")]
     StatuteType,
+    #[serde(alias = "vehiclecolorcodes.zip")]
     #[strum(serialize = "vehiclecolorcodes.zip")]
     VehicleColor,
+    #[serde(alias = "vehiclemakecodes.zip")]
     #[strum(serialize = "vehiclemakecodes.zip")]
     VehicleMake,
+    #[serde(alias = "vehicletypecodes.zip")]
     #[strum(serialize = "vehicletypecodes.zip")]
     VehicleType,
 }
