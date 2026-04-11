@@ -18,7 +18,7 @@ pub struct CodeCaseCategory<'a> {
     pub damageamountsubsequent: CodeCaseCategoryAvailability,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
 pub enum CodeCaseCategoryAvailability {
     NotAvailable,
     Available,

@@ -40,7 +40,7 @@ impl<'a> CodeRow<'a> for CodeVersion<'a> {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, EnumString, Deserialize, Serialize)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, EnumString, Deserialize, Serialize)]
 pub enum CodeVersionFile {
     // ── System-wide ──────────────────────────────────────────────────────────
     #[strum(serialize = "countrycodes.zip")]

@@ -34,18 +34,18 @@ impl<'a> Input<'a> {
         quote! {
             use serde::{Deserialize, Serialize};
 
-            #[derive(Clone, Debug, Eq, PartialEq, Deserialize, Serialize)]
+            #[derive(Clone, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
             pub struct Metadata {
                 pub state: State,
                 pub environment: Environment,
             }
 
-            #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+            #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
             pub enum State {
                 #(#states),*
             }
 
-            #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+            #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
             pub enum Environment {
                 Stage,
                 Production,

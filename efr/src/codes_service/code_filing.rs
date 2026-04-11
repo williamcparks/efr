@@ -28,7 +28,7 @@ pub struct CodeFiling<'a> {
     pub efspcode: Cow<'a, str>,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
 pub enum CodeFilingType {
     Initial,
     Subsequent,

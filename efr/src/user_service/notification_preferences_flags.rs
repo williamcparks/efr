@@ -2,7 +2,7 @@ use bitflags::bitflags;
 use serde::{Deserialize, Serialize};
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+    #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
     pub struct NotificationPreferencesFlags: u8 {
         const ACCEPTED = 1 << 0;
         const REJECTED = 1 << 1;

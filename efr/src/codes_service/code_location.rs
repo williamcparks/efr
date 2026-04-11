@@ -48,7 +48,7 @@ pub struct CodeLocation<'a> {
 }
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+    #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
     pub struct CodeLocationFlags: u64 {
         const INITIAL                                    = 1 << 0;
         const SUBSEQUENT                                 = 1 << 1;
@@ -99,7 +99,7 @@ bitflags! {
 }
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+    #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
     pub struct CodeLocationAllowableCardTypes: u8 {
         const AMEX = 1 << 0;
         const CHECKING = 1 << 1;
@@ -110,7 +110,7 @@ bitflags! {
 }
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize, Serialize)]
+    #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
     pub struct CodeLocationRedactionTargetConfig: u8 {
         const ACCOUNT_NUMBER = 1 << 0;
         const CREDIT_CARD = 1 << 1;
@@ -122,7 +122,7 @@ bitflags! {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub struct CodeLocationPartialWaiver([u8; 8]);
 
 impl<'a> CodeRow<'a> for CodeLocation<'a> {
