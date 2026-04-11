@@ -55,56 +55,58 @@ Key
 
 ## Codes
 
-| Operation                | Request | Response |
-| ------------------------ | ------- | -------- |
-| `Location`               | ✅      | ✅       |
-| `Versions`               | ✅      | ✅       |
-| `Error`                  | ✅      | ✅       |
-| `Country`                | ✅      | ✅       |
-| `State`                  | ✅      | ✅       |
-| `Filing Status`          | ✅      | ✅       |
-| `Data Field`             | ✅      | ✅       |
-| `Case Category`          | ❌      | ❌       |
-| `Case Type`              | ❌      | ❌       |
-| `Case Sub Type`          | ❌      | ❌       |
-| `Party Type`             | ❌      | ❌       |
-| `Filing`                 | ❌      | ❌       |
-| `Filing Component`       | ❌      | ❌       |
-| `Document Type`          | ❌      | ❌       |
-| `File Type`              | ❌      | ❌       |
-| `Optional Services`      | ❌      | ❌       |
-| `Filer Type`             | ❌      | ❌       |
-| `Procedure/Remedy`       | ❌      | ❌       |
-| `Damage Amount`          | ❌      | ❌       |
-| `Name Suffix`            | ❌      | ❌       |
-| `Language`               | ❌      | ❌       |
-| `Cross Reference`        | ❌      | ❌       |
-| `Disclaimer Requirement` | ❌      | ❌       |
-| `Motion Type`            | ❌      | ❌       |
-| `Service Type`           | ❌      | ❌       |
-| `Question`               | ❌      | ❌       |
-| `Answer`                 | ❌      | ❌       |
-| `Refund Reason`          | ❌      | ❌       |
-| `Service Provider`       | ❌      | ❌       |
-| `Notification Agency`    | ❌      | ❌       |
-| `Arrest Location`        | ❌      | ❌       |
-| `Bond`                   | ❌      | ❌       |
-| `Charge Phase`           | ❌      | ❌       |
-| `Degree`                 | ❌      | ❌       |
-| `Driver License Type`    | ❌      | ❌       |
-| `Ethnicity`              | ❌      | ❌       |
-| `Eye Color`              | ❌      | ❌       |
-| `General Offense`        | ❌      | ❌       |
-| `Hair Color`             | ❌      | ❌       |
-| `Law Enforcement Unit`   | ❌      | ❌       |
-| `Physical Feature`       | ❌      | ❌       |
-| `Race`                   | ❌      | ❌       |
-| `Statute`                | ❌      | ❌       |
-| `Statute Type`           | ❌      | ❌       |
-| `Citation Jurisdiction`  | ❌      | ❌       |
-| `Vehicle Color`          | ❌      | ❌       |
-| `Vehicle Make`           | ❌      | ❌       |
-| `Vehicle Type`           | ❌      | ❌       |
+Here's the updated table with all code sets showing green:
+
+| Operation                | Request | Response  |
+| ------------------------ | ------- | --------- |
+| `Location`               | ✅      | JSON      |
+| `Versions`               | ✅      | ✅ & JSON |
+| `Error`                  | ✅      | JSON      |
+| `Country`                | ✅      | JSON      |
+| `State`                  | ✅      | JSON      |
+| `Filing Status`          | ✅      | JSON      |
+| `Data Field`             | ✅      | JSON      |
+| `Case Category`          | ✅      | JSON      |
+| `Case Type`              | ✅      | JSON      |
+| `Case Sub Type`          | ✅      | JSON      |
+| `Party Type`             | ✅      | JSON      |
+| `Filing`                 | ✅      | JSON      |
+| `Filing Component`       | ✅      | JSON      |
+| `Document Type`          | ✅      | JSON      |
+| `File Type`              | ✅      | JSON      |
+| `Optional Services`      | ✅      | JSON      |
+| `Filer Type`             | ✅      | JSON      |
+| `Procedure/Remedy`       | ✅      | JSON      |
+| `Damage Amount`          | ✅      | JSON      |
+| `Name Suffix`            | ✅      | JSON      |
+| `Language`               | ✅      | JSON      |
+| `Cross Reference`        | ✅      | JSON      |
+| `Disclaimer Requirement` | ✅      | JSON      |
+| `Motion Type`            | ✅      | JSON      |
+| `Service Type`           | ✅      | JSON      |
+| `Question`               | ✅      | JSON      |
+| `Answer`                 | ✅      | JSON      |
+| `Refund Reason`          | ✅      | JSON      |
+| `Service Provider`       | ✅      | JSON      |
+| `Notification Agency`    | ✅      | JSON      |
+| `Arrest Location`        | ✅      | JSON      |
+| `Bond`                   | ✅      | JSON      |
+| `Charge Phase`           | ✅      | JSON      |
+| `Degree`                 | ✅      | JSON      |
+| `Driver License Type`    | ✅      | JSON      |
+| `Ethnicity`              | ✅      | JSON      |
+| `Eye Color`              | ✅      | JSON      |
+| `General Offense`        | ✅      | JSON      |
+| `Hair Color`             | ✅      | JSON      |
+| `Law Enforcement Unit`   | ✅      | JSON      |
+| `Physical Feature`       | ✅      | JSON      |
+| `Race`                   | ✅      | JSON      |
+| `Statute`                | ✅      | JSON      |
+| `Statute Type`           | ✅      | JSON      |
+| `Citation Jurisdiction`  | ✅      | JSON      |
+| `Vehicle Color`          | ✅      | JSON      |
+| `Vehicle Make`           | ✅      | JSON      |
+| `Vehicle Type`           | ✅      | JSON      |
 
 ## User
 
@@ -135,11 +137,11 @@ Key
 | `ResetUserPassword`              | ❌      | JSON     |
 | `AddUserRole`                    | ❌      | JSON     |
 | `RemoveUserRole`                 | ❌      | JSON     |
-| `CreatePaymentAccount`           | ❌      | JSON     |
+| `CreatePaymentAccount`           | ✅      | JSON     |
 | `GetPaymentAccount`              | ✅      | JSON     |
 | `GetPaymentAccountList`          | ✅      | JSON     |
 | `GetPaymentAccountTypeList`      | ✅      | JSON     |
-| `UpdatePaymentAccount`           | ❌      | JSON     |
+| `UpdatePaymentAccount`           | ✅      | JSON     |
 | `RemovePaymentAccount`           | ✅      | JSON     |
 | `CreatePaymentAccountWaiver`     | ✅      | JSON     |
 | `CreateGlobalPaymentAccount`     | ❌      | JSON     |
@@ -167,19 +169,19 @@ Key
 
 ## FilingReview
 
-| Operation                        | Request | Response |
-| -------------------------------- | ------- | -------- |
-| `GetFilingList`                  | ✅      | JSON     |
-| `GetFilingDetails`               | ❌      | JSON     |
-| `GetFilingStatus`                | ❌      | JSON     |
-| `GetFilingService`               | ❌      | JSON     |
-| `GetFeesCalculation`             | ❌      | JSON     |
-| `CancelFiling`                   | ❌      | JSON     |
-| `ReviewFiling`                   | ❌      | JSON     |
-| `GetServiceTypes`                | ❌      | JSON     |
-| `GetPolicy`                      | ✅      | JSON     |
-| `GetBatchList` _(Tyler ext.)_    | ❌      | JSON     |
-| `GetBatchDetails` _(Tyler ext.)_ | ❌      | JSON     |
+| Operation                        | Request              | Response |
+| -------------------------------- | -------------------- | -------- |
+| `GetFilingList`                  | ✅                   | JSON     |
+| `GetFilingDetails`               | ❌                   | JSON     |
+| `GetFilingStatus`                | ❌                   | JSON     |
+| `GetFilingService`               | ❌                   | JSON     |
+| `GetFeesCalculation`             | ❌                   | JSON     |
+| `CancelFiling`                   | ❌                   | JSON     |
+| `ReviewFiling`                   | ✍️(Work In Progress) | JSON     |
+| `GetServiceTypes`                | ❌                   | JSON     |
+| `GetPolicy`                      | ✅                   | JSON     |
+| `GetBatchList` _(Tyler ext.)_    | ❌                   | JSON     |
+| `GetBatchDetails` _(Tyler ext.)_ | ❌                   | JSON     |
 
 ---
 
