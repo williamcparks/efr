@@ -1,5 +1,7 @@
 use chrono::{DateTime, NaiveTime, Utc};
+use efr::codes_service::CodeList;
 use inquire::Text;
+use strum::Display;
 
 use crate::operations::error::OperationsError;
 
@@ -44,5 +46,35 @@ impl DateRange {
             start_date,
             end_date,
         })
+    }
+}
+
+pub struct CodeListPrompt;
+
+impl CodeListPrompt {
+    pub fn prompt() -> Result<CodeList, OperationsError> {
+        let options = CodeList::all().to_vec();
+        let selection =
+            inquire::Select::new("Which Code List Would You Like To Fetch?", options).prompt()?;
+        Ok(selection)
+    }
+}
+
+#[derive(Display)]
+pub enum CodesSource {
+    #[strum(to_string = "Fetch")]
+    Fetch,
+    #[strum(to_string = "Local File System")]
+    LocalFs,
+}
+
+impl CodesSource {
+    pub fn prompt() -> Result<Self, OperationsError> {
+        let ok = inquire::Select::new(
+            "How Would You Like To Pull Codes?",
+            vec![Self::Fetch, Self::LocalFs],
+        )
+        .prompt()?;
+        Ok(ok)
     }
 }

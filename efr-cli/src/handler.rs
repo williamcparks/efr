@@ -34,7 +34,7 @@ pub async fn handler() -> Result<(), CliError> {
         Services::CourtRecord => Operations::court_record(),
         Services::Policy => Operations::policy(),
         Services::FilingReview => Operations::filing_review(),
-        Services::Codes => Operations::codes(),
+        Services::Codes => return Ok(codes::codes(client, &config).await?),
     };
 
     let operation = inquire::Select::new(
@@ -83,20 +83,6 @@ pub async fn handler() -> Result<(), CliError> {
         Operations::SelfResendActivationEmail => {
             self_resend_activation_email::handler(client, &config).await?
         }
-        Operations::LocationCodes => codes::location(client, &config).await?,
-        Operations::VersionCodes => codes::version(client, &config).await?,
-        Operations::ErrorCodes => codes::error(client, &config).await?,
-        Operations::CountryCodes => codes::country(client, &config).await?,
-        Operations::StateCodes => codes::state(client, &config).await?,
-        Operations::FilingStatusCodes => codes::filing_status(client, &config).await?,
-        Operations::DataFieldCodes => codes::data_field(client, &config).await?,
-        Operations::CaseCategoryCodes => codes::case_category(client, &config).await?,
-        Operations::CaseTypeCodes => codes::case_type(client, &config).await?,
-        Operations::FilingCodes => codes::filing(client, &config).await?,
-        Operations::MotionTypeCodes => codes::motion_type(client, &config).await?,
-        Operations::FilingComponentCodes => codes::filing_component(client, &config).await?,
-        Operations::DocumentTypeCodes => codes::document_type(client, &config).await?,
-        Operations::FilerTypeCodes => codes::filer_type(client, &config).await?,
     }
 
     Ok(())

@@ -1,47 +1,38 @@
-use std::{borrow::Cow, str::FromStr};
+use std::borrow::Cow;
 
-use efr_macros::CodeList;
-use quick_xml::NsReader;
 use serde::{Deserialize, Serialize};
-use strum::EnumString;
+use serde_json::Value;
+use strum::{Display, EnumString, VariantArray};
 
-use crate::codes_service::{EfrCodesError, utils::CodeRow};
+use crate::codes_service::EfrCodesError;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct CodeVersion<'a> {
-    pub location: Cow<'a, str>,
-    pub codelist: CodeVersionFile,
-    pub version: Cow<'a, str>,
+pub struct CodeVersion {
+    pub location: Box<str>,
+    pub codelist: CodeList,
+    pub version: Box<str>,
 }
 
-impl<'a> CodeRow<'a> for CodeVersion<'a> {
-    fn code_row(ns_reader: &mut NsReader<&'a [u8]>) -> Result<Option<Self>, EfrCodesError> {
-        let raw = match RawCodeVersion::code_row(ns_reader) {
-            Ok(Some(some)) => some,
-            Ok(None) => return Ok(None),
-            Err(err) => return Err(err),
-        };
-
-        let codelist = match CodeVersionFile::from_str(raw.codelist.as_ref()) {
-            Ok(ok) => ok,
-            Err(err) => {
-                return Err(EfrCodesError::Xml(quick_xml::DeError::Custom(format!(
-                    "Failed To Parse `codelist`: `{err}` Got: `{}`",
-                    raw.codelist
-                ))));
-            }
-        };
-
-        Ok(Some(Self {
-            location: raw.location,
-            codelist,
-            version: raw.version,
-        }))
+impl CodeVersion {
+    pub fn from_value(value: Value) -> Result<Self, EfrCodesError> {
+        Ok(serde_json::from_value(value)?)
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, EnumString, Deserialize, Serialize)]
-pub enum CodeVersionFile {
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    PartialEq,
+    Display,
+    VariantArray,
+    EnumString,
+    Deserialize,
+    Serialize,
+)]
+pub enum CodeList {
     // ── System-wide ──────────────────────────────────────────────────────────
     #[strum(serialize = "countrycodes.zip")]
     Country,
@@ -151,8 +142,12 @@ pub enum CodeVersionFile {
     VehicleType,
 }
 
-impl CodeVersionFile {
-    pub fn to_static_str(&self) -> &'static str {
+impl CodeList {
+    pub const fn all() -> &'static [Self] {
+        Self::VARIANTS
+    }
+
+    pub fn name(&self) -> &'static str {
         match self {
             // ── System-wide ──────────────────────────────────────────────────
             Self::Country => "countrycodes",
@@ -212,12 +207,90 @@ impl CodeVersionFile {
             Self::VehicleType => "vehicletypecodes",
         }
     }
-}
 
-#[derive(Clone, Debug, Deserialize, Serialize, CodeList)]
-#[codelist("Code Version")]
-struct RawCodeVersion<'a> {
-    location: Cow<'a, str>,
-    codelist: Cow<'a, str>,
-    version: Cow<'a, str>,
+    #[cfg(feature = "metadata")]
+    pub fn url(
+        &self,
+        metadata: &crate::api::Metadata,
+        jurisdiction: Option<&str>,
+    ) -> Cow<'static, str> {
+        let jurisdiction = jurisdiction.unwrap_or_default();
+        match self {
+            // ── System-wide ──────────────────────────────────────────────────────────
+            Self::Country => Cow::Borrowed(metadata.country_url()),
+            Self::DataFieldConfig => Cow::Borrowed(metadata.data_field_config_url()),
+            Self::Error => Cow::Borrowed(metadata.error_url()),
+            Self::FilingStatus => Cow::Borrowed(metadata.filing_status_url()),
+            Self::Language => Cow::Borrowed(metadata.language_url()),
+            Self::Locations => Cow::Borrowed(metadata.locations_url()),
+            Self::State => Cow::Borrowed(metadata.state_url()),
+            // ── Court-specific ───────────────────────────────────────────────────────
+            Self::Answer => Cow::Owned(metadata.answer_url(jurisdiction)),
+            Self::AppellateLowerCourts => {
+                Cow::Owned(metadata.appellate_lower_courts_url(jurisdiction))
+            }
+            Self::CaseCategory => Cow::Owned(metadata.case_category_url(jurisdiction)),
+            Self::CaseSubType => Cow::Owned(metadata.case_sub_type_url(jurisdiction)),
+            Self::CaseType => Cow::Owned(metadata.case_type_url(jurisdiction)),
+            Self::CrossReference => Cow::Owned(metadata.cross_reference_url(jurisdiction)),
+            Self::DamageAmount => Cow::Owned(metadata.damage_amount_url(jurisdiction)),
+            Self::DisclaimerRequirement => {
+                Cow::Owned(metadata.disclaimer_requirement_url(jurisdiction))
+            }
+            Self::DocumentType => Cow::Owned(metadata.document_type_url(jurisdiction)),
+            Self::FilerType => Cow::Owned(metadata.filer_type_url(jurisdiction)),
+            Self::FileType => Cow::Owned(metadata.file_type_url(jurisdiction)),
+            Self::Filing => Cow::Owned(metadata.filing_url(jurisdiction)),
+            Self::FilingComponent => Cow::Owned(metadata.filing_component_url(jurisdiction)),
+            Self::HearingLocation => Cow::Owned(metadata.hearing_location_url(jurisdiction)),
+            Self::JudicialOfficer => Cow::Owned(metadata.judicial_officer_url(jurisdiction)),
+            Self::MotionType => Cow::Owned(metadata.motion_type_url(jurisdiction)),
+            Self::NameSuffix => Cow::Owned(metadata.name_suffix_url(jurisdiction)),
+            Self::NotificationAgency => Cow::Owned(metadata.notification_agency_url(jurisdiction)),
+            Self::OptionalServices => Cow::Owned(metadata.optional_services_url(jurisdiction)),
+            Self::PartyType => Cow::Owned(metadata.party_type_url(jurisdiction)),
+            Self::ProcedureRemedy => Cow::Owned(metadata.procedure_remedy_url(jurisdiction)),
+            Self::Question => Cow::Owned(metadata.question_url(jurisdiction)),
+            Self::RefundReason => Cow::Owned(metadata.refund_reason_url(jurisdiction)),
+            Self::RepCap => Cow::Owned(metadata.rep_cap_url(jurisdiction)),
+            Self::ServiceProvider => Cow::Owned(metadata.service_provider_url(jurisdiction)),
+            Self::ServiceType => Cow::Owned(metadata.service_type_url(jurisdiction)),
+            // ── Criminal initiation ──────────────────────────────────────────────────
+            Self::ArrestLocation => Cow::Owned(metadata.arrest_location_url(jurisdiction)),
+            Self::Bond => Cow::Owned(metadata.bond_url(jurisdiction)),
+            Self::ChargePhase => Cow::Owned(metadata.charge_phase_url(jurisdiction)),
+            Self::CitationJurisdiction => {
+                Cow::Owned(metadata.citation_jurisdiction_url(jurisdiction))
+            }
+            Self::Degree => Cow::Owned(metadata.degree_url(jurisdiction)),
+            Self::DriverLicenseType => Cow::Owned(metadata.driver_license_type_url(jurisdiction)),
+            Self::Ethnicity => Cow::Owned(metadata.ethnicity_url(jurisdiction)),
+            Self::EyeColor => Cow::Owned(metadata.eye_color_url(jurisdiction)),
+            Self::GeneralOffense => Cow::Owned(metadata.general_offense_url(jurisdiction)),
+            Self::HairColor => Cow::Owned(metadata.hair_color_url(jurisdiction)),
+            Self::LawEnforcementUnit => Cow::Owned(metadata.law_enforcement_unit_url(jurisdiction)),
+            Self::PhysicalFeature => Cow::Owned(metadata.physical_feature_url(jurisdiction)),
+            Self::Race => Cow::Owned(metadata.race_url(jurisdiction)),
+            Self::Statute => Cow::Owned(metadata.statute_url(jurisdiction)),
+            Self::StatuteType => Cow::Owned(metadata.statute_type_url(jurisdiction)),
+            Self::VehicleColor => Cow::Owned(metadata.vehicle_color_url(jurisdiction)),
+            Self::VehicleMake => Cow::Owned(metadata.vehicle_make_url(jurisdiction)),
+            Self::VehicleType => Cow::Owned(metadata.vehicle_type_url(jurisdiction)),
+        }
+    }
+
+    pub const fn requires_jurisdiction(&self) -> bool {
+        match self {
+            // ── System-wide ──────────────────────────────────────────────────────────
+            Self::Country
+            | Self::DataFieldConfig
+            | Self::Error
+            | Self::FilingStatus
+            | Self::Language
+            | Self::Locations
+            | Self::State => false,
+            // ── Court-specific & Criminal initiation ─────────────────────────────────
+            _ => true,
+        }
+    }
 }

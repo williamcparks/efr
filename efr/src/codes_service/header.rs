@@ -15,9 +15,11 @@ use rsa::{
     signature::{SignatureEncoding, Signer},
 };
 use sha2::Sha256;
+use std::io::{Cursor, Read};
 use x509_cert::{Certificate, der::Decode, spki::AlgorithmIdentifierOwned};
+use zip::{ZipArchive, result::ZipError};
 
-use crate::codes_service::EfrCodesHeaderError;
+use crate::codes_service::{EfrCodesError, EfrCodesHeaderError};
 
 pub struct CodeHeader {
     pub header: String,
@@ -78,6 +80,25 @@ impl CodeHeader {
 
     pub fn as_str(&self) -> &str {
         self.header.as_str()
+    }
+
+    pub fn unzip_xml(bytes: &[u8]) -> Result<String, EfrCodesError> {
+        let reader = Cursor::new(bytes);
+        let mut archive = ZipArchive::new(reader)?;
+
+        for i in 0..archive.len() {
+            let mut file = archive.by_index(i)?;
+
+            if file.is_file() {
+                let mut contents = String::with_capacity(file.size() as usize);
+                if let Err(err) = file.read_to_string(&mut contents) {
+                    return Err(EfrCodesError::Zip(ZipError::Io(err)));
+                }
+                return Ok(contents);
+            }
+        }
+
+        Err(EfrCodesError::NoXmlCodesFileInsideZip)
     }
 }
 

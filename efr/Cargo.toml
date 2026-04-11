@@ -1,6 +1,6 @@
 [package]
 name = "efr"
-version = "0.1.87"
+version = "0.1.88"
 edition = "2024"
 description = "efr (EFile Rust)"
 license = "MIT"
@@ -13,7 +13,6 @@ all-features = true
 
 [features]
 codes = [
-    "efr-macros/codelist",
     "dep:cms",
     "dep:const-oid",
     "dep:der",
@@ -29,7 +28,7 @@ metadata = ["efr-macros/metadata"]
 base64 = "0.22.1"
 bitflags = { version = "2.11.0", features = ["serde"] }
 chrono = { version = "0.4.43", features = ["serde"] }
-efr-macros = { version = "0.1.87", path = "../efr-macros", features = [
+efr-macros = { version = "0.1.88", path = "../efr-macros", features = [
     "partial-xml",
     "xml",
 ] }

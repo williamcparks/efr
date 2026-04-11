@@ -1,6 +1,6 @@
 [package]
 name = "efr-macros"
-version = "0.1.87"
+version = "0.1.88"
 edition = "2024"
 description = "efr (EFile Rust) macros"
 license = "MIT"
@@ -11,7 +11,6 @@ keywords = ["efr"]
 [features]
 exports = ["dep:proc-macro2", "dep:quote", "dep:syn"]
 
-codelist = ["exports"]
 metadata = ["exports", "dep:serde", "dep:serde_json"]
 partial-xml = ["exports"]
 xml = ["exports"]

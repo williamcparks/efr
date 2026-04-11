@@ -29,6 +29,13 @@ pub enum EfrCodesError {
         #[source]
         quick_xml::DeError,
     ),
+
+    #[error("EFile Rust JSON: {0}")]
+    Json(
+        #[from]
+        #[source]
+        serde_json::Error,
+    ),
 }
 
 impl From<quick_xml::Error> for EfrCodesError {

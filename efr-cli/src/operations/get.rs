@@ -1,20 +1,20 @@
 use std::{
     io::ErrorKind,
     path::{Path, PathBuf},
-    str::FromStr,
 };
 
 use bytes::Bytes;
 use efr::codes_service::CodeHeader;
-use mime::Mime;
-use reqwest::{
-    Client, Response,
-    header::{CONTENT_DISPOSITION, HeaderValue},
-};
+use reqwest::{Client, header::HeaderValue};
 
 use crate::{config::EfrConfig, operations::error::OperationsError};
 
-pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes, OperationsError> {
+pub async fn get(
+    client: Client,
+    config: &EfrConfig,
+    url: &str,
+    file_name: &str,
+) -> Result<Bytes, OperationsError> {
     let codes_header = CodeHeader::try_new(config.cert_der.as_slice(), &config.codes_signing_key)?;
     let codes_header_value = HeaderValue::from_str(codes_header.as_str())?;
 
@@ -35,7 +35,7 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes,
 
     println!("---inbound---\n{res:#?}\n");
 
-    let output = output_file(&res, config.cwd.as_path())?;
+    let output = output_file(config.cwd.as_path(), file_name)?;
     let bytes = res.bytes().await?;
     if let Err(err) = std::fs::write(output.as_path(), bytes.as_ref()) {
         return Err(OperationsError::Write {
@@ -50,7 +50,7 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes,
     Ok(bytes)
 }
 
-fn output_file(response: &Response, cwd: &Path) -> Result<PathBuf, OperationsError> {
+fn output_file(cwd: &Path, file_name: &str) -> Result<PathBuf, OperationsError> {
     let mut out = cwd.to_path_buf();
     out.push("code-downloads");
 
@@ -63,33 +63,14 @@ fn output_file(response: &Response, cwd: &Path) -> Result<PathBuf, OperationsErr
         });
     }
 
-    if let Some(header) = response.headers().get(CONTENT_DISPOSITION)
-        && let Ok(content_dispo) = header.to_str()
-    {
-        let mime_parsed = match Mime::from_str(content_dispo) {
-            Ok(ok) => Ok(ok),
-            _ => {
-                let extended = format!("text/{content_dispo}");
-                Mime::from_str(extended.as_str())
-            }
-        };
-
-        if let Ok(mime) = mime_parsed
-            && let Some(file_name) = mime.get_param("filename")
-        {
-            out.push(file_name.as_str());
-            return Ok(out);
-        }
-    }
-
-    out.push("codes.zip");
+    out.push(file_name);
     Ok(out)
 }
 
-pub fn read(file: &str, cwd: &Path) -> Result<Bytes, OperationsError> {
+pub fn read(file_name: &str, cwd: &Path) -> Result<Bytes, OperationsError> {
     let mut path = cwd.to_path_buf();
     path.push("code-downloads");
-    path.push(file);
+    path.push(file_name);
 
     match std::fs::read(path.as_path()) {
         Ok(ok) => Ok(Bytes::from(ok)),

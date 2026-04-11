@@ -1,6 +1,6 @@
 [package]
 name = "efr-cli"
-version = "0.1.87"
+version = "0.1.88"
 edition = "2024"
 publish = false
 
@@ -8,12 +8,11 @@ publish = false
 base64 = "0.22.1"
 bytes = "1.11.1"
 chrono = "0.4.44"
-efr = { version = "0.1.87", path = "../efr", features = ["codes", "metadata"] }
-efr-macros = { version = "0.1.87", path = "../efr-macros", features = [
+efr = { version = "0.1.88", path = "../efr", features = ["codes", "metadata"] }
+efr-macros = { version = "0.1.88", path = "../efr-macros", features = [
     "sub-class",
 ] }
 inquire = { version = "0.9.3", features = ["date"] }
-mime = "0.3.17"
 reqwest = { version = "0.13.2", default-features = false, features = [
     "rustls",
 ] }

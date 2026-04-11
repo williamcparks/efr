@@ -91,62 +91,6 @@ pub enum Operations {
     #[subclass(user)]
     #[strum(to_string = "Self Resend Activation Email (uses email)")]
     SelfResendActivationEmail,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Location Codes")]
-    LocationCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Version Codes")]
-    VersionCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Error Codes")]
-    ErrorCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Country Codes")]
-    CountryCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch State Codes")]
-    StateCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Filing Status Codes")]
-    FilingStatusCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Data Field Codes")]
-    DataFieldCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Case Category Codes")]
-    CaseCategoryCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Case Types Codes")]
-    CaseTypeCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Filing Codes")]
-    FilingCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Filing Component Codes")]
-    FilingComponentCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Motion Type Codes")]
-    MotionTypeCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Document Type Codes")]
-    DocumentTypeCodes,
-
-    #[subclass(codes)]
-    #[strum(to_string = "Fetch Filer Type Codes")]
-    FilerTypeCodes,
 }
 
 pub mod authenticate_user;
