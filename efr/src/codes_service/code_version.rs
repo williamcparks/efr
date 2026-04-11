@@ -44,172 +44,172 @@ impl<'a> CodeRow<'a> for CodeVersion<'a> {
 pub enum CodeVersionFile {
     // ── System-wide ──────────────────────────────────────────────────────────
     #[strum(serialize = "countrycodes.zip")]
-    CountryCodes,
+    Country,
     #[strum(serialize = "datafieldconfigcodes.zip")]
-    DataFieldConfigCodes,
+    DataFieldConfig,
     #[strum(serialize = "errorcodes.zip")]
-    ErrorCodes,
+    Error,
     #[strum(serialize = "filingstatuscodes.zip")]
-    FilingStatusCodes,
+    FilingStatus,
     #[strum(serialize = "languagecodes.zip")]
-    LanguageCodes,
+    Language,
     #[strum(serialize = "locations.zip")]
     Locations,
     #[strum(serialize = "statecodes.zip")]
-    StateCodes,
+    State,
 
     // ── Court-specific ───────────────────────────────────────────────────────
     #[strum(serialize = "answercodes.zip")]
-    AnswerCodes,
+    Answer,
     #[strum(serialize = "appellatelowercourts.zip")]
     AppellateLowerCourts,
     #[strum(serialize = "casecategorycodes.zip")]
-    CaseCategoryCodes,
+    CaseCategory,
     #[strum(serialize = "casesubtypecodes.zip")]
-    CaseSubTypeCodes,
+    CaseSubType,
     #[strum(serialize = "casetypecodes.zip")]
-    CaseTypeCodes,
+    CaseType,
     #[strum(serialize = "crossreferencecodes.zip")]
-    CrossReferenceCodes,
+    CrossReference,
     #[strum(serialize = "damageamountcodes.zip")]
-    DamageAmountCodes,
+    DamageAmount,
     #[strum(serialize = "disclaimerrequirementcodes.zip")]
-    DisclaimerRequirementCodes,
+    DisclaimerRequirement,
     #[strum(serialize = "documenttypecodes.zip")]
-    DocumentTypeCodes,
+    DocumentType,
     #[strum(serialize = "filertypecodes.zip")]
-    FilerTypeCodes,
+    FilerType,
     #[strum(serialize = "filetypecodes.zip")]
-    FileTypeCodes,
+    FileType,
     #[strum(serialize = "filingcodes.zip")]
-    FilingCodes,
+    Filing,
     #[strum(serialize = "filingcomponentcodes.zip")]
-    FilingComponentCodes,
+    FilingComponent,
     #[strum(serialize = "hearinglocationcodes.zip")]
-    HearingLocationCodes,
+    HearingLocation,
     #[strum(serialize = "judicialofficercodes.zip")]
-    JudicialOfficerCodes,
+    JudicialOfficer,
     #[strum(serialize = "motiontypecodes.zip")]
-    MotionTypeCodes,
+    MotionType,
     #[strum(serialize = "namesuffixcodes.zip")]
-    NameSuffixCodes,
+    NameSuffix,
     #[strum(serialize = "notificationagencycodes.zip")]
-    NotificationAgencyCodes,
+    NotificationAgency,
     #[strum(serialize = "optionalservicescodes.zip")]
-    OptionalServicesCodes,
+    OptionalServices,
     #[strum(serialize = "partytypecodes.zip")]
-    PartyTypeCodes,
+    PartyType,
     #[strum(serialize = "procedureremedycodes.zip")]
-    ProcedureRemedyCodes,
+    ProcedureRemedy,
     #[strum(serialize = "questioncodes.zip")]
-    QuestionCodes,
+    Question,
     #[strum(serialize = "refundreasoncodes.zip")]
-    RefundReasonCodes,
+    RefundReason,
     #[strum(serialize = "repcapcodes.zip")]
-    RepCapCodes,
+    RepCap,
     #[strum(serialize = "serviceprovidercodes.zip")]
-    ServiceProviderCodes,
+    ServiceProvider,
     #[strum(serialize = "servicetypecodes.zip")]
-    ServiceTypeCodes,
+    ServiceType,
 
     // ── Criminal initiation ──────────────────────────────────────────────────
     #[strum(serialize = "arrestlocationcodes.zip")]
-    ArrestLocationCodes,
+    ArrestLocation,
     #[strum(serialize = "bondcodes.zip")]
-    BondCodes,
+    Bond,
     #[strum(serialize = "chargephasecodes.zip")]
-    ChargePhaseCodes,
+    ChargePhase,
     #[strum(serialize = "citationjurisdictioncodes.zip")]
-    CitationJurisdictionCodes,
+    CitationJurisdiction,
     #[strum(serialize = "degreecodes.zip")]
-    DegreeCodes,
+    Degree,
     #[strum(serialize = "driverlicensetypecodes.zip")]
-    DriverLicenseTypeCodes,
+    DriverLicenseType,
     #[strum(serialize = "ethnicitycodes.zip")]
-    EthnicityCodes,
+    Ethnicity,
     #[strum(serialize = "eyecolorcodes.zip")]
-    EyeColorCodes,
+    EyeColor,
     #[strum(serialize = "generaloffensecodes.zip")]
-    GeneralOffenseCodes,
+    GeneralOffense,
     #[strum(serialize = "haircolorcodes.zip")]
-    HairColorCodes,
+    HairColor,
     #[strum(serialize = "lawenforcementunitcodes.zip")]
-    LawEnforcementUnitCodes,
+    LawEnforcementUnit,
     #[strum(serialize = "physicalfeaturecodes.zip")]
-    PhysicalFeatureCodes,
+    PhysicalFeature,
     #[strum(serialize = "racecodes.zip")]
-    RaceCodes,
+    Race,
     #[strum(serialize = "statutecodes.zip")]
-    StatuteCodes,
+    Statute,
     #[strum(serialize = "statutetypecodes.zip")]
-    StatuteTypeCodes,
+    StatuteType,
     #[strum(serialize = "vehiclecolorcodes.zip")]
-    VehicleColorCodes,
+    VehicleColor,
     #[strum(serialize = "vehiclemakecodes.zip")]
-    VehicleMakeCodes,
+    VehicleMake,
     #[strum(serialize = "vehicletypecodes.zip")]
-    VehicleTypeCodes,
+    VehicleType,
 }
 
 impl CodeVersionFile {
     pub fn to_static_str(&self) -> &'static str {
         match self {
             // ── System-wide ──────────────────────────────────────────────────
-            Self::CountryCodes => "countrycodes",
-            Self::DataFieldConfigCodes => "datafieldconfigcodes",
-            Self::ErrorCodes => "errorcodes",
-            Self::FilingStatusCodes => "filingstatuscodes",
-            Self::LanguageCodes => "languagecodes",
+            Self::Country => "countrycodes",
+            Self::DataFieldConfig => "datafieldconfigcodes",
+            Self::Error => "errorcodes",
+            Self::FilingStatus => "filingstatuscodes",
+            Self::Language => "languagecodes",
             Self::Locations => "locations",
-            Self::StateCodes => "statecodes",
+            Self::State => "statecodes",
 
             // ── Court-specific ───────────────────────────────────────────────
-            Self::AnswerCodes => "answercodes",
+            Self::Answer => "answercodes",
             Self::AppellateLowerCourts => "appellatelowercourts",
-            Self::CaseCategoryCodes => "casecategorycodes",
-            Self::CaseSubTypeCodes => "casesubtypecodes",
-            Self::CaseTypeCodes => "casetypecodes",
-            Self::CrossReferenceCodes => "crossreferencecodes",
-            Self::DamageAmountCodes => "damageamountcodes",
-            Self::DisclaimerRequirementCodes => "disclaimerrequirementcodes",
-            Self::DocumentTypeCodes => "documenttypecodes",
-            Self::FilerTypeCodes => "filertypecodes",
-            Self::FileTypeCodes => "filetypecodes",
-            Self::FilingCodes => "filingcodes",
-            Self::FilingComponentCodes => "filingcomponentcodes",
-            Self::HearingLocationCodes => "hearinglocationcodes",
-            Self::JudicialOfficerCodes => "judicialofficercodes",
-            Self::MotionTypeCodes => "motiontypecodes",
-            Self::NameSuffixCodes => "namesuffixcodes",
-            Self::NotificationAgencyCodes => "notificationagencycodes",
-            Self::OptionalServicesCodes => "optionalservicescodes",
-            Self::PartyTypeCodes => "partytypecodes",
-            Self::ProcedureRemedyCodes => "procedureremedycodes",
-            Self::QuestionCodes => "questioncodes",
-            Self::RefundReasonCodes => "refundreasoncodes",
-            Self::RepCapCodes => "repcapcodes",
-            Self::ServiceProviderCodes => "serviceprovidercodes",
-            Self::ServiceTypeCodes => "servicetypecodes",
+            Self::CaseCategory => "casecategorycodes",
+            Self::CaseSubType => "casesubtypecodes",
+            Self::CaseType => "casetypecodes",
+            Self::CrossReference => "crossreferencecodes",
+            Self::DamageAmount => "damageamountcodes",
+            Self::DisclaimerRequirement => "disclaimerrequirementcodes",
+            Self::DocumentType => "documenttypecodes",
+            Self::FilerType => "filertypecodes",
+            Self::FileType => "filetypecodes",
+            Self::Filing => "filingcodes",
+            Self::FilingComponent => "filingcomponentcodes",
+            Self::HearingLocation => "hearinglocationcodes",
+            Self::JudicialOfficer => "judicialofficercodes",
+            Self::MotionType => "motiontypecodes",
+            Self::NameSuffix => "namesuffixcodes",
+            Self::NotificationAgency => "notificationagencycodes",
+            Self::OptionalServices => "optionalservicescodes",
+            Self::PartyType => "partytypecodes",
+            Self::ProcedureRemedy => "procedureremedycodes",
+            Self::Question => "questioncodes",
+            Self::RefundReason => "refundreasoncodes",
+            Self::RepCap => "repcapcodes",
+            Self::ServiceProvider => "serviceprovidercodes",
+            Self::ServiceType => "servicetypecodes",
 
             // ── Criminal initiation ──────────────────────────────────────────
-            Self::ArrestLocationCodes => "arrestlocationcodes",
-            Self::BondCodes => "bondcodes",
-            Self::ChargePhaseCodes => "chargephasecodes",
-            Self::CitationJurisdictionCodes => "citationjurisdictioncodes",
-            Self::DegreeCodes => "degreecodes",
-            Self::DriverLicenseTypeCodes => "driverlicensetypecodes",
-            Self::EthnicityCodes => "ethnicitycodes",
-            Self::EyeColorCodes => "eyecolorcodes",
-            Self::GeneralOffenseCodes => "generaloffensecodes",
-            Self::HairColorCodes => "haircolorcodes",
-            Self::LawEnforcementUnitCodes => "lawenforcementunitcodes",
-            Self::PhysicalFeatureCodes => "physicalfeaturecodes",
-            Self::RaceCodes => "racecodes",
-            Self::StatuteCodes => "statutecodes",
-            Self::StatuteTypeCodes => "statutetypecodes",
-            Self::VehicleColorCodes => "vehiclecolorcodes",
-            Self::VehicleMakeCodes => "vehiclemakecodes",
-            Self::VehicleTypeCodes => "vehicletypecodes",
+            Self::ArrestLocation => "arrestlocationcodes",
+            Self::Bond => "bondcodes",
+            Self::ChargePhase => "chargephasecodes",
+            Self::CitationJurisdiction => "citationjurisdictioncodes",
+            Self::Degree => "degreecodes",
+            Self::DriverLicenseType => "driverlicensetypecodes",
+            Self::Ethnicity => "ethnicitycodes",
+            Self::EyeColor => "eyecolorcodes",
+            Self::GeneralOffense => "generaloffensecodes",
+            Self::HairColor => "haircolorcodes",
+            Self::LawEnforcementUnit => "lawenforcementunitcodes",
+            Self::PhysicalFeature => "physicalfeaturecodes",
+            Self::Race => "racecodes",
+            Self::Statute => "statutecodes",
+            Self::StatuteType => "statutetypecodes",
+            Self::VehicleColor => "vehiclecolorcodes",
+            Self::VehicleMake => "vehiclemakecodes",
+            Self::VehicleType => "vehicletypecodes",
         }
     }
 }

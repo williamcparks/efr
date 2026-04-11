@@ -113,57 +113,57 @@ macro_rules! code_fetch {
 }
 
 code_fetch! {
-    location, "locations.zip", location_codes_url, CodeLocation
+    location, "locations.zip", locations_url, CodeLocation
 }
 
 code_fetch! {
-    version, "codeversions.zip", version_codes_url, CodeVersion
+    version, "codeversions.zip", version_url, CodeVersion
 }
 
 code_fetch! {
-    error, "errorcodes.zip", error_codes_url, CodeError
+    error, "errorcodes.zip", error_url, CodeError
 }
 
 code_fetch! {
-    country, "countrycodes.zip", country_codes_url, CodeCountry
+    country, "countrycodes.zip", country_url, CodeCountry
 }
 
 code_fetch! {
-    state, "statecodes.zip", state_codes_url, CodeState
+    state, "statecodes.zip", state_url, CodeState
 }
 
 code_fetch! {
-    filing_status, "filingstatuscodes.zip", filing_status_codes_url, CodeFilingStatus
+    filing_status, "filingstatuscodes.zip", filing_status_url, CodeFilingStatus
 }
 
 code_fetch! {
-    data_field, "datafieldcodes.zip", data_field_codes_url, CodeDataField
+    data_field, "datafieldcodes.zip", data_field_config_url, CodeDataField
 }
 
 code_fetch! {
-    case_category, "casecategorycodes.zip", case_category_codes_url(_), CodeCaseCategory
+    case_category, "casecategorycodes.zip", case_category_url(_), CodeCaseCategory
 }
 
 code_fetch! {
-    case_type, "casetypecodes.zip", case_type_codes_url(_), CodeCaseType
+    case_type, "casetypecodes.zip", case_type_url(_), CodeCaseType
 }
 
 code_fetch! {
-    filing, "filingcodes.zip", filing_codes_url(_), CodeFiling, "Case Category Filter (Optional)?", casecategory
+    filing, "filingcodes.zip", filing_url(_), CodeFiling, "Case Category Filter (Optional)?", casecategory
 }
 
 code_fetch! {
-    motion_type, "motiontypecodes.zip", motion_type_codes_url(_), CodeMotionType
+    motion_type, "motiontypecodes.zip", motion_type_url(_), CodeMotionType
 }
 
 code_fetch! {
-    filing_component, "filingcomponentcodes.zip", filing_component_codes_url(_), CodeFilingComponent, "Filing Code Filter (Optional)?", filingcodeid
+    filing_component, "filingcomponentcodes.zip", filing_component_url(_), CodeFilingComponent, "Filing Code Filter (Optional)?", filingcodeid
 }
 
 code_fetch! {
-    document_type, "documenttypecodes.zip", document_type_codes_url(_), CodeDocumentType
+    document_type, "documenttypecodes.zip", document_type_url(_), CodeDocumentType
 }
 
 code_fetch! {
-    filer_type, "filertypecodes.zip", filer_type_codes_url(_), CodeFilerType
+    filer_type, "filertypecodes.zip", filer_type_url(_), CodeFilerType
 }

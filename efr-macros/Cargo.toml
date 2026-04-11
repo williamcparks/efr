@@ -1,6 +1,6 @@
 [package]
 name = "efr-macros"
-version = "0.1.86"
+version = "0.1.87"
 edition = "2024"
 description = "efr (EFile Rust) macros"
 license = "MIT"
