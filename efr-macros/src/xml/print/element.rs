@@ -5,10 +5,10 @@ impl Element {
         let mut out = vec![Instr::Const(b"<".to_vec()), self.tag.print()];
 
         if let Some(ns_block) = ns_block {
-            for ns in self.namespaces_used() {
-                let uri = match ns_block.map.get(ns) {
-                    Some(NsDecl::Uri(uri)) => uri,
-                    _ => continue,
+            for (ns, decl) in ns_block.map.iter() {
+                let uri = match decl {
+                    NsDecl::Uri(uri) | NsDecl::ParentUri(uri) => uri,
+                    NsDecl::SubElement => continue,
                 };
 
                 let bytes = format!(" xmlns:{}=\"{}\"", ns, uri.value());

@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use efr::api::Metadata;
 use rsa::{RsaPrivateKey, pkcs1v15::SigningKey, pkcs8::DecodePrivateKey, sha2::Sha256};
@@ -14,10 +14,12 @@ pub struct EfrConfig {
     pub efsp_url: String,
     pub email: Box<str>,
     pub password: Box<str>,
+
+    pub cwd: PathBuf,
 }
 
 impl EfrConfig {
-    pub fn try_from_fs(path: &Path) -> Result<Self, ConfigError> {
+    pub fn try_from_fs(path: &Path, cwd: PathBuf) -> Result<Self, ConfigError> {
         let parent = match path.parent() {
             Some(some) => some,
             None => return Err(ConfigError::NoParent(path.to_path_buf())),
@@ -82,6 +84,8 @@ impl EfrConfig {
             efsp_url: raw.admin.efsp_url,
             email: raw.admin.email.into_boxed_str(),
             password: raw.admin.password.into_boxed_str(),
+
+            cwd,
         })
     }
 }

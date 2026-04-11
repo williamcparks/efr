@@ -19,9 +19,13 @@ fn qname<'a, 'b>(local_name: &'a [u8], uri: &'b ResolveResult) -> (&'a str, &'b 
         b"http://release.niem.gov/niem/domains/cbrn/4.1/" => "cbrn",
         b"urn:tyler:efm:services" => "tyler",
         b"urn:tyler:efm:services:schema:Common" => "common",
+        b"urn:tyler:ecf:v5.0:extensions:common" => "v5common",
         b"urn:tyler:efm:services:schema:AuthenticateResponse" => "authenticateresponse",
         b"http://schemas.xmlsoap.org/soap/envelope/" => "soap",
         b"urn:tyler:efm:services:schema:BaseResponse" => "baseresponse",
+        b"https://docs.oasis-open.org/legalxml-courtfiling/ns/v5.0/policyresponse" => {
+            "policyresponse"
+        }
         b"" => "",
         _ => str::from_utf8(uri).unwrap_or(""),
     };

@@ -21,6 +21,13 @@ impl<'a> Input<'a> {
         let state_codes_arms = self.arms("CodeService/codes/state");
         let filing_status_codes_arms = self.arms("CodeService/codes/filingstatus");
         let data_field_codes_arms = self.arms("CodeService/codes/datafield");
+        let case_category_codes_arms = self.arms("CodeService/codes/casecategory/");
+        let case_type_codes_arms = self.arms("CodeService/codes/casetype/");
+        let filing_codes_arms = self.arms("CodeService/codes/filing/");
+        let filing_component_codes_arms = self.arms("CodeService/codes/filingcomponent/");
+        let document_type_codes_arms = self.arms("CodeService/codes/documenttype/");
+        let motion_type_codes_arms = self.arms("CodeService/codes/motiontype/");
+        let filer_type_codes_arms = self.arms("CodeService/codes/filertype/");
 
         let try_new_impls = self.print_try_new();
 
@@ -127,6 +134,55 @@ impl<'a> Input<'a> {
                     match (self.state, self.environment) {
                         #(#data_field_codes_arms)*
                     }
+                }
+
+                pub fn case_category_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#case_category_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn case_type_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#case_type_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn filing_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#filing_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn filing_component_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#filing_component_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn document_type_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#document_type_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn motion_type_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#motion_type_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn filer_type_codes_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) {
+                        #(#filer_type_codes_arms)*
+                    };
+                    ::std::format!("{base}{jurisdiction}")
                 }
             }
 

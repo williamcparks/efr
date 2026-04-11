@@ -1,8 +1,7 @@
 use std::collections::HashMap;
 
 use syn::{
-    Attribute, Error, Generics, Ident, LitStr, Meta, Token, Type, braced, parse::Parse,
-    spanned::Spanned,
+    Attribute, Error, Generics, Ident, LitStr, Token, Type, braced, parse::Parse, spanned::Spanned,
 };
 
 use crate::xml::Element;
@@ -71,29 +70,39 @@ impl Parse for NsBlock {
         let mut map = HashMap::new();
 
         while !section.is_empty() {
-            let subelement = match section.peek(Token![#]) {
-                false => false,
-                true => {
-                    NsDecl::parse_subelement_attr(&section)?;
-                    true
-                }
+            let ns_decl_attr = match section.peek(Token![#]) {
+                false => None,
+                true => Some(section.parse::<NsDeclAttr>()?),
             };
 
             let key: Ident = section.parse()?;
-            if subelement {
-                section.parse::<Token![;]>()?;
-                map.insert(key, NsDecl::SubElement);
-                continue;
-            }
+            match ns_decl_attr {
+                Some(NsDeclAttr::SubElement) => {
+                    section.parse::<Token![;]>()?;
+                    map.insert(key, NsDecl::SubElement);
+                    continue;
+                }
+                Some(NsDeclAttr::Parent) => {
+                    section.parse::<Token![=]>()?;
+                    let uri: LitStr = section.parse()?;
+                    section.parse::<Token![;]>()?;
 
-            section.parse::<Token![=]>()?;
-            let uri: LitStr = section.parse()?;
-            section.parse::<Token![;]>()?;
+                    if map.contains_key(&key) {
+                        return Err(Error::new(key.span(), "duplicate namespace key"));
+                    }
+                    map.insert(key, NsDecl::ParentUri(uri));
+                }
+                None => {
+                    section.parse::<Token![=]>()?;
+                    let uri: LitStr = section.parse()?;
+                    section.parse::<Token![;]>()?;
 
-            if map.contains_key(&key) {
-                return Err(Error::new(key.span(), "duplicate namespace key"));
+                    if map.contains_key(&key) {
+                        return Err(Error::new(key.span(), "duplicate namespace key"));
+                    }
+                    map.insert(key, NsDecl::Uri(uri));
+                }
             }
-            map.insert(key, NsDecl::Uri(uri));
         }
 
         Ok(Self { map })
@@ -102,31 +111,39 @@ impl Parse for NsBlock {
 
 pub enum NsDecl {
     Uri(LitStr),
+    ParentUri(LitStr),
     SubElement,
 }
 
-impl NsDecl {
-    pub fn parse_subelement_attr(input: syn::parse::ParseStream) -> syn::Result<()> {
-        let attrs = Attribute::parse_outer(input)?;
-        match attrs.as_slice() {
-            [] => Err(Error::new(input.span(), "Expected #[subelement]")),
-            [attr] => {
-                if !attr.path().is_ident("subelement") {
-                    return Err(Error::new(attr.span(), "Expected #[subelement]"));
-                }
-                if let Meta::Path(_) = attr.meta {
-                    return Ok(());
-                }
+enum NsDeclAttr {
+    Parent,
+    SubElement,
+}
 
-                Err(Error::new(
-                    attr.span(),
-                    "#[subelement] does not taking any arguments",
-                ))
-            }
+impl Parse for NsDeclAttr {
+    fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
+        let attrs = Attribute::parse_outer(input)?;
+        let attr = match attrs.as_slice() {
+            [] => Err(Error::new(
+                input.span(),
+                "Expected #[subelement] or #[parent]",
+            )),
+            [attr] => Ok(attr),
             [_, other, ..] => Err(Error::new(
                 other.span(),
-                "Expected exactly one #[subelement] Attribute",
+                "Expected exactly one #[subelement] or #[parent] Attribute",
             )),
+        }?;
+
+        if attr.path().is_ident("subelement") {
+            Ok(Self::SubElement)
+        } else if attr.path().is_ident("parent") {
+            Ok(Self::Parent)
+        } else {
+            Err(Error::new(
+                attr.span(),
+                "Expected #[subelement] or #[parent]",
+            ))
         }
     }
 }

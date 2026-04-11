@@ -40,13 +40,13 @@ impl<'a> CodeRow<'a> for CodeDataField<'a> {
         };
 
         let mut flags = CodeDataFieldFlags::empty();
-        if raw.isvisible == "True" {
+        if raw.isvisible.eq_ignore_ascii_case("true") {
             flags |= CodeDataFieldFlags::IS_VISIBLE;
         }
-        if raw.isrequired == "True" {
+        if raw.isrequired.eq_ignore_ascii_case("true") {
             flags |= CodeDataFieldFlags::IS_REQUIRED;
         }
-        if raw.isreadonly == "True" {
+        if raw.isreadonly.eq_ignore_ascii_case("true") {
             flags |= CodeDataFieldFlags::IS_READ_ONLY;
         }
 

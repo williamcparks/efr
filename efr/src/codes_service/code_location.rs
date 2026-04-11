@@ -186,139 +186,187 @@ impl<'a> CodeRow<'a> for CodeLocation<'a> {
         )?;
 
         let mut flags = CodeLocationFlags::empty();
-        if raw.initial == "True" {
+        if raw.initial.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::INITIAL;
         }
-        if raw.subsequent == "True" {
+        if raw.subsequent.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SUBSEQUENT;
         }
-        if raw.disallowcopyingenvelopemultipletimes == "True" {
+        if raw
+            .disallowcopyingenvelopemultipletimes
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::DISALLOW_COPYING_ENVELOPE_MULTIPLE_TIMES;
         }
-        if raw.allowfilingintononindexedcase == "True" {
+        if raw
+            .allowfilingintononindexedcase
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::ALLOW_FILING_INTO_NON_INDEXED_CASE;
         }
-        if raw.sendservicebeforereview == "True" {
+        if raw.sendservicebeforereview.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SEND_SERVICE_BEFORE_REVIEW;
         }
-        if raw.iscounty == "True" {
+        if raw.iscounty.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::IS_COUNTY;
         }
-        if raw.restrictbankaccountpayment == "True" {
+        if raw.restrictbankaccountpayment.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::RESTRICT_BANK_ACCOUNT_PAYMENT;
         }
-        if raw.allowmultipleattorneys == "True" {
+        if raw.allowmultipleattorneys.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_MULTIPLE_ATTORNEYS;
         }
-        if raw.sendservicecontactremovednotifications == "True" {
+        if raw
+            .sendservicecontactremovednotifications
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::SEND_SERVICE_CONTACT_REMOVED_NOTIFICATIONS;
         }
-        if raw.allowmaxfeeamount == "True" {
+        if raw.allowmaxfeeamount.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_MAX_FEE_AMOUNT;
         }
-        if raw.transferwaivedfeestocms == "True" {
+        if raw.transferwaivedfeestocms.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::TRANSFER_WAIVED_FEES_TO_CMS;
         }
-        if raw.skippreauth == "True" {
+        if raw.skippreauth.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SKIP_PRE_AUTH;
         }
-        if raw.allowhearing == "True" {
+        if raw.allowhearing.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_HEARING;
         }
-        if raw.allowreturndate == "True" {
+        if raw.allowreturndate.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_RETURN_DATE;
         }
-        if raw.showdamageamount == "True" {
+        if raw.showdamageamount.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SHOW_DAMAGE_AMOUNT;
         }
-        if raw.hasconditionalservicetypes == "True" {
+        if raw.hasconditionalservicetypes.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::HAS_CONDITIONAL_SERVICE_TYPES;
         }
-        if raw.hasprotectedcasetypes == "True" {
+        if raw.hasprotectedcasetypes.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::HAS_PROTECTED_CASE_TYPES;
         }
-        if raw.allowzerofeeswithoutfilingparty == "True" {
+        if raw
+            .allowzerofeeswithoutfilingparty
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::ALLOW_ZERO_FEES_WITHOUT_FILING_PARTY;
         }
-        if raw.allowserviceoninitial == "True" {
+        if raw.allowserviceoninitial.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_SERVICE_ON_INITIAL;
         }
-        if raw.allowaddservicecontactsoninitial == "True" {
+        if raw
+            .allowaddservicecontactsoninitial
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::ALLOW_ADD_SERVICE_CONTACTS_ON_INITIAL;
         }
-        if raw.allowredaction == "True" {
+        if raw.allowredaction.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_REDACTION;
         }
-        if raw.enforceredaction == "True" {
+        if raw.enforceredaction.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ENFORCE_REDACTION;
         }
-        if raw.allowwaiveronmail == "True" {
+        if raw.allowwaiveronmail.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_WAIVER_ON_MAIL;
         }
-        if raw.showreturnonreject == "True" {
+        if raw.showreturnonreject.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SHOW_RETURN_ON_REJECT;
         }
-        if raw.allowchargeupdate == "True" {
+        if raw.allowchargeupdate.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_CHARGE_UPDATE;
         }
-        if raw.allowpartyid == "True" {
+        if raw.allowpartyid.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_PARTY_ID;
         }
-        if raw.allowwaiveronredaction == "True" {
+        if raw.allowwaiveronredaction.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_WAIVER_ON_REDACTION;
         }
-        if raw.disallowelectronicserviceonnewcontacts == "True" {
+        if raw
+            .disallowelectronicserviceonnewcontacts
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::DISALLOW_ELECTRONIC_SERVICE_ON_NEW_CONTACTS;
         }
-        if raw.allowindividualregistration == "True" {
+        if raw.allowindividualregistration.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_INDIVIDUAL_REGISTRATION;
         }
-        if raw.bulkfilingfeeassessorconfiguration == "True" {
+        if raw
+            .bulkfilingfeeassessorconfiguration
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::BULK_FILING_FEE_ASSESSOR_CONFIGURATION;
         }
-        if raw.envelopelevelcommentconfiguration == "True" {
+        if raw
+            .envelopelevelcommentconfiguration
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::ENVELOPE_LEVEL_COMMENT_CONFIGURATION;
         }
-        if raw.autoassignsrlservicecontact == "True" {
+        if raw.autoassignsrlservicecontact.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::AUTO_ASSIGN_SRL_SERVICE_CONTACT;
         }
-        if raw.autoassignattorneyservicecontact == "True" {
+        if raw
+            .autoassignattorneyservicecontact
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::AUTO_ASSIGN_ATTORNEY_SERVICE_CONTACT;
         }
-        if raw.allowrepcap == "True" {
+        if raw.allowrepcap.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ALLOW_REP_CAP;
         }
-        if raw.eserviceconsentenabled == "True" {
+        if raw.eserviceconsentenabled.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::ESERVICE_CONSENT_ENABLED;
         }
-        if raw.promptforconfidentialdocumentsenabled == "True" {
+        if raw
+            .promptforconfidentialdocumentsenabled
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::PROMPT_FOR_CONFIDENTIAL_DOCUMENTS_ENABLED;
         }
-        if raw.defaultdocumentsecurityenabled == "True" {
+        if raw
+            .defaultdocumentsecurityenabled
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::DEFAULT_DOCUMENT_SECURITY_ENABLED;
         }
-        if raw.cmsservicecontactsupdatesenabled == "True" {
+        if raw
+            .cmsservicecontactsupdatesenabled
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::CMS_SERVICE_CONTACTS_UPDATES_ENABLED;
         }
-        if raw.subsequentactionsenabled == "True" {
+        if raw.subsequentactionsenabled.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SUBSEQUENT_ACTIONS_ENABLED;
         }
-        if raw.hearingschedulingenabled == "True" {
+        if raw.hearingschedulingenabled.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::HEARING_SCHEDULING_ENABLED;
         }
-        if raw.serviceofprocessenabled == "True" {
+        if raw.serviceofprocessenabled.eq_ignore_ascii_case("true") {
             flags |= CodeLocationFlags::SERVICE_OF_PROCESS_ENABLED;
         }
-        if raw.chargenumberconfigurationenabled == "True" {
+        if raw
+            .chargenumberconfigurationenabled
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::CHARGE_NUMBER_CONFIGURATION_ENABLED;
         }
-        if raw.chargenumberconfigurationrequired == "True" {
+        if raw
+            .chargenumberconfigurationrequired
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::CHARGE_NUMBER_CONFIGURATION_REQUIRED;
         }
-        if raw.chargenumberconfigurationavailable == "True" {
+        if raw
+            .chargenumberconfigurationavailable
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::CHARGE_NUMBER_CONFIGURATION_AVAILABLE;
         }
-        if raw.chargenumberconfigurationusedefaultsequence == "True" {
+        if raw
+            .chargenumberconfigurationusedefaultsequence
+            .eq_ignore_ascii_case("true")
+        {
             flags |= CodeLocationFlags::CHARGE_NUMBER_CONFIGURATION_USE_DEFAULT_SEQUENCE;
         }
 

@@ -24,7 +24,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
     .await?;
 
     let json_res = json(xml.as_str())?;
-    println!("{json_res:?}");
+    println!("{json_res:#?}");
 
     Ok(())
 }

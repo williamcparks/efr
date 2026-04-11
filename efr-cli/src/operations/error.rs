@@ -35,9 +35,6 @@ pub enum OperationsError {
     #[error(transparent)]
     Inquire(#[from] inquire::InquireError),
 
-    #[error(transparent)]
-    Cwd(std::io::Error),
-
     #[error("Failed To Write To `{}` Due To: {source}", .path.display())]
     Write {
         path: PathBuf,

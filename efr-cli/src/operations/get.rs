@@ -1,4 +1,8 @@
-use std::{io::ErrorKind, path::PathBuf, str::FromStr};
+use std::{
+    io::ErrorKind,
+    path::{Path, PathBuf},
+    str::FromStr,
+};
 
 use bytes::Bytes;
 use efr::codes_service::CodeHeader;
@@ -31,7 +35,7 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes,
 
     println!("---inbound---\n{res:#?}\n");
 
-    let output = output_file(&res)?;
+    let output = output_file(&res, config.cwd.as_path())?;
     let bytes = res.bytes().await?;
     if let Err(err) = std::fs::write(output.as_path(), bytes.as_ref()) {
         return Err(OperationsError::Write {
@@ -46,8 +50,8 @@ pub async fn get(client: Client, config: &EfrConfig, url: &str) -> Result<Bytes,
     Ok(bytes)
 }
 
-fn output_file(response: &Response) -> Result<PathBuf, OperationsError> {
-    let mut out = std::env::current_dir().map_err(OperationsError::Cwd)?;
+fn output_file(response: &Response, cwd: &Path) -> Result<PathBuf, OperationsError> {
+    let mut out = cwd.to_path_buf();
     out.push("code-downloads");
 
     if let Err(err) = std::fs::create_dir(out.as_path())
@@ -82,16 +86,13 @@ fn output_file(response: &Response) -> Result<PathBuf, OperationsError> {
     Ok(out)
 }
 
-pub fn read(file: &str) -> Result<Bytes, OperationsError> {
-    let mut cwd = std::env::current_dir().map_err(OperationsError::Cwd)?;
-    cwd.push("code-downloads");
-    cwd.push(file);
+pub fn read(file: &str, cwd: &Path) -> Result<Bytes, OperationsError> {
+    let mut path = cwd.to_path_buf();
+    path.push("code-downloads");
+    path.push(file);
 
-    match std::fs::read(cwd.as_path()) {
+    match std::fs::read(path.as_path()) {
         Ok(ok) => Ok(Bytes::from(ok)),
-        Err(err) => Err(OperationsError::Read {
-            path: cwd,
-            source: err,
-        }),
+        Err(err) => Err(OperationsError::Read { path, source: err }),
     }
 }

@@ -1,6 +1,7 @@
 use efr::codes_service::{
-    CodeCountry, CodeDataField, CodeError, CodeFilingStatus, CodeHeader, CodeLocation,
-    CodeResponse, CodeState, CodeVersion,
+    CodeCaseCategory, CodeCaseType, CodeCountry, CodeDataField, CodeDocumentType, CodeError,
+    CodeFilerType, CodeFiling, CodeFilingComponent, CodeFilingStatus, CodeHeader, CodeLocation,
+    CodeMotionType, CodeResponse, CodeState, CodeVersion,
 };
 use reqwest::Client;
 use strum::Display;
@@ -10,6 +11,7 @@ use crate::{
     operations::{
         error::OperationsError,
         get::{get, read},
+        inquire_helpers::InquireEmptyIsNone,
     },
 };
 
@@ -38,7 +40,7 @@ macro_rules! code_fetch {
             let codes_source = CodesSource::prompt()?;
             let bytes = match codes_source {
                 CodesSource::Fetch => get(client, config, config.metadata.$url()).await?,
-                CodesSource::LocalFs => read($file_name)?,
+                CodesSource::LocalFs => read($file_name, config.cwd.as_path())?,
             };
 
             let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
@@ -48,6 +50,61 @@ macro_rules! code_fetch {
             println!("{:#?}", code_response.codes_metadata);
             for row_result in code_response.rows {
                 println!("{:#?}", row_result?);
+            }
+
+            Ok(())
+        }
+    };
+
+    ($ident: ident, $file_name: literal, $url: ident (_), $ty: ty) => {
+        pub async fn $ident(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
+            let jurisdiction = inquire::Text::new("Jurisdiction?").prompt()?;
+            let url = config.metadata.$url(jurisdiction.as_str());
+
+            let codes_source = CodesSource::prompt()?;
+            let bytes = match codes_source {
+                CodesSource::Fetch => get(client, config, url.as_str()).await?,
+                CodesSource::LocalFs => read($file_name, config.cwd.as_path())?,
+            };
+
+            let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+
+            let code_response = CodeResponse::<'_, $ty>::try_new(xml.as_str())?;
+
+            println!("{:#?}", code_response.codes_metadata);
+            for row_result in code_response.rows {
+                println!("{:#?}", row_result?);
+            }
+
+            Ok(())
+        }
+    };
+
+    ($ident: ident, $file_name: literal, $url: ident (_), $ty: ty, $filter_prompt: literal, $filter_field: ident) => {
+        pub async fn $ident(client: Client, config: &EfrConfig) -> Result<(), OperationsError> {
+            let jurisdiction = inquire::Text::new("Jurisdiction?").prompt()?;
+            let filter = inquire::Text::new($filter_prompt).prompt_empty_is_none()?;
+            let url = config.metadata.$url(jurisdiction.as_str());
+
+            let codes_source = CodesSource::prompt()?;
+            let bytes = match codes_source {
+                CodesSource::Fetch => get(client, config, url.as_str()).await?,
+                CodesSource::LocalFs => read($file_name, config.cwd.as_path())?,
+            };
+
+            let xml = CodeHeader::unzip_xml(bytes.as_ref())?;
+
+            let code_response = CodeResponse::<'_, $ty>::try_new(xml.as_str())?;
+
+            println!("{:#?}", code_response.codes_metadata);
+            for row_result in code_response.rows {
+                let row = row_result?;
+                if let Some(fil_condition) = filter.as_deref()
+                    && row.$filter_field.as_ref() != fil_condition
+                {
+                    continue;
+                }
+                println!("{row:#?}");
             }
 
             Ok(())
@@ -81,4 +138,32 @@ code_fetch! {
 
 code_fetch! {
     data_field, "datafieldcodes.zip", data_field_codes_url, CodeDataField
+}
+
+code_fetch! {
+    case_category, "casecategorycodes.zip", case_category_codes_url(_), CodeCaseCategory
+}
+
+code_fetch! {
+    case_type, "casetypecodes.zip", case_type_codes_url(_), CodeCaseType
+}
+
+code_fetch! {
+    filing, "filingcodes.zip", filing_codes_url(_), CodeFiling, "Case Category Filter (Optional)?", casecategory
+}
+
+code_fetch! {
+    motion_type, "motiontypecodes.zip", motion_type_codes_url(_), CodeMotionType
+}
+
+code_fetch! {
+    filing_component, "filingcomponentcodes.zip", filing_component_codes_url(_), CodeFilingComponent, "Filing Code Filter (Optional)?", filingcodeid
+}
+
+code_fetch! {
+    document_type, "documenttypecodes.zip", document_type_codes_url(_), CodeDocumentType
+}
+
+code_fetch! {
+    filer_type, "filertypecodes.zip", filer_type_codes_url(_), CodeFilerType
 }

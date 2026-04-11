@@ -36,6 +36,10 @@ pub enum Operations {
     #[strum(to_string = "Get Filing List")]
     GetFilingList,
 
+    #[subclass(filing_review)]
+    #[strum(to_string = "Review Filing")]
+    ReviewFiling,
+
     #[subclass(firm)]
     #[strum(to_string = "Get Payment Account")]
     GetPaymentAccount,
@@ -51,6 +55,10 @@ pub enum Operations {
     #[subclass(firm)]
     #[strum(to_string = "Create Payment Account Waiver")]
     CreatePaymentAccountWaiver,
+
+    #[subclass(firm)]
+    #[strum(to_string = "Create Payment Account /w Credit Card")]
+    CreatePaymentAcountCreditCard,
 
     #[subclass(firm)]
     #[strum(to_string = "Remove Payment Account")]
@@ -111,11 +119,40 @@ pub enum Operations {
     #[subclass(codes)]
     #[strum(to_string = "Fetch Data Field Codes")]
     DataFieldCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Case Category Codes")]
+    CaseCategoryCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Case Types Codes")]
+    CaseTypeCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Filing Codes")]
+    FilingCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Filing Component Codes")]
+    FilingComponentCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Motion Type Codes")]
+    MotionTypeCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Document Type Codes")]
+    DocumentTypeCodes,
+
+    #[subclass(codes)]
+    #[strum(to_string = "Fetch Filer Type Codes")]
+    FilerTypeCodes,
 }
 
 pub mod authenticate_user;
 pub mod change_password;
 pub mod codes;
+pub mod create_payment_account_credit_card;
 pub mod create_payment_account_waiver;
 pub mod error;
 pub mod get;
@@ -132,6 +169,7 @@ pub mod inquire_helpers;
 pub mod post;
 pub mod remove_payment_account;
 pub mod reset_password;
+pub mod review_filing;
 pub mod self_resend_activation_email;
 pub mod update_notification_preferences;
 pub mod update_user;

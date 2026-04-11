@@ -38,9 +38,34 @@ impl<T: Xml> Xml for Option<T> {
     }
 
     fn len(&self) -> usize {
-        match self.as_ref() {
-            Some(inner) => T::len(inner),
-            None => 0,
+        self.as_ref().map(Xml::len).unwrap_or_default()
+    }
+}
+
+impl<T: Xml> Xml for &[T] {
+    fn xml(&self, xml: &mut Vec<u8>) {
+        for el in self.iter() {
+            Xml::xml(el, xml)
+        }
+    }
+
+    fn len(&self) -> usize {
+        self.iter().map(Xml::len).sum()
+    }
+}
+
+impl Xml for bool {
+    fn xml(&self, xml: &mut Vec<u8>) {
+        match self {
+            true => xml.extend_from_slice(b"true"),
+            false => xml.extend_from_slice(b"false"),
+        }
+    }
+
+    fn len(&self) -> usize {
+        match self {
+            true => 4,
+            false => 5,
         }
     }
 }

@@ -151,6 +151,69 @@ pub enum CodeVersionFile {
     VehicleTypeCodes,
 }
 
+impl CodeVersionFile {
+    pub fn to_static_str(&self) -> &'static str {
+        match self {
+            // ── System-wide ──────────────────────────────────────────────────
+            Self::CountryCodes => "countrycodes",
+            Self::DataFieldConfigCodes => "datafieldconfigcodes",
+            Self::ErrorCodes => "errorcodes",
+            Self::FilingStatusCodes => "filingstatuscodes",
+            Self::LanguageCodes => "languagecodes",
+            Self::Locations => "locations",
+            Self::StateCodes => "statecodes",
+
+            // ── Court-specific ───────────────────────────────────────────────
+            Self::AnswerCodes => "answercodes",
+            Self::AppellateLowerCourts => "appellatelowercourts",
+            Self::CaseCategoryCodes => "casecategorycodes",
+            Self::CaseSubTypeCodes => "casesubtypecodes",
+            Self::CaseTypeCodes => "casetypecodes",
+            Self::CrossReferenceCodes => "crossreferencecodes",
+            Self::DamageAmountCodes => "damageamountcodes",
+            Self::DisclaimerRequirementCodes => "disclaimerrequirementcodes",
+            Self::DocumentTypeCodes => "documenttypecodes",
+            Self::FilerTypeCodes => "filertypecodes",
+            Self::FileTypeCodes => "filetypecodes",
+            Self::FilingCodes => "filingcodes",
+            Self::FilingComponentCodes => "filingcomponentcodes",
+            Self::HearingLocationCodes => "hearinglocationcodes",
+            Self::JudicialOfficerCodes => "judicialofficercodes",
+            Self::MotionTypeCodes => "motiontypecodes",
+            Self::NameSuffixCodes => "namesuffixcodes",
+            Self::NotificationAgencyCodes => "notificationagencycodes",
+            Self::OptionalServicesCodes => "optionalservicescodes",
+            Self::PartyTypeCodes => "partytypecodes",
+            Self::ProcedureRemedyCodes => "procedureremedycodes",
+            Self::QuestionCodes => "questioncodes",
+            Self::RefundReasonCodes => "refundreasoncodes",
+            Self::RepCapCodes => "repcapcodes",
+            Self::ServiceProviderCodes => "serviceprovidercodes",
+            Self::ServiceTypeCodes => "servicetypecodes",
+
+            // ── Criminal initiation ──────────────────────────────────────────
+            Self::ArrestLocationCodes => "arrestlocationcodes",
+            Self::BondCodes => "bondcodes",
+            Self::ChargePhaseCodes => "chargephasecodes",
+            Self::CitationJurisdictionCodes => "citationjurisdictioncodes",
+            Self::DegreeCodes => "degreecodes",
+            Self::DriverLicenseTypeCodes => "driverlicensetypecodes",
+            Self::EthnicityCodes => "ethnicitycodes",
+            Self::EyeColorCodes => "eyecolorcodes",
+            Self::GeneralOffenseCodes => "generaloffensecodes",
+            Self::HairColorCodes => "haircolorcodes",
+            Self::LawEnforcementUnitCodes => "lawenforcementunitcodes",
+            Self::PhysicalFeatureCodes => "physicalfeaturecodes",
+            Self::RaceCodes => "racecodes",
+            Self::StatuteCodes => "statutecodes",
+            Self::StatuteTypeCodes => "statutetypecodes",
+            Self::VehicleColorCodes => "vehiclecolorcodes",
+            Self::VehicleMakeCodes => "vehiclemakecodes",
+            Self::VehicleTypeCodes => "vehicletypecodes",
+        }
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize, CodeList)]
 #[codelist("Code Version")]
 struct RawCodeVersion<'a> {

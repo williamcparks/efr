@@ -7,18 +7,32 @@ pub struct Tag {
 
 impl Parse for Tag {
     fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
-        let ident: Ident = input.parse()?;
-        if input.peek(Token![:]) {
-            input.parse::<Token![:]>()?;
-            return Ok(Self {
-                prefix: Some(ident),
-                tag: input.parse()?,
-            });
-        }
+        let raw = parse_tag(input)?;
 
         Ok(Self {
-            prefix: None,
-            tag: ident,
+            prefix: raw.prefix.map(modify_ident),
+            tag: modify_ident(raw.tag),
         })
     }
+}
+
+fn parse_tag(input: syn::parse::ParseStream) -> syn::Result<Tag> {
+    let ident: Ident = input.parse()?;
+    if input.peek(Token![:]) {
+        input.parse::<Token![:]>()?;
+        return Ok(Tag {
+            prefix: Some(ident),
+            tag: input.parse()?,
+        });
+    }
+
+    Ok(Tag {
+        prefix: None,
+        tag: ident,
+    })
+}
+
+fn modify_ident(ident: Ident) -> Ident {
+    let raw = ident.to_string();
+    Ident::new(raw.trim_start_matches("r#"), ident.span())
 }

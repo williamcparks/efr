@@ -35,7 +35,7 @@ impl NsBlock {
         self.map
             .iter()
             .filter_map(|(k, v)| match v {
-                NsDecl::SubElement => Some(k),
+                NsDecl::SubElement | NsDecl::ParentUri(_) => Some(k),
                 _ => None,
             })
             .collect()

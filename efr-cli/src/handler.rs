@@ -5,10 +5,11 @@ use crate::{
     error::CliError,
     operations::{
         Operations, Services, authenticate_user, change_password, codes,
-        create_payment_account_waiver, get_case, get_case_list, get_filing_list,
-        get_notification_preferences, get_payment_account, get_payment_account_list,
-        get_payment_account_type_list, get_policy, get_user, remove_payment_account,
-        reset_password, self_resend_activation_email, update_notification_preferences, update_user,
+        create_payment_account_credit_card, create_payment_account_waiver, get_case, get_case_list,
+        get_filing_list, get_notification_preferences, get_payment_account,
+        get_payment_account_list, get_payment_account_type_list, get_policy, get_user,
+        remove_payment_account, reset_password, review_filing, self_resend_activation_email,
+        update_notification_preferences, update_user,
     },
 };
 
@@ -50,6 +51,7 @@ pub async fn handler() -> Result<(), CliError> {
             authenticate_user::handler(client, &config).await?;
         }
         Operations::GetFilingList => get_filing_list::handler(client, &config).await?,
+        Operations::ReviewFiling => review_filing::handler(client, &config).await?,
         Operations::GetPaymentAccount => {
             get_payment_account::handler(client, &config).await?;
         }
@@ -61,6 +63,9 @@ pub async fn handler() -> Result<(), CliError> {
         }
         Operations::CreatePaymentAccountWaiver => {
             create_payment_account_waiver::handler(client, &config).await?
+        }
+        Operations::CreatePaymentAcountCreditCard => {
+            create_payment_account_credit_card::handler(client, &config).await?
         }
         Operations::RemovePaymentAccount => {
             remove_payment_account::handler(client, &config).await?
@@ -85,6 +90,13 @@ pub async fn handler() -> Result<(), CliError> {
         Operations::StateCodes => codes::state(client, &config).await?,
         Operations::FilingStatusCodes => codes::filing_status(client, &config).await?,
         Operations::DataFieldCodes => codes::data_field(client, &config).await?,
+        Operations::CaseCategoryCodes => codes::case_category(client, &config).await?,
+        Operations::CaseTypeCodes => codes::case_type(client, &config).await?,
+        Operations::FilingCodes => codes::filing(client, &config).await?,
+        Operations::MotionTypeCodes => codes::motion_type(client, &config).await?,
+        Operations::FilingComponentCodes => codes::filing_component(client, &config).await?,
+        Operations::DocumentTypeCodes => codes::document_type(client, &config).await?,
+        Operations::FilerTypeCodes => codes::filer_type(client, &config).await?,
     }
 
     Ok(())
