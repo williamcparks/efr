@@ -19,6 +19,8 @@ pub struct CodeResponse<'a> {
 impl<'a> CodeResponse<'a> {
     pub fn try_new(xml: &'a str) -> Result<Self, EfrCodesError> {
         let mut reader = Reader::from_str(xml);
+        reader.config_mut().trim_text(true);
+
         let column_set = ColumnSet::try_new(xml, &mut reader)?;
 
         let estimated_obj_size = column_set.columns.len();
