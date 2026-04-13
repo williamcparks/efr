@@ -350,4 +350,28 @@ impl CodeList {
             _ => true,
         }
     }
+
+    pub const fn is_criminal_specific(&self) -> bool {
+        matches!(
+            self,
+            Self::ArrestLocation
+                | Self::Bond
+                | Self::ChargePhase
+                | Self::Degree
+                | Self::DriverLicenseType
+                | Self::Ethnicity
+                | Self::EyeColor
+                | Self::GeneralOffense
+                | Self::HairColor
+                | Self::LawEnforcementUnit
+                | Self::PhysicalFeature
+                | Self::Race
+                | Self::Statute
+                | Self::StatuteType
+                | Self::CitationJurisdiction
+                | Self::VehicleColor
+                | Self::VehicleMake
+                | Self::VehicleType
+        )
+    }
 }
