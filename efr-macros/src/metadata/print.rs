@@ -23,7 +23,6 @@ impl<'a> Input<'a> {
         let state_arms = self.arms("CodeService/codes/state/");
         let filing_status_arms = self.arms("CodeService/codes/filingstatus/");
         let data_field_config_arms = self.arms("CodeService/codes/datafield/");
-        let language_arms = self.arms("CodeService/codes/language/");
 
         // Court-specific (jurisdiction, use format!)
         let answer_arms = self.arms("CodeService/codes/answer/");
@@ -52,6 +51,7 @@ impl<'a> Input<'a> {
         let rep_cap_arms = self.arms("CodeService/codes/repcap/");
         let service_provider_arms = self.arms("CodeService/codes/serviceprovider/");
         let service_type_arms = self.arms("CodeService/codes/servicetype/");
+        let language_arms = self.arms("CodeService/codes/language/");
 
         // Criminal initiation (jurisdiction, use format!)
         let arrest_location_arms = self.arms("CodeService/codes/arrestlocation/");
@@ -182,11 +182,6 @@ impl<'a> Input<'a> {
                     }
                 }
 
-                pub const fn language_url(&self) -> &'static str {
-                    match (self.state, self.environment) {
-                        #(#language_arms)*
-                    }
-                }
 
                 // ── Court-specific ───────────────────────────────────────────────────────
 
@@ -317,6 +312,11 @@ impl<'a> Input<'a> {
 
                 pub fn service_type_url(&self, jurisdiction: &str) -> String {
                     let base = match (self.state, self.environment) { #(#service_type_arms)* };
+                    ::std::format!("{base}{jurisdiction}")
+                }
+
+                pub fn language_url(&self, jurisdiction: &str) -> String {
+                    let base = match (self.state, self.environment) { #(#language_arms)* };
                     ::std::format!("{base}{jurisdiction}")
                 }
 

@@ -277,7 +277,6 @@ impl CodeList {
             Self::DataFieldConfig => Cow::Borrowed(metadata.data_field_config_url()),
             Self::Error => Cow::Borrowed(metadata.error_url()),
             Self::FilingStatus => Cow::Borrowed(metadata.filing_status_url()),
-            Self::Language => Cow::Borrowed(metadata.language_url()),
             Self::Locations => Cow::Borrowed(metadata.locations_url()),
             Self::State => Cow::Borrowed(metadata.state_url()),
             // ── Court-specific ───────────────────────────────────────────────────────
@@ -310,6 +309,7 @@ impl CodeList {
             Self::RefundReason => Cow::Owned(metadata.refund_reason_url(jurisdiction)),
             Self::RepCap => Cow::Owned(metadata.rep_cap_url(jurisdiction)),
             Self::ServiceProvider => Cow::Owned(metadata.service_provider_url(jurisdiction)),
+            Self::Language => Cow::Owned(metadata.language_url(jurisdiction)),
             Self::ServiceType => Cow::Owned(metadata.service_type_url(jurisdiction)),
             // ── Criminal initiation ──────────────────────────────────────────────────
             Self::ArrestLocation => Cow::Owned(metadata.arrest_location_url(jurisdiction)),
@@ -343,7 +343,6 @@ impl CodeList {
             | Self::DataFieldConfig
             | Self::Error
             | Self::FilingStatus
-            | Self::Language
             | Self::Locations
             | Self::State => false,
             // ── Court-specific & Criminal initiation ─────────────────────────────────
