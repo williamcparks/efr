@@ -8,6 +8,7 @@ use reqwest::header::InvalidHeaderValue;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
+#[error(transparent)]
 pub enum OperationsError {
     #[error("Request Error: {0}")]
     Reqwest(
@@ -23,17 +24,15 @@ pub enum OperationsError {
         InvalidHeaderValue,
     ),
 
-    #[error(transparent)]
     Efr(#[from] EfrError),
 
-    #[error(transparent)]
     CodesHeader(#[from] EfrCodesHeaderError),
 
-    #[error(transparent)]
     Codes(#[from] EfrCodesError),
 
-    #[error(transparent)]
     Inquire(#[from] inquire::InquireError),
+
+    Json(#[from] serde_json::Error),
 
     #[error("Failed To Write To `{}` Due To: {source}", .path.display())]
     Write {

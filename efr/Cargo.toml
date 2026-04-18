@@ -1,6 +1,6 @@
 [package]
 name = "efr"
-version = "0.1.93"
+version = "0.1.94"
 edition = "2024"
 description = "efr (EFile Rust)"
 license = "MIT"
@@ -28,11 +28,12 @@ metadata = ["efr-macros/metadata"]
 base64 = "0.22.1"
 bitflags = { version = "2.11.0", features = ["serde"] }
 chrono = { version = "0.4.43", features = ["serde"] }
-efr-macros = { version = "0.1.93", path = "../efr-macros", features = [
+efr-macros = { version = "0.1.94", path = "../efr-macros", features = [
     "partial-xml",
     "xml",
 ] }
 quick-xml = { version = "0.39.2", features = ["serialize"] }
+quick-xml-to-json = "0.2.0"
 rsa = { version = "0.9.10", features = ["sha1"] }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"

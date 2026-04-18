@@ -1,6 +1,7 @@
 use base64::Engine;
 use efr::{api::json, filing_review_service::ReviewFilingRequest};
 use reqwest::Client;
+use serde_json::Value;
 
 use crate::{
     config::EfrConfig,
@@ -82,6 +83,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<(), Operation
     .await?;
 
     let json_res = json(xml.as_str())?;
+    let json_res: Value = serde_json::from_slice(json_res.as_slice())?;
     println!("{json_res:#?}");
 
     Ok(())

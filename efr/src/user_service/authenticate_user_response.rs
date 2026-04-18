@@ -14,8 +14,8 @@ pub struct AuthenticateUserResponse<'a> {
 }
 
 impl<'a> EfrResponse<'a> for AuthenticateUserResponse<'a> {
-    fn efr_response(response: &'a str) -> Result<Self, EfrError> {
-        let multipart = MultiPartResponse::try_new(response)?;
+    fn efr_response(multipart_response: &'a str) -> Result<Self, EfrError> {
+        let multipart = MultiPartResponse::try_new(multipart_response)?;
         let xml = multipart.xml;
 
         let envelope: Envelope<'a> = quick_xml::de::from_str(xml)?;

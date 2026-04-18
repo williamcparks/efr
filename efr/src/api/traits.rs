@@ -11,7 +11,7 @@ pub trait EfrRequest {
 }
 
 pub trait EfrResponse<'a>: Sized {
-    fn efr_response(response: &'a str) -> Result<Self, EfrError>;
+    fn efr_response(multipart_response: &'a str) -> Result<Self, EfrError>;
 }
 
 pub(crate) trait Xml {

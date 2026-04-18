@@ -15,7 +15,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<AuthedUser, O
         password: config.password.as_ref(),
     };
 
-    let text = post(
+    let xml = post(
         client,
         config,
         &authenticate_user_request,
@@ -23,7 +23,7 @@ pub async fn handler(client: Client, config: &EfrConfig) -> Result<AuthedUser, O
     )
     .await?;
 
-    let response = AuthenticateUserResponse::efr_response(text.as_str())?;
+    let response = AuthenticateUserResponse::efr_response(xml.as_str())?;
     println!("{response:#?}");
 
     Ok(AuthedUser {
